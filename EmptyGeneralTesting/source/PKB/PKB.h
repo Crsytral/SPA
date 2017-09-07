@@ -10,7 +10,7 @@ using namespace std;
 #include "Procedure.h"
 #include "Statement.h"
 #include "Variable.h"
-#include "Expression.h"
+#include "ComplexExpression.h"
 #include "WhileStatement.h"
 #include "StatementContainer.h"
 
@@ -44,10 +44,14 @@ public:
 	*/
 	bool endOfList();
 	//the ones below are for query selector
-	vector<int> follow(int stmtIndex);
-	vector<int> followBy(int stmtIndex);
-	vector<int> follows(int stmtIndex);
-	vector<int> followsBy(int stmtIndex);
+	bool follows(int stmt1, int stmt2);
+	int follows(int stmt1);
+	int followsBy(int stmt2);
+	bool followStar(int stmt1, int stmt2);
+	vector<int> followStar(int stmt1);
+	vector<int> followStarBy(int stmt2);
+	vector<int> follows();
+	vector<int> followStar();
 	vector<int> parent(int stmtIndex);
 	vector<int> parentBy(int stmtIndex);
 	vector<int> parents(int stmtIndex);

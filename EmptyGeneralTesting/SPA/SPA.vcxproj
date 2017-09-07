@@ -13,7 +13,8 @@
   <ItemGroup>
     <ClCompile Include="..\source\DesignExtractor.cpp" />
     <ClCompile Include="..\source\Parser.cpp" />
-    <ClCompile Include="..\source\PKB\Expression.cpp" />
+    <ClCompile Include="..\source\PKB\AssignStatement.cpp" />
+    <ClCompile Include="..\source\PKB\ComplexExpression.cpp" />
     <ClCompile Include="..\source\PKB\PKB.cpp" />
     <ClCompile Include="..\source\PKB\Procedure.cpp" />
     <ClCompile Include="..\source\PKB\Statement.cpp" />
@@ -23,7 +24,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\PKB\AssignStatement.h" />
-    <ClInclude Include="..\source\PKB\Expression.h" />
+    <ClInclude Include="..\source\PKB\ComplexExpression.h" />
     <ClInclude Include="..\source\PKB\PKB.h" />
     <ClInclude Include="..\source\PKB\Procedure.h" />
     <ClInclude Include="..\source\PKB\Statement.h" />
