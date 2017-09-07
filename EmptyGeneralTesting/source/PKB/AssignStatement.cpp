@@ -1,7 +1,8 @@
 #include "AssignStatement.h"
 
-AssignStatement::AssignStatement(Variable varModified, vector<Variable> varUsed, Expression ex) {
-	modifiedVar = varModified;
-	usedVar = varUsed;
-	exp = ex;
+AssignStatement::AssignStatement(int index, Variable* v, vector<Variable*>* usedVars, Expression* exp) {
+	stmtNo = index;
+	varModified = v;
+	varUsed = usedVars;
+	this->exp = exp;
 }

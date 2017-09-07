@@ -7,9 +7,9 @@ Statement::Statement() {
 	follow = nullptr;
 }
 
-Statement::Statement(int index, Statement *parent, Statement *following) {
+Statement::Statement(int index, StatementContainer* p, Statement *following) {
 	stmtNo = index;
-	parentStatement = parent;
+	parentContainer = p;
 	follow = following;
 	followBy = nullptr;
 }
@@ -23,6 +23,11 @@ follow = following;
 void Statement::setFollowedBy(Statement *followedBy) {
 	followBy = followedBy;
 }
+
+void Statement::setParentStatement(Statement* parent) {
+	parentStatement = parent;
+}
+
 Statement* Statement::getFollow() {
 	return follow;
 }

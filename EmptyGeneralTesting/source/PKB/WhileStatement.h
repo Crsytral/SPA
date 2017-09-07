@@ -1,12 +1,12 @@
 #pragma once
 #include "StatementContainer.h"
 #include "Statement.h"
+#include "Variable.h"
+
+class StatementContainer;
+class Statement;
 
 class WhileStatement : public StatementContainer, public Statement {
-private:
-	Variable controlVar;
 public:
-	WhileStatement();
-	void addControlVar(Variable v);
-	void addStatement(Statement stmt);
+	WhileStatement(Variable* cVar);
 };
