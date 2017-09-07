@@ -12,6 +12,13 @@ void StatementList::addStatement(int stmtNo) {
 	curr = stmt;
 }
 
+void StatementList::addAssignmentStatement(int stmtNo, Variable varModified, vector<Variable> varUsed, Expression ex) {
+	Statement* stmt = new AssignStatement(stmtNo, parentStatement, curr, varModified, varUsed, ex);
+	if (curr != nullptr)
+		curr->setFollowedBy(stmt);
+	curr = stmt;
+}
+
 Statement* StatementList::getParent() {
 	return parentStatement;
 }

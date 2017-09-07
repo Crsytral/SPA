@@ -1,8 +1,10 @@
 #pragma once
-#include <set>
+#include <vector>
 using namespace std;
 
 #include "Statement.h"
+#include "Variable.h"
+#include "Expression.h"
 
 class StatementList {
 private:
@@ -13,6 +15,7 @@ private:
 public:
 	StatementList(Statement* parent);
 	void addStatement(int stmtNo);
+	void addAssignmentStatement(int stmtNo, Variable varModified, vector<Variable> varUsed, Expression ex);
 	Statement* getParent();
 	Statement* getCurr();
 };

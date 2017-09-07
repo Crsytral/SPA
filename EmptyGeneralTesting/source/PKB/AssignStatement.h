@@ -13,5 +13,5 @@ private:
 	vector<Variable> usedVar;
 	Expression exp;
 public:
-	AssignStatement(Variable varModified, vector<Variable> varUsed, Expression ex);
+	AssignStatement(int stmtNo,Variable varModified, vector<Variable> varUsed, Expression ex);
 };
