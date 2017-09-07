@@ -1,4 +1,8 @@
 #pragma once
+/*
+Represents an AssignStatement object.
+Constructor: Variable varModified, vector<Variable> varUsed, Expression ex
+*/
 #include "Statement.h"
 #include "Variable.h"
 #include "Expression.h"
@@ -9,10 +13,5 @@ private:
 	vector<Variable> usedVar;
 	Expression exp;
 public:
-	AssignStatement();
-	AssignStatement(Variable varModified, vector<Variable> varUsed, Expression ex) {
-		modifiedVar = varModified;
-		usedVar = varUsed;
-		exp = ex;
-	}
+	AssignStatement(int stmtNo,Variable varModified, vector<Variable> varUsed, Expression ex);
 };

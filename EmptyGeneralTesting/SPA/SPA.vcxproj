@@ -12,8 +12,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\DesignExtractor.cpp" />
-    <ClCompile Include="..\source\Parser.cpp" />
-    <ClCompile Include="..\source\PKB\Expression.cpp" />
+    <ClCompile Include="..\source\Parser\Parser.cpp" />
+    <ClCompile Include="..\source\Parser\Token.cpp" />
+    <ClCompile Include="..\source\PKB\AssignStatement.cpp" />
+    <ClCompile Include="..\source\PKB\ComplexExpression.cpp" />
     <ClCompile Include="..\source\PKB\PKB.cpp" />
     <ClCompile Include="..\source\PKB\Procedure.cpp" />
     <ClCompile Include="..\source\PKB\Statement.cpp" />
@@ -23,7 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\PKB\AssignStatement.h" />
-    <ClInclude Include="..\source\PKB\Expression.h" />
+    <ClInclude Include="..\source\PKB\ComplexExpression.h" />
     <ClInclude Include="..\source\PKB\PKB.h" />
     <ClInclude Include="..\source\PKB\Procedure.h" />
     <ClInclude Include="..\source\PKB\Statement.h" />
@@ -31,7 +33,8 @@
     <ClInclude Include="..\source\PKB\StatementList.h" />
     <ClInclude Include="..\source\PKB\Variable.h" />
     <ClInclude Include="..\source\PKB\WhileStatement.h" />
-    <ClInclude Include="Parser.h" />
+    <ClCompile Include="..\source\Parser\Parser.h" />
+    <ClCompile Include="..\source\Parser\Token.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

@@ -2,13 +2,20 @@
 #include <vector>
 using namespace std;
 
-class Statement;
 #include "Statement.h"
+#include "Variable.h"
+#include "Expression.h"
 
 class StatementList {
 private:
-	vector<Statement> statements;
+	Statement* parentStatement;
+	//Procedure parentProcedure;
+	Statement* curr;
+
 public:
-	StatementList();
-	void addStatement(Statement &stmt);
+	StatementList(Statement* parent);
+	void addStatement(int stmtNo);
+	void addAssignmentStatement(int stmtNo, Variable varModified, vector<Variable> varUsed, Expression ex);
+	Statement* getParent();
+	Statement* getCurr();
 };
