@@ -1,5 +1,6 @@
 ﻿  stdafx.cpp
   TestAST.cpp
-     Creating library C:\Users\Le Minh Phuc\Documents\SPA\EmptyGeneralTesting\Debug\UnitTesting.lib and object C:\Users\Le Minh Phuc\Documents\SPA\EmptyGeneralTesting\Debug\UnitTesting.exp
-  UnitTesting.vcxproj -> C:\Users\Le Minh Phuc\Documents\SPA\EmptyGeneralTesting\Debug\UnitTesting.dll
-  UnitTesting.vcxproj -> C:\Users\Le Minh Phuc\Documents\SPA\EmptyGeneralTesting\Debug\UnitTesting.pdb (Full PDB)
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(8): fatal error C1083: Cannot open include file: 'Expression.h': No such file or directory
+  StatementTest.cpp
+  StatementListTest.cpp
+  Generating Code...

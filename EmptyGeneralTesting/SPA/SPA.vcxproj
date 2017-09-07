@@ -25,6 +25,7 @@
   <ItemGroup>
     <ClInclude Include="..\source\PKB\AssignStatement.h" />
     <ClInclude Include="..\source\PKB\ComplexExpression.h" />
+    <ClInclude Include="..\source\PKB\Expression.h" />
     <ClInclude Include="..\source\PKB\PKB.h" />
     <ClInclude Include="..\source\PKB\Procedure.h" />
     <ClInclude Include="..\source\PKB\Statement.h" />

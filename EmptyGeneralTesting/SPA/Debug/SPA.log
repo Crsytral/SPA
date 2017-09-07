@@ -3,9 +3,15 @@
   StatementContainer.cpp
   Statement.cpp
   Procedure.cpp
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\procedure.cpp(6): error C2512: 'StatementList': no appropriate default constructor available
+  c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\statementlist.h(7): note: see declaration of 'StatementList'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\procedure.cpp(11): error C2664: 'void StatementList::addStatement(int)': cannot convert argument 1 from 'Statement' to 'int'
+  c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\procedure.cpp(11): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
   PKB.cpp
-  Expression.cpp
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(8): fatal error C1083: Cannot open include file: 'Expression.h': No such file or directory
+  ComplexExpression.cpp
+  AssignStatement.cpp
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(8): fatal error C1083: Cannot open include file: 'Expression.h': No such file or directory
   Parser.cpp
   DesignExtractor.cpp
   Generating Code...
-  SPA.vcxproj -> C:\Users\Le Minh Phuc\Documents\SPA\EmptyGeneralTesting\Debug\SPA.lib

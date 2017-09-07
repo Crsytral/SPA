@@ -44,10 +44,10 @@ void PKB::addStatement(Statement &stmt) {
 /*
 Add AssignStatement stmt to the AST.
 */
-void PKB::addAssignStatement(AssignStatement &stmt) {
+void PKB::addAssignStatement(Variable* v, Expression* exp) {
 	//currentStmtContainer stack guaranteed to be non-empty
-	StatementContainer * stmtContainer = currentStmtContainer.top();
-	(*stmtContainer).addStatement(stmt);
+	StatementList * stmtLst = currentStmtContainer.top();
+	(*stmtLst).addAssignStatement(v, exp);
 }
 
 /*

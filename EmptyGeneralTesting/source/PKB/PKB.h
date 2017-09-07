@@ -22,7 +22,7 @@ private:
 	vector<Procedure> allProcedures;
 	vector<Variable> allVariables;
 	vector<Statement> allStatements;
-	stack<StatementContainer*> currentStmtContainer;
+	stack<StatementList*> currentStmtContainer;
 public:
 	PKB();
 	void addProcedure(Procedure &proc);
