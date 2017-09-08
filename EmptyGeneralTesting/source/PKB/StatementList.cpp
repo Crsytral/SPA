@@ -1,28 +1,30 @@
 #include "StatementList.h"
 
-StatementList::StatementList(Statement* parent) {
-	parentStatement = parent;
+StatementList::StatementList(StatementContainer* p) {
+	parentContainer = p;
 	curr = nullptr;
 }
 
 void StatementList::addStatement(int stmtNo) {
-	Statement* stmt = new Statement(stmtNo, parentStatement, curr);
+	Statement* stmt = new Statement(stmtNo, parentContainer, curr);
 	if(curr != nullptr)
 		curr->setFollowedBy(stmt);
 	curr = stmt;
 }
 
-void StatementList::addAssignmentStatement(int stmtNo, Variable varModified, vector<Variable> varUsed, Expression ex) {
-	Statement* stmt = new AssignStatement(stmtNo, parentStatement, curr, varModified, varUsed, ex);
-	if (curr != nullptr)
-		curr->setFollowedBy(stmt);
-	curr = stmt;
-}
-
-Statement* StatementList::getParent() {
-	return parentStatement;
+StatementContainer* StatementList::getParentContainer() {
+	return parentContainer;
 }
 
 Statement* StatementList::getCurr() {
 	return curr;
 }
+
+AssignStatement* StatementList::addAssignStatement(int index, Variable* v, vector<Variable*>* usedVars, Expression* exp) {
+	//To be implemented by Shermine
+}
+
+WhileStatement* StatementList::addWhileStatement(int index, Variable* controlVar) {
+	//To be implemented by Shermine
+}
+

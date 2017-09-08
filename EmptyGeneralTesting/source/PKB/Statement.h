@@ -2,7 +2,10 @@
 #include <string>
 using namespace std;
 
-//#include "Procedure.h"
+#include "StatementContainer.h"
+
+class StatementContainer;
+
 /*
 Abstract representation of the commonalities of all types of statements
 */
@@ -13,14 +16,16 @@ protected:
 	Statement* follow;
 	Statement* followBy;
 	Statement* parentStatement;
+	//I think this can be used to replace parentStatement
+	StatementContainer* parentContainer;
 	//Procedure parentProcedure;
-
 
 public:
 	Statement();
-	Statement(int stmtNo, Statement *parent, Statement *following);
+	Statement(int stmtNo, StatementContainer* p, Statement *following);
 	//Statement(int stmtNo, Procedure parent, Statement *following);
-	void setFollowedBy(Statement *followBy);
+	void setFollowedBy(Statement* followBy);
+	void setParentStatement(Statement* parent);
 	Statement* getFollow();
 	bool isFollow(int stmtNo);
 	Statement* getFollowBy();

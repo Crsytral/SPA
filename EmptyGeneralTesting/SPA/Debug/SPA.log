@@ -1,11 +1,81 @@
-﻿  Variable.cpp
+﻿  WhileStatement.cpp
+  Variable.cpp
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(15): error C2504: 'Statement': base class undefined
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\whilestatement.h(9): error C2504: 'StatementContainer': base class undefined
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\whilestatement.h(9): error C2504: 'Statement': base class undefined
   StatementList.cpp
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\whilestatement.h(9): error C2504: 'StatementContainer': base class undefined
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\whilestatement.h(9): error C2504: 'Statement': base class undefined
   StatementContainer.cpp
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\whilestatement.h(9): error C2504: 'StatementContainer': base class undefined
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\statementcontainer.cpp(24): error C2039: 'setParentContainer': is not a member of 'WhileStatement'
+  c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\statementcontainer.h(14): note: see declaration of 'WhileStatement'
   Statement.cpp
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(15): error C2504: 'Statement': base class undefined
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\whilestatement.h(9): error C2504: 'StatementContainer': base class undefined
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\whilestatement.h(9): error C2504: 'Statement': base class undefined
   Procedure.cpp
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(15): error C2504: 'Statement': base class undefined
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(17): error C2143: syntax error: missing ';' before '*'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(17): error C2238: unexpected token(s) preceding ';'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(18): error C2065: 'Variable': undeclared identifier
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(18): error C2059: syntax error: '>'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(18): error C2976: 'std::vector': too few template arguments
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\vector(679): note: see declaration of 'std::vector'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(19): error C2143: syntax error: missing ';' before '*'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(19): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(19): error C2238: unexpected token(s) preceding ';'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(21): error C2061: syntax error: identifier 'Variable'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\whilestatement.h(9): error C2504: 'StatementContainer': base class undefined
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\whilestatement.h(9): error C2504: 'Statement': base class undefined
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\whilestatement.h(11): error C2061: syntax error: identifier 'Variable'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\statementlist.h(29): error C2061: syntax error: identifier 'Variable'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\statementlist.h(35): error C2061: syntax error: identifier 'Variable'
   PKB.cpp
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\whilestatement.h(9): error C2504: 'StatementContainer': base class undefined
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\whilestatement.h(9): error C2504: 'Statement': base class undefined
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\statementlist.h(29): error C2143: syntax error: missing ';' before '*'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\statementlist.h(29): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\statementlist.h(29): error C2238: unexpected token(s) preceding ';'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\pkb.cpp(63): error C2664: 'void std::vector<Statement *,std::allocator<_Ty>>::push_back(Statement *const &)': cannot convert argument 1 from 'WhileStatement *' to 'Statement *&&'
+          with
+          [
+              _Ty=Statement *
+          ]
+  c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\pkb.cpp(63): note: Reason: cannot convert from 'WhileStatement *' to 'Statement *'
+  c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\pkb.cpp(63): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\pkb.cpp(65): error C2664: 'void std::stack<StatementContainer *,std::deque<_Ty,std::allocator<_Ty>>>::push(StatementContainer *const &)': cannot convert argument 1 from 'WhileStatement *' to 'StatementContainer *&&'
+          with
+          [
+              _Ty=StatementContainer *
+          ]
+  c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\pkb.cpp(65): note: Reason: cannot convert from 'WhileStatement *' to 'StatementContainer *'
+  c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\pkb.cpp(65): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
   Expression.cpp
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(15): error C2504: 'Statement': base class undefined
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(17): error C2143: syntax error: missing ';' before '*'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(17): error C2238: unexpected token(s) preceding ';'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(18): error C2065: 'Variable': undeclared identifier
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(18): error C2059: syntax error: '>'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(18): error C2976: 'std::vector': too few template arguments
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\vector(679): note: see declaration of 'std::vector'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(19): error C2143: syntax error: missing ';' before '*'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(19): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(19): error C2238: unexpected token(s) preceding ';'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\assignstatement.h(21): error C2061: syntax error: identifier 'Variable'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\whilestatement.h(9): error C2504: 'StatementContainer': base class undefined
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\whilestatement.h(9): error C2504: 'Statement': base class undefined
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\whilestatement.h(11): error C2061: syntax error: identifier 'Variable'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\statementlist.h(29): error C2061: syntax error: identifier 'Variable'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\statementlist.h(35): error C2061: syntax error: identifier 'Variable'
+  AssignStatement.cpp
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\whilestatement.h(9): error C2504: 'StatementContainer': base class undefined
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\whilestatement.h(9): error C2504: 'Statement': base class undefined
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\statementlist.h(29): error C2143: syntax error: missing ';' before '*'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\statementlist.h(29): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\statementlist.h(29): error C2238: unexpected token(s) preceding ';'
   Parser.cpp
   DesignExtractor.cpp
   Generating Code...
-  SPA.vcxproj -> C:\Users\Le Minh Phuc\Documents\SPA\EmptyGeneralTesting\Debug\SPA.lib

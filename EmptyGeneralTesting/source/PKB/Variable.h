@@ -4,6 +4,7 @@
 using namespace std;
 
 #include "Statement.h"
+class Statement;
 
 /*
 A simplified Variable class implement to try out Unit Testing.

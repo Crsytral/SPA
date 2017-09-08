@@ -42,7 +42,10 @@
     <ClCompile Include="..\source\PKB\AssignStatement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\PKB\ComplexExpression.cpp">
+    <ClCompile Include="..\source\PKB\WhileStatement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\PKB\Expression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,7 +77,7 @@
     <ClInclude Include="..\source\PKB\WhileStatement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\source\PKB\ComplexExpression.h">
+    <ClInclude Include="..\source\PKB\Expression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

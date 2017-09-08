@@ -15,17 +15,18 @@
     <ClCompile Include="..\source\Parser\Parser.cpp" />
     <ClCompile Include="..\source\Parser\Token.cpp" />
     <ClCompile Include="..\source\PKB\AssignStatement.cpp" />
-    <ClCompile Include="..\source\PKB\ComplexExpression.cpp" />
+    <ClCompile Include="..\source\PKB\Expression.cpp" />
     <ClCompile Include="..\source\PKB\PKB.cpp" />
     <ClCompile Include="..\source\PKB\Procedure.cpp" />
     <ClCompile Include="..\source\PKB\Statement.cpp" />
     <ClCompile Include="..\source\PKB\StatementContainer.cpp" />
     <ClCompile Include="..\source\PKB\StatementList.cpp" />
     <ClCompile Include="..\source\PKB\Variable.cpp" />
+    <ClCompile Include="..\source\PKB\WhileStatement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\PKB\AssignStatement.h" />
-    <ClInclude Include="..\source\PKB\ComplexExpression.h" />
+    <ClInclude Include="..\source\PKB\Expression.h" />
     <ClInclude Include="..\source\PKB\PKB.h" />
     <ClInclude Include="..\source\PKB\Procedure.h" />
     <ClInclude Include="..\source\PKB\Statement.h" />
