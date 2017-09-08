@@ -15,10 +15,10 @@ bool Variable::equals(Variable& v) {
 	else return false;
 }
 
-void Variable::addModifyStmt(Statement stmt) {
-	modifyStmtLst.push_back(stmt);
+void Variable::addModifyStmt(Statement* stmt) {
+	modifyStmtLst->push_back(stmt);
 }
 
-void Variable::addUseStmt(Statement stmt) {
-	useStmtLst.push_back(stmt);
+void Variable::addUseStmt(Statement* stmt) {
+	useStmtLst->push_back(stmt);
 }

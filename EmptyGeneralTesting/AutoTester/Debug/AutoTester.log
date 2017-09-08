@@ -1,3 +1,53 @@
 ﻿  TestWrapper.cpp
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(60): error C3646: 'm_cCurToken': unknown override specifier
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(60): error C2143: syntax error: missing ',' before '['
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(60): error C2143: syntax error: missing ')' before ';'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(60): error C2238: unexpected token(s) preceding ';'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(61): error C3646: 'm_cCurWord': unknown override specifier
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(61): error C2143: syntax error: missing ',' before '['
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(61): error C2143: syntax error: missing ')' before ';'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(61): error C2238: unexpected token(s) preceding ';'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(62): error C3646: 'm_cCurBuffer': unknown override specifier
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(62): error C2143: syntax error: missing ',' before '['
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(62): error C2143: syntax error: missing ')' before ';'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(62): error C2238: unexpected token(s) preceding ';'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(64): error C2143: syntax error: missing ';' before '*'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(64): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(64): error C2238: unexpected token(s) preceding ';'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(65): error C3646: 'm_dwError': unknown override specifier
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(65): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(68): error C3646: 'Read': unknown override specifier
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(68): error C2059: syntax error: '('
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(68): error C2238: unexpected token(s) preceding ';'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(69): error C3646: 'SetError': unknown override specifier
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(69): error C2059: syntax error: '('
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(69): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(83): error C2143: syntax error: missing ';' before '*'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(83): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(83): error C2238: unexpected token(s) preceding ';'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(84): error C2143: syntax error: missing ';' before '*'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(84): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(84): error C2238: unexpected token(s) preceding ';'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(86): error C3646: 'Start': unknown override specifier
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(86): error C2059: syntax error: '('
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(86): error C2238: unexpected token(s) preceding ';'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(88): error C2143: syntax error: missing ';' before '*'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(88): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(88): error C2238: unexpected token(s) preceding ';'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(89): error C3646: 'GetError': unknown override specifier
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(89): error C2059: syntax error: '('
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(89): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(74): error C2065: 'm_cCurBuffer': undeclared identifier
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(75): error C2065: 'm_pCurrentIndex': undeclared identifier
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(76): error C2065: 'm_dwError': undeclared identifier
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(94): error C2143: syntax error: missing ';' before '*'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(94): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(94): error C2238: unexpected token(s) preceding ';'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(109): error C3646: 'AddTail': unknown override specifier
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(109): error C2059: syntax error: '('
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(109): error C2238: unexpected token(s) preceding ';'
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(110): error C3646: 'GetTail': unknown override specifier
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(110): error C2059: syntax error: '('
+c:\program files (x86)\windows kits\8.1\include\um\parser.h(110): error C2238: unexpected token(s) preceding ';'
 c:\users\le minh phuc\documents\spa\emptygeneraltesting\autotester\source\testwrapper.cpp(11): warning C4356: 'AbstractWrapper::GlobalStop': static data member cannot be initialized via derived class
-LINK : fatal error LNK1104: cannot open file 'C:\Users\Le Minh Phuc\Documents\SPA\EmptyGeneralTesting\Debug\SPA.lib'
+c:\users\le minh phuc\documents\spa\emptygeneraltesting\autotester\source\testwrapper.cpp(23): error C3861: 'Parse': identifier not found

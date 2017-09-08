@@ -10,8 +10,6 @@ using namespace std;
 #include "Variable.h"
 #include "Expression.h"
 
-class Statement;
-
 class AssignStatement : public Statement {
 private:
 	Variable* varModified;

@@ -2,18 +2,12 @@
 #include <vector>
 using namespace std;
 
-#include "AssignStatement.h"
 #include "Statement.h"
-#include "StatementList.h"
-#include "WhileStatement.h"
 #include "Expression.h"
+#include "Variable.h"
+#include "StatementList.h"
 
-class AssignStatement;
-class Statement;
 class StatementList;
-class WhileStatement;
-class Variable;
-class Expression;
 
 /*
 An abstract interface representing any object that has at least 1 statement list
@@ -32,8 +26,8 @@ public:
 	StatementList of this object should also be added to the StatementList of stmt.
 	Set parent of stmt to this Statement Container for if & while statements.
 	*/
-	AssignStatement* addAssignStatement(int index, Variable* v, Expression* exp);
-	WhileStatement* addWhileStatement(int index, Variable* controlVar);
+	Statement* addAssignStatement(int index, Variable* v, Expression* exp);
+	StatementContainer* addWhileStatement(int index, Variable* controlVar);
 	/*
 	Update varUsed list of this object and its parentContainer (if exist) after a statement is added to the stmtLst.
 	To be implemented by Shermine

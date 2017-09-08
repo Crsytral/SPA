@@ -20,11 +20,15 @@ Statement* StatementList::getCurr() {
 	return curr;
 }
 
-AssignStatement* StatementList::addAssignStatement(int index, Variable* v, vector<Variable*>* usedVars, Expression* exp) {
+Statement* StatementList::addAssignStatement(int index, Variable* v, vector<Variable*>* usedVars, Expression* exp) {
 	//To be implemented by Shermine
+	//I put nullptr here first to be able to build
+	return nullptr;
 }
 
-WhileStatement* StatementList::addWhileStatement(int index, Variable* controlVar) {
+StatementContainer* StatementList::addWhileStatement(int index, Variable* controlVar) {
 	//To be implemented by Shermine
+	//I put nullptr here first to be able to build
+	return nullptr;
 }
 
