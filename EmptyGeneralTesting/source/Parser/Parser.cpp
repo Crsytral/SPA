@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 // token types:
@@ -47,8 +48,14 @@ const string BLOCK_END = "}";
 //const string PLUS, MINUS, MULTIPLY, DIVIDE, EQUAL = "PLUS", "MINUS", "MULTIPLY", "DIVIDE", "EQUAL";
 
 
-Parser::Parser(string text) : text(text), currentToken(EMPTY_TOKEN, EMPTY_TOKEN)
+Parser::Parser(string filename) : filename(filename), currentToken(EMPTY_TOKEN, EMPTY_TOKEN)
 {
+	ifstream ifs(filename);
+	string content((istreambuf_iterator<char>(ifs)),
+		(istreambuf_iterator<char>()));
+	
+	text = content;
+	cout << text << endl;
 	line = 1;
 	//text = text;
 	position = 0;
