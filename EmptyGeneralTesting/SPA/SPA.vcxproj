@@ -11,34 +11,56 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\DesignExtractor.cpp" />
-    <ClCompile Include="..\source\Parser\Parser.cpp" />
-    <ClCompile Include="..\source\Parser\Token.cpp" />
-    <ClCompile Include="..\source\PKB\AssignStatement.cpp" />
-    <ClCompile Include="..\source\PKB\Expression.cpp" />
-    <ClCompile Include="..\source\PKB\PKB.cpp" />
-    <ClCompile Include="..\source\PKB\Procedure.cpp" />
-    <ClCompile Include="..\source\PKB\Statement.cpp" />
-    <ClCompile Include="..\source\PKB\StatementContainer.cpp" />
-    <ClCompile Include="..\source\PKB\StatementList.cpp" />
-    <ClCompile Include="..\source\PKB\Variable.cpp" />
-    <ClCompile Include="..\source\PKB\WhileStatement.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\source\PKB\AssignStatement.h" />
-    <ClInclude Include="..\source\PKB\Expression.h" />
-    <ClInclude Include="..\source\PKB\PKB.h" />
-    <ClInclude Include="..\source\PKB\Procedure.h" />
-    <ClInclude Include="..\source\PKB\Statement.h" />
-    <ClInclude Include="..\source\PKB\StatementContainer.h" />
-    <ClInclude Include="..\source\PKB\StatementList.h" />
-    <ClInclude Include="..\source\PKB\Variable.h" />
-    <ClInclude Include="..\source\PKB\WhileStatement.h" />
-    <ClCompile Include="..\source\Parser\Parser.h" />
-    <ClCompile Include="..\source\Parser\Token.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DesignExtractor.cpp" />
+    <ClCompile Include="Parser\Parser.cpp" />
+    <ClCompile Include="Parser\Token.cpp" />
+    <ClCompile Include="PKB\AssignStatement.cpp" />
+    <ClCompile Include="PKB\Expression.cpp" />
+    <ClCompile Include="PKB\PKB.cpp" />
+    <ClCompile Include="PKB\Procedure.cpp" />
+    <ClCompile Include="PKB\Statement.cpp" />
+    <ClCompile Include="PKB\StatementContainer.cpp" />
+    <ClCompile Include="PKB\StatementList.cpp" />
+    <ClCompile Include="PKB\Variable.cpp" />
+    <ClCompile Include="PKB\WhileStatement.cpp" />
+    <ClCompile Include="QPS\ParameterNode[2].cpp" />
+    <ClCompile Include="QPS\PatternNode[1].cpp" />
+    <ClCompile Include="QPS\QueryEvaluator.cpp" />
+    <ClCompile Include="QPS\QueryNode[1].cpp" />
+    <ClCompile Include="QPS\QueryParser[1].cpp" />
+    <ClCompile Include="QPS\QueryResultProjector.cpp" />
+    <ClCompile Include="QPS\QueryTree[1].cpp" />
+    <ClCompile Include="QPS\Result.cpp" />
+    <ClCompile Include="QPS\Synonyms[1].cpp" />
+    <ClCompile Include="QPS\SyntaticData[1].cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Parser\Parser.h" />
+    <ClInclude Include="Parser\Token.h" />
+    <ClInclude Include="PKB\AssignStatement.h" />
+    <ClInclude Include="PKB\Expression.h" />
+    <ClInclude Include="PKB\PKB.h" />
+    <ClInclude Include="PKB\Procedure.h" />
+    <ClInclude Include="PKB\Statement.h" />
+    <ClInclude Include="PKB\StatementContainer.h" />
+    <ClInclude Include="PKB\StatementList.h" />
+    <ClInclude Include="PKB\Variable.h" />
+    <ClInclude Include="PKB\WhileStatement.h" />
+    <ClInclude Include="QPS\ParameterNode[1].h" />
+    <ClInclude Include="QPS\PatternNode[1].h" />
+    <ClInclude Include="QPS\QueryEvaluator.h" />
+    <ClInclude Include="QPS\QueryNode[1].h" />
+    <ClInclude Include="QPS\QueryObject[1].h" />
+    <ClInclude Include="QPS\QueryParser[1].h" />
+    <ClInclude Include="QPS\QueryResultProjector.h" />
+    <ClInclude Include="QPS\QueryTree[1].h" />
+    <ClInclude Include="QPS\Result.h" />
+    <ClInclude Include="QPS\Synonyms[1].h" />
+    <ClInclude Include="QPS\SyntaticData[1].h" />
+    <ClInclude Include="QPS\SyntaticType[1].h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>
