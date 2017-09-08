@@ -2,9 +2,7 @@
 #include "StatementContainer.h"
 #include "Statement.h"
 #include "Variable.h"
-
-class StatementContainer;
-class Statement;
+#include "StatementList.h"
 
 class WhileStatement : public StatementContainer, public Statement {
 public:

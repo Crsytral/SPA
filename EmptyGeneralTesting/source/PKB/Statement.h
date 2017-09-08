@@ -2,8 +2,6 @@
 #include <string>
 using namespace std;
 
-#include "StatementContainer.h"
-
 class StatementContainer;
 
 /*

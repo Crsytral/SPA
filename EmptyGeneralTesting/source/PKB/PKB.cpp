@@ -44,7 +44,7 @@ Add assign statement with variable* v and expression* exp to the AST.
 void PKB::addAssignStatement(Variable* v, Expression* exp) {
 	//currentStmtContainer stack guaranteed to be non-empty by parser
 	StatementContainer * stmt = currentStmtContainer.top();
-	AssignStatement* aStmt = stmt->addAssignStatement(++currIndex, v, exp);
+	AssignStatement* aStmt = static_cast<AssignStatement*> (stmt->addAssignStatement(++currIndex, v, exp));
 	allStatements.push_back(aStmt);
 	addVariable(v);
 	vector<Variable*>* expVars = exp->getUsedVariable();
@@ -59,7 +59,7 @@ Add WhileStatement stmt to the AST.
 void PKB::addWhileStatement(Variable* controlVar) {
 	//currentStmtContainer stack guaranteed to be non-empty
 	StatementContainer * stmtContainer = currentStmtContainer.top();
-	WhileStatement* wStmt = stmtContainer->addWhileStatement(++currIndex, controlVar);
+	WhileStatement* wStmt = static_cast<WhileStatement*> (stmtContainer->addWhileStatement(++currIndex, controlVar));
 	allStatements.push_back(wStmt);
 	addVariable(controlVar);
 	currentStmtContainer.push(wStmt);

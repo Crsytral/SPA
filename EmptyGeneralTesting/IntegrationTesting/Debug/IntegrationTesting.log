@@ -1,3 +1,5 @@
 ﻿  stdafx.cpp
   TestFrontEnd.cpp
-LINK : fatal error LNK1104: cannot open file 'C:\Users\Le Minh Phuc\Documents\SPA\EmptyGeneralTesting\Debug\SPA.lib'
+     Creating library C:\Users\Le Minh Phuc\Documents\SPA\EmptyGeneralTesting\Debug\IntegrationTesting.lib and object C:\Users\Le Minh Phuc\Documents\SPA\EmptyGeneralTesting\Debug\IntegrationTesting.exp
+  IntegrationTesting.vcxproj -> C:\Users\Le Minh Phuc\Documents\SPA\EmptyGeneralTesting\Debug\IntegrationTesting.dll
+  IntegrationTesting.vcxproj -> C:\Users\Le Minh Phuc\Documents\SPA\EmptyGeneralTesting\Debug\IntegrationTesting.pdb (Full PDB)
