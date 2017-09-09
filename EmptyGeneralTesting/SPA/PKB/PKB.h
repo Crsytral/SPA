@@ -22,6 +22,8 @@ private:
 	vector<Variable*> allVariables;
 	vector<Statement*> allStatements;
 	stack<StatementContainer*> currentStmtContainer;
+	bool isValidStmtNo(int s);
+	bool followStar(Statement* s1, Statement* s2);
 public:
 	PKB();
 	void addProcedure(string procName);
