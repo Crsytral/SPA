@@ -1,4 +1,6 @@
+#include <algorithm>
 #include <vector>
+#include <typeinfo>
 using namespace std;
 
 #include "PKB.h"
@@ -191,37 +193,186 @@ vector<pair<int, int>> PKB::followStar() {
 }
 
 /*
-Dummy implementation
+Now comes the parent methods
 */
 bool PKB::parents(int stmt1, int stmt2) {
-
+	if (isValidStmtNo(stmt1) && isValidStmtNo(stmt2)) {
+		Statement* s2 = allStatements[stmt2 - 1];
+		StatementContainer* sc2 = s2->getParentContainer();
+		if (typeid(*sc2) == typeid(WhileStatement) && static_cast<WhileStatement*> (sc2)->getStmtNo() == stmt1) {
+			return true;
+		}
+	}
+	return false;
 }
 
-vector<int> PKB::parent(int stmtIndex) {
-	vector<int> result(2, 2);
+vector<int> PKB::parents(int stmt1) {
+	vector<int> result;
+	if (isValidStmtNo(stmt1)) {
+		Statement* s1 = allStatements[stmt1 - 1];
+		if (typeid(*s1) == typeid(WhileStatement)) {
+			vector<Statement*> nestedStmt = static_cast<WhileStatement*>(s1)->getAllStatements();
+			if (!nestedStmt.empty()) {
+				for (Statement* s : nestedStmt)
+					result.push_back(s->getStmtNo());
+			}
+			return result;
+		}
+	}
+	result.push_back(-1);
 	return result;
 }
 
 /*
-Dummy implementation
+Return index of the statement that stmt2 is directly nested under.
+Return -1  if there is no such statement.
 */
-vector<int> PKB::parentBy(int stmtIndex) {
-	vector<int> result(2, 2);
-	return result;
+int PKB::parentedBy(int stmt2) {
+	if (isValidStmtNo(stmt2)) {
+		Statement* s2 = allStatements[stmt2 - 1];
+		StatementContainer* sc2 = s2->getParentContainer();
+		if (typeid(*sc2) == typeid(WhileStatement))
+			return static_cast<WhileStatement*>(sc2)->getStmtNo();
+	}
+	return -1;
+}
+
+bool PKB::parentStar(WhileStatement* s1, StatementContainer* s2) {
+	if (typeid(*s2) == typeid(Procedure)) return false;
+	WhileStatement* w2 = static_cast<WhileStatement*>(s2);
+	if (s1->getStmtNo() == w2->getStmtNo()) return true;
+	if (s1->getStmtNo() > w2->getStmtNo()) return false;
+	return parentStar(s1, s2->getParentContainer());
 }
 
 /*
-Dummy implementation
+Return true if parentStar(stmt1, stmt2). Return false otherwise.
 */
-vector<int> PKB::parents(int stmtIndex) {
-	vector<int> result(2, 2);
-	return result;
+bool PKB::parentStar(int stmt1, int stmt2) {
+	if (isValidStmtNo(stmt1) && isValidStmtNo(stmt2) && stmt1 < stmt2) {
+		if (parents(stmt1, stmt2)) {
+			return true;
+		}
+		else {
+			Statement* s1 = allStatements[stmt1 - 1];
+			Statement* s2 = allStatements[stmt2 - 1];
+			StatementContainer* sc2 = s2->getParentContainer();
+			if (typeid(*s1) == typeid(WhileStatement) && typeid(*sc2) == typeid(WhileStatement)) {
+				return parentStar(static_cast<WhileStatement*>(s1), sc2);
+			}
+		}
+	}
+	return false;
 }
 
 /*
-Dummy implementation
+Return a vector of indices of statements that are nested below stmt1, both directly and indirectly.
+Return a vector of 1 element -1 if there are no statement nested below stmt1, both directly and indirectly.
 */
-vector<int> PKB::parentsBy(int stmtIndex) {
-	vector<int> result(2, 2);
-	return result;
+vector<int> PKB::parentStar(int stmt1) {
+	vector<int> result;
+	vector<int> nestedStmts = parents(stmt1);
+	if (nestedStmts[0] == -1) {
+		return nestedStmts;
+	}
+	else {
+		for (int stmtNo : nestedStmts) {
+			result.push_back(stmtNo);
+			vector<int> nestedChildren = parentStar(stmtNo);
+			if (nestedChildren[0] != -1) {
+				for (int index : nestedChildren) {
+					result.push_back(index);
+				}
+			}
+		}
+		return result;
+	}
+}
+
+/*
+Return a vector of indices of statements that stmt2 is nested below, both directly and indirectly.
+*/
+vector<int> PKB::parentStarBy(int stmt2) {
+	vector<int> result;
+	if (isValidStmtNo(stmt2)) {
+		int directParent = parentedBy(stmt2);
+		if (directParent != -1) {
+			result.push_back(directParent);
+			vector<int> parentsOfParent = parentStarBy(directParent);
+			if (parentsOfParent[0] != -1) {
+				for (int index : parentsOfParent) {
+					result.push_back(index);
+				}
+			}
+			return result;
+		}
+		else {
+			result.push_back(-1);
+			return result;
+		}
+	}
+}
+
+/*
+Return a vector of all possible pairs (s1, s2) such that parent(s1, s2)
+Return a vector of 1 element (-1, -1) if no nesting occurs.
+*/
+vector<pair<int, int>> PKB::parents() {
+	vector<pair<int, int>> result;
+	vector<Statement*> allWhileStatements(allStatements.size());
+	auto it = copy_if(allStatements.begin(),
+		allStatements.end(),
+		allWhileStatements.begin(),
+		[](Statement* s) { return (typeid(*s) == typeid(WhileStatement)); });
+	allWhileStatements.resize(distance(allWhileStatements.begin(), it));
+	if (allWhileStatements.empty) {
+		pair<int, int> p(-1, -1);
+		result.push_back(p);
+		return result;
+	}
+	else {
+		for (Statement* s : allWhileStatements) {
+			WhileStatement* w = static_cast<WhileStatement*>(s);
+			vector<int> nested = parents(w->getStmtNo());
+			if (nested[0] != -1) {
+				for (int index : nested) {
+					pair<int, int> p(w->getStmtNo(), index);
+					result.push_back(p);
+			    }
+			}
+		}
+		return result;
+	}
+}
+
+/*
+Return a vector of all possible pairs (s1, s2) such that parentStar(s1, s2).
+Return a vector of 1 element (-1, -1) if no nesting occurs.
+*/
+vector<pair<int, int>> PKB::parentStar() {
+	vector<pair<int, int>> result;
+	vector<Statement*> allWhileStatements(allStatements.size());
+	auto it = copy_if(allStatements.begin(),
+		allStatements.end(),
+		allWhileStatements.begin(),
+		[](Statement* s) { return (typeid(*s) == typeid(WhileStatement)); });
+	allWhileStatements.resize(distance(allWhileStatements.begin(), it));
+	if (allWhileStatements.empty) {
+		pair<int, int> p(-1, -1);
+		result.push_back(p);
+		return result;
+	}
+	else {
+		for (Statement* s : allWhileStatements) {
+			WhileStatement* w = static_cast<WhileStatement*>(s);
+			vector<int> nested = parentStar(w->getStmtNo());
+			if (nested[0] != -1) {
+				for (int index : nested) {
+					pair<int, int> p(w->getStmtNo(), index);
+					result.push_back(p);
+				}
+			}
+		}
+		return result;
+	}
 }
