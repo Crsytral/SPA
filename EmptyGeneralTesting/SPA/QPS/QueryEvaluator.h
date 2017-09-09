@@ -1,24 +1,24 @@
-//header guard at start of header file
+//header guard
 #ifndef QUERYEVALUATOR_H
 #define QUERYEVALUATOR_H	
 
 #include <string>
 #include "Result.h"
 #include "QueryObject.h"
-#include "PKB.h"
+#include "../PKB/PKB.h"
 
 using namespace std;
 
 class QueryEvaluator {
 private:
-	QueryObject queryObj; //To be updated with actual "QueryObj" class
-	PKB PKB; //To be updated with actual PKB class
+	QueryObject queryObj;
+	PKB PKB;
 	Result rawResult;
 
 	bool processVariableClause();
 	bool processSelect();
-	//bool processSecondClause(Result result);
 	bool processSuchThat();
+	//bool processSecondClause(Result result);
 	//Result combineResults(Result r1, Result r2, Result r3);
 
 public:
@@ -28,5 +28,5 @@ public:
 	Result getRawResult();
 };
 
-//End guard at bottom of header file
+//End guard
 #endif 

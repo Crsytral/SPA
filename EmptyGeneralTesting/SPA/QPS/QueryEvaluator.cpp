@@ -1,7 +1,7 @@
 #include "QueryEvaluator.h"
-#include "stdafx.h"
 #include <vector>
 #include <iostream>
+#include "SyntaticType.h"
 
 QueryEvaluator::QueryEvaluator(QueryObject q) { //string q to be replaced with QueryObj
 	queryObj = q;
@@ -10,8 +10,8 @@ QueryEvaluator::QueryEvaluator(QueryObject q) { //string q to be replaced with Q
 
 Result QueryEvaluator::processQuery() {
 	Result result;
-	if (processVariableClause(result) == true)
-			processSuchThat(result);
+	if (processVariableClause() == true)
+			processSuchThat();
 
 	//combineResults(r1, r2, r3);
 	return result;
@@ -24,29 +24,30 @@ bool QueryEvaluator::processVariableClause() {
 	vector <string> assignmentType; //to be replaced with API from query preprocessor, get assignmentType(s) of query
 	assignmentType.push_back("assign");
 	assignmentType.push_back("statement");
-	vector <SyntaticData*> symbolTable = queryObj.getSymbolTable();
-	if (symbolTable.getSize() == 0) { //if 0 means no symbol = return nth
+	vector <SyntaticData*> symbolTable = queryObj.synonym->getQuery();
+	if (symbolTable.size() == 0) { //if 0 means no symbol = return nth
 		return false;
 	}else{
-		for each (SyntaticData data in symbolTable)
+		for each (SyntaticData *data in symbolTable)
 		{
-			if (data.getResult() == 1){
-				if (data.getVariableType() == "assign") {
+			if (data->getResult() == 1){
+				cout << data->getVariableType() << endl;
+				if (data->getVariableType() == syntatic_type::assignment) {
 					rawResult.setAsgnData(PKB.getAllAssignStatement()); // to replace with relevant PKB API
 				}
-				else if (data.getVariableType() == "variable") {
+				else if (data->getVariableType() == syntatic_type::variable) {
 					rawResult.setAsgnData(PKB.getAllVariables()); // to replace with relevant PKB API
 				}
-				else if (data.getVariableType() == "statement") {
+				else if (data->getVariableType() == syntatic_type::statement) {
 					rawResult.setAsgnData(PKB.getAllStatements()); // to replace with relevant PKB API
 				}
-				else if (data.getVariableType() == "while") {
+				else if (data->getVariableType() == syntatic_type::whileLoop) {
 					rawResult.setAsgnData(PKB.getAllWhileStatement()); // to replace with relevant PKB API
 				}
-				else if (data.getVariableType() == "if") {
+				else if (data->getVariableType() == syntatic_type::ifelse) {
 					rawResult.setAsgnData(PKB.getAllIfStatement()); // to replace with relevant PKB API
 				}
-				else if (data.getVariableType() == "procedure") {
+				else if (data->getVariableType() == syntatic_type::procedure) {
 					rawResult.setAsgnData(PKB.getAllProcedures()); // to replace with relevant PKB API
 				}
 				else {
@@ -62,30 +63,32 @@ bool QueryEvaluator::processVariableClause() {
 bool QueryEvaluator::processSuchThat() {
 	Result result("This is data 3");
 	bool success = false;
-	if (queryObj.getQuery().getType() == "follows") {
+	//checks if its int or var
+
+	if (queryObj.tree->getQuery()->getType() == relation::follows) {
 		//to check if param is int or not first before calling
-		success = PKB.follows((int)queryObj.getQuery().getLeftParam(), (int)queryObj.getQuery().getRightParam());
+		success = PKB.follows((int)queryObj.tree->getQuery()->getLeftParam(), (int)queryObj.tree->getQuery()->getRightParam());
 	}
-	else if (queryObj.getQuery().getType() == "followsStar") {
-		success = PKB.followStar((int)queryObj.getQuery().getLeftParam(), (int)queryObj.getQuery().getRightParam());
+	else if (queryObj.tree->getQuery()->getType() == relation::followsStar) {
+		success = PKB.followStar((int)queryObj.tree->getQuery()->getLeftParam(), (int)queryObj.tree->getQuery()->getRightParam());
 	}
-	else if (queryObj.getQuery().getType() == "parents") {
-		success = PKB.parents((int)queryObj.getQuery().getLeftParam(), (int)queryObj.getQuery().getRightParam());
+	else if (queryObj.tree->getQuery()->getType() == relation::parent) {
+		success = PKB.parents((int)queryObj.tree->getQuery()->getLeftParam(), (int)queryObj.tree->getQuery()->getRightParam());
 	}
-	else if (queryObj.getQuery().getType() == "parentStar") {
-		success = PKB.parentStar((int)queryObj.getQuery().getLeftParam(), (int)queryObj.getQuery().getRightParam());
+	else if (queryObj.tree->getQuery()->getType() == relation::parentStar) {
+		success = PKB.parentStar((int)queryObj.tree->getQuery()->getLeftParam(), (int)queryObj.tree->getQuery()->getRightParam());
 	}
-	else if (queryObj.getQuery().getType() == "modifies") {
-		success = PKB.modifies((int)queryObj.getQuery().getLeftParam(), queryObj.getQuery().getRightParam());
+	else if (queryObj.tree->getQuery()->getType() == relation::modifies) {
+		success = PKB.modifies((int)queryObj.tree->getQuery()->getLeftParam(), queryObj.tree->getQuery()->getRightParam());
 	}
-	else if (queryObj.getQuery().getType() == "uses") {
-		success = PKB.uses((int)queryObj.getQuery().getLeftParam(), queryObj.getQuery().getRightParam());
+	else if (queryObj.tree->getQuery()->getType() == relation::uses) {
+		success = PKB.uses((int)queryObj.tree->getQuery()->getLeftParam(), queryObj.tree->getQuery()->getRightParam());
 	}
-	else if (queryObj.getQuery().getType() == "pattern") {
-		cout << "pattern processing yet to finish" << endl;
-	}
+	//else if (queryObj.tree->getQuery()->getType() == relation::pattern) {
+	//	cout << "pattern processing yet to finish" << endl;
+	//}
 	else {
-		cout << "Yet to be handled (processSuchThat()) - What case is this?" << endl;
+		cout << "Yet to be handled (from processSuchThat()) - What case is this?" << endl;
 	}
 
 	if (success == true)
@@ -99,6 +102,7 @@ Result QueryEvaluator::getRawResult() {
 	return rawResult;
 }
 
+//perheps not need since its covered in processVariableClause()
 bool QueryEvaluator::processSelect() {
 	
 	return true;
