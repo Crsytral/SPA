@@ -16,8 +16,10 @@ private:
 	Result rawResult;
 
 	bool processVariableClause();
-	bool processSelect();
+	bool processRawResult();
 	bool processSuchThat();
+	bool processPattern();
+	string QueryEvaluator::convertIntVectorToString(vector<int> intVector);
 	//bool processSecondClause(Result result);
 	//Result combineResults(Result r1, Result r2, Result r3);
 
