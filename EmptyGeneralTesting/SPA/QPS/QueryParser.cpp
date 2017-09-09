@@ -31,6 +31,7 @@ bool buildSuchThat = false;
 bool buildPattern = false;
 
 string concatQuery;
+string concatPattern;
 
 regex varRegex("(([a-zA-Z])+(([a-zA-Z])|#|(\\d)+)*|_|\"([a-zA-Z])+(([a-zA-Z])|#|(\\d)+)*\")");
 
@@ -59,25 +60,62 @@ QueryParser::QueryParser() {
 
 }
 
-/*
+
 //Check the parameter of queries with pattern clause
-bool parametersCheck(syntatic_type currentSyn, string firstPara, string secondPara, string thirdPara) {
+bool parametersCheck(syntatic_type inputSyn, string firstPara, string secondPara, string thirdPara) {
 
 	bool validity = false;
+	regex expressionRegex("\"(([a-zA-Z])+(([a-zA-Z])|(\\d)+)*|\\d+)((\\+|\\-|\\*)(([a-zA-Z])+(([a-zA-Z])|(\\d)+)*|\\d+))*\"|_");
+	regex singleUnderscore("_");
+	regex doubleUnderscore("_\"(([a-zA-Z])+(([a-zA-Z])|(\\d)+)*|\\d+)((\\+|\\-|\\*)(([a-zA-Z])+(([a-zA-Z])|(\\d)+)*|\\d+))*\"_");
 	
-	//This function serves to check test cases like Select a pattern a ( _ , _ìx*y+zî_)
-	if (regex_match(firstPara, varRegex)) {
-
+	//This function serves to check test cases like Select a pattern a ( _ , _‚Äúx*y+z‚Äù_)
+	if (inputSyn == syntatic_type::assignment)
+	{
 		if (regex_match(firstPara, varRegex)) {
 
+			if (regex_match(secondPara, expressionRegex) || regex_match(secondPara, doubleUnderscore))
+			{
+				validity = true;
+			}
 
+			else
+			{
+				printf("Invalid regex detected");
+			}
 
 		}
 
+		else
+		{
+			printf("invalid parameter detected");
+		}
 	}
-	
+
+	else if (inputSyn == syntatic_type::ifelse)
+	{
+		if (regex_match(firstPara, varRegex) && regex_match(secondPara, singleUnderscore) && regex_match(thirdPara, singleUnderscore))
+		{
+			if (regex_match(firstPara, varRegex) && regex_match(secondPara, singleUnderscore) && regex_match(thirdPara, singleUnderscore))
+			{
+				validity = true;
+			}
+		}
+	}
+
+	else if (inputSyn == syntatic_type::whileLoop)
+	{
+		if (regex_match(firstPara, varRegex) && regex_match(secondPara, singleUnderscore))
+		{
+			validity = true;
+		}
+	}
+
+	return validity;
+
+
 }
-*/
+
 
 //Check the parameter of queries with such that clause
 bool parametersCheck(relation relationClause, string firstParam, string secondParam) {
@@ -369,6 +407,144 @@ void buildQueryNode(char* curTok, string concatQuery) {
 
 }
 
+void buildPatternNode(char* curTok, string concatPattern) {
+
+	concatPattern.append(curTok);
+
+	regex expectedPattern("([^\\(]+\\(([^\\)]+|[^\,]+)(\,([^\\)]+|[^\,]+)\\))+)");
+
+	bool firstParameterDone = false;
+	bool secondParameterDone = false;
+	bool foundPatternSyn = false;
+	bool synonymExist;
+	bool isIfElse;
+
+	string firstParameter = "";
+	string secondParameter = "";
+	string thirdParameter = "";
+	syntatic_type  patternSynType;
+
+	//patternSyn reders to the synonyms 'a' in < pattern a ("x", _)
+	string patternSyn = "";
+
+	if (regex_match(concatPattern, expectedPattern))
+	{
+
+		for (std::string::size_type i = 0; i < concatPattern.size(); ++i) {
+
+			if (concatPattern[i] == '(')
+			{
+				if (newSynonyms->checkExists(patternSyn))
+				{
+					synonymExist = true;
+				}
+
+				else;
+
+				if (synonymExist = false)
+				{
+					errorFound = true;
+					break;
+				}
+
+				else
+				{
+					patternSynType = newSynonyms->getSyntType(patternSyn);
+
+					//check if its syntactic type is valid
+					if (patternSynType != syntatic_type::assignment || patternSynType != syntatic_type::whileLoop || patternSynType != syntatic_type::ifelse)
+					{
+						errorFound = true;
+						printf("Error with pattern syntactic type");
+						break;
+					}
+
+					else;
+
+					if (patternSynType == syntatic_type::ifelse)
+					{
+						isIfElse = true;
+					}
+				
+				}
+				foundPatternSyn = true;
+			}
+
+			else if (concatPattern[i] == ')')
+			{
+				concatPattern = "";
+			}
+
+			else if (foundPatternSyn && concatPattern[i] != ',')
+			{
+				if (!isIfElse)
+				{
+					if (firstParameterDone)
+					{
+						secondParameter += concatPattern[i];
+					}
+
+					else
+					{
+						firstParameter += concatPattern[i];
+					}
+				}
+
+				else
+				{
+					if (firstParameterDone)
+					{
+						secondParameter += concatPattern[i];
+					}
+
+					else if (secondParameterDone)
+					{
+						thirdParameter += concatPattern[i];
+					}
+
+					else
+					{
+						firstParameter += concatPattern[i];
+					}
+
+				}
+
+			}
+
+			else if (concatPattern[i] == ',')
+			{
+				if (!firstParameterDone)
+				{
+					firstParameterDone = true;
+				}
+
+				else
+				{
+					secondParameterDone = true;
+				}
+			}
+
+			else if (foundPatternSyn != true)
+			{
+				patternSyn += concatPattern[i];
+			}
+		}
+	}
+
+	if (parametersCheck(patternSynType, firstParameter, secondParameter, thirdParameter))
+	{
+		ParameterNode* leftParameterNode = new ParameterNode(patternSynType, patternSyn);
+		syntatic_type middleParameterSynType = checkSyntaticType(firstParameter);
+		syntatic_type rightParameterSynType = checkSyntaticType(secondParameter);
+		removeCharsFromString(secondParameter, "\"");
+		removeCharsFromString(firstParameter, "\"");
+		ParameterNode* middleParameterNode = new ParameterNode(middleParameterSynType, firstParameter);
+		ParameterNode* rightParameterNode = new ParameterNode(rightParameterSynType, secondParameter);
+		PatternNode* newPattern = new PatternNode(leftParameterNode, middleParameterNode, rightParameterNode);
+		newTree -> addPattern(newPattern);
+	}
+
+}
 
 void checkPatternOrQuery(char* inputTok) {
 
@@ -403,6 +579,7 @@ void checkPatternOrQuery(char* inputTok) {
 	else if (strcmp(inputTok, "pattern") == 0)
 	{
 		buildPattern = true;
+		concatPattern = "";
 	}
 
 	else
@@ -415,6 +592,11 @@ void checkPatternOrQuery(char* inputTok) {
 		else if (buildSuchThat = true)
 		{
 			buildQueryNode(inputTok, concatQuery);
+		}
+
+		else if (buildPattern = true)
+		{
+			buildPatternNode(inputTok, concatPattern);
 		}
 	}
 
@@ -575,5 +757,5 @@ QueryObject QueryParser::getQueryObj(std::string i) {
 int main(void){
 
 	return 0;
-
 }
+
