@@ -1,5 +1,4 @@
 #include "QueryResultProjector.h"
-#include "stdafx.h"
 #include <iostream>
 
 QueryResultProjector::QueryResultProjector(Result r) {
