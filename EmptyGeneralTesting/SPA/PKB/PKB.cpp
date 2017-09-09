@@ -82,37 +82,112 @@ bool PKB::endOfList() {
 /*
 Dummy implementation
 */
+bool PKB::isValidStmtNo(int s) {
+	return (0 < s && s < currIndex + 1 ? true : false);
+}
 bool PKB::follows(int stmt1, int stmt2) {
+	if (isValidStmtNo(stmt1) && isValidStmtNo(stmt2)) {
+		Statement* s1 = allStatements[stmt1 - 1];
+		Statement* s2 = s1->getFollowBy();
+		if (s2 != NULL && s2->getStmtNo() == stmt2) return true;
+		else return false;
+	}
 	return false;
 }
 int PKB::follows(int stmt1) {
+	if (isValidStmtNo(stmt1)) {
+		Statement* s1 = allStatements[stmt1 - 1];
+		Statement* s2 = s1->getFollowBy();
+		if (s2 != NULL) return s2->getStmtNo();
+	}
 	return -1;
 }
 int PKB::followsBy(int stmt2) {
+	if (isValidStmtNo(stmt2)) {
+		Statement* s1 = allStatements[stmt2 - 1];
+		Statement* s2 = s1->getFollow();
+		if (s2 != NULL) return s2->getStmtNo();
+	}
 	return -1;
 }
+bool PKB::followStar(Statement* s1, Statement* s2) {
+	if (s1 == NULL) return false;
+	if (s1 == s2) return true;
+	else return followStar(s1->getFollowBy(), s2);
+}
 bool PKB::followStar(int stmt1, int stmt2) {
+	if (isValidStmtNo(stmt1) && isValidStmtNo(stmt2) && stmt1 < stmt2) {
+		Statement* s1 = allStatements[stmt1 - 1];
+		Statement* s2 = allStatements[stmt2 - 1];
+		return followStar(s1, s2);
+	}
 	return false;
 }
 vector<int> PKB::followStar(int stmt1) {
-	vector<int> result(1, -1);
+	vector<int> result;
+	if (isValidStmtNo(stmt1)) {
+		Statement* s1 = allStatements[stmt1 - 1];
+		while (s1->getFollowBy() != NULL) {
+			s1 = s1->getFollowBy();
+			result.push_back(s1->getStmtNo());
+		}
+		if (!result.empty()) return result;
+	}
+	result.push_back(-1);
 	return result;
 }
 vector<int> PKB::followStarBy(int stmt2) {
-	vector<int> result(1, -1);
+	vector<int> result;
+	if (isValidStmtNo(stmt2)) {
+		Statement* s2 = allStatements[stmt2 - 1];
+		while (s2->getFollow() != NULL) {
+			s2 = s2->getFollowBy();
+			result.push_back(s2->getStmtNo());
+		}
+		if (!result.empty()) return result;
+	}
+	result.push_back(-1);
 	return result;
 }
 vector<pair<int, int>> PKB::follows() {
 	vector<pair<int, int>> result;
-	pair<int, int> ans(-1, -1);
-	result.push_back(ans);
-	return result;
+	for (Statement* s : allStatements) {
+		int s1 = s->getStmtNo();
+		int followStmt = follows(s1);
+		if (followStmt != -1) {
+			pair<int, int> p(s1, followStmt);
+			result.push_back(p);
+		}
+	}
+	if (!result.empty()) {
+		return result;
+	}
+	else {
+		pair<int, int> ans(-1, -1);
+		result.push_back(ans);
+		return result;
+	}
 }
 vector<pair<int, int>> PKB::followStar() {
 	vector<pair<int, int>> result;
-	pair<int, int> ans(-1, -1);
-	result.push_back(ans);
-	return result;
+	for (Statement* s : allStatements) {
+		int s1 = s->getStmtNo();
+		vector<int> followStmt = followStar(s1);
+		if (followStmt[0] != -1) {
+			for (int s2 : followStmt) {
+				pair<int, int> p(s1, s2);
+				result.push_back(p);
+			}
+		}
+	}
+	if (!result.empty()) {
+		return result;
+	}
+	else {
+		pair<int, int> ans(-1, -1);
+		result.push_back(ans);
+		return result;
+	}
 }
 
 /*
