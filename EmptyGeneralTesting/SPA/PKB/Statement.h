@@ -30,6 +30,7 @@ public:
 	bool isFollowBy(int stmtNo);
 	Statement* getParentStatement();
 	//Procedure getParentProcedure();
+	StatementContainer* getParentContainer();
 	bool isParent(int stmtNo);
 	//bool isParent(string proName);
 	int getStmtNo();

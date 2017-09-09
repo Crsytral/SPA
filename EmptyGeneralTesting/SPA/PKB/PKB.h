@@ -24,6 +24,7 @@ private:
 	stack<StatementContainer*> currentStmtContainer;
 	bool isValidStmtNo(int s);
 	bool followStar(Statement* s1, Statement* s2);
+	bool parentStar(WhileStatement* s1, StatementContainer* s2);
 public:
 	PKB();
 	void addProcedure(string procName);
@@ -52,8 +53,23 @@ public:
 	vector<int> followStarBy(int stmt2);
 	vector<pair<int, int>> follows();
 	vector<pair<int, int>> followStar();
-	vector<int> parent(int stmtIndex);
-	vector<int> parentBy(int stmtIndex);
-	vector<int> parents(int stmtIndex);
-	vector<int> parentsBy(int stmtIndex);
+	//parent relation
+	bool parents(int stmt1, int stmt2);
+	vector<int> parents(int stmt1);
+	int parentedBy(int stmt2);
+	bool parentStar(int stmt1, int stmt2);
+	vector<int> parentStar(int stmt1);
+	vector<int> parentStarBy(int stmt2);
+	vector<pair<int, int>> parents();
+	vector<pair<int, int>> parentStar();
+	//uses relation
+	bool uses(int stmtIndex, string varName);
+	vector<int> uses(string varName);
+	vector<string> usedBy(int stmtIndex);
+	vector<pair<int, string>> uses();
+	//modifies relation
+	bool modifies(int stmtIndex, string varName);
+	vector<int> modifies(string varName);
+	vector<string> modifiedBy(int stmtIndex);
+	vector<pair<int, string>> modifies();
 };

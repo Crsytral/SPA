@@ -18,8 +18,13 @@ protected:
 	vector<Variable*> varUsed;
 	vector<Variable*> varModified;
 	StatementList * stmtLst;
-	StatementContainer * parentContainer;
+	StatementContainer * pContainer;
 public:
+	/*
+	Return a vector of all statements that are nested under this statement container.
+	Return an empty vector if there is no statement nested under this statement container.
+	*/
+	vector<Statement*> getAllStatements();
 	/*
 	Parameter: Statement stmt
 	Outcome: stmt is added to the StatementList of this StatementContainer object.
@@ -42,4 +47,8 @@ public:
 	updateVarModified operations.
 	*/
 	void setParentContainer(StatementContainer * p);
+	/*
+	Get the parent StatementContainer of this object.
+	*/
+	StatementContainer* getParentContainer();
 };

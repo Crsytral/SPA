@@ -43,6 +43,9 @@ bool Statement::isFollowBy(int stmtNo) {
 Statement* Statement::getParentStatement() {
 	return parentStatement;
 }
+StatementContainer* Statement::getParentContainer() {
+	return parentContainer;
+}
 //Procedure getParentProcedure();
 bool Statement::isParent(int stmtNo) {
 	return parentStatement != nullptr && parentStatement->stmtNo == stmtNo;

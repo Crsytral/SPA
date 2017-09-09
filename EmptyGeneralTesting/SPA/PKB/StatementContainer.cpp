@@ -1,7 +1,11 @@
 #include "StatementContainer.h"
 
 void StatementContainer::setParentContainer(StatementContainer* p) {
-	parentContainer = p;
+	pContainer = p;
+}
+
+StatementContainer* StatementContainer::getParentContainer() {
+	return pContainer;
 }
 
 void StatementContainer::updateVarUsed(vector<Variable*>* vars) {
