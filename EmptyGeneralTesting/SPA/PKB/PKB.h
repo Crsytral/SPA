@@ -52,8 +52,13 @@ public:
 	vector<int> followStarBy(int stmt2);
 	vector<pair<int, int>> follows();
 	vector<pair<int, int>> followStar();
-	vector<int> parent(int stmtIndex);
-	vector<int> parentBy(int stmtIndex);
-	vector<int> parents(int stmtIndex);
-	vector<int> parentsBy(int stmtIndex);
+	//parent relation
+	bool parents(int stmt1, int stmt2);
+	int parents(int stmt1);
+	int parentedBy(int stmt2);
+	bool parentStar(int stmt1, int stmt2);
+	vector<int> parentStar(int stmt1);
+	vector<int> parentStarBy(int stmt2);
+	vector<pair<int, int>> parents();
+	vector<pair<int, int>> parentStar();
 };

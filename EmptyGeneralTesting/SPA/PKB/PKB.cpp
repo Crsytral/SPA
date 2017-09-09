@@ -193,6 +193,10 @@ vector<pair<int, int>> PKB::followStar() {
 /*
 Dummy implementation
 */
+bool PKB::parents(int stmt1, int stmt2) {
+
+}
+
 vector<int> PKB::parent(int stmtIndex) {
 	vector<int> result(2, 2);
 	return result;
