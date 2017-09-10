@@ -13,4 +13,5 @@ private:
 	string procName;
 public:
 	Procedure(string name);
+	string getName();
 };

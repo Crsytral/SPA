@@ -45,6 +45,33 @@ public:
 	*/
 	bool endOfList();
 	//the ones below are for query selector
+	//getAll APIs
+	/*
+	Return a vector of names of all procedures in the program
+	*/
+	vector<string> getAllProcedures();
+	/*
+	Return a vector of all indices of all statements in the program
+	Return a vector with 1 element -1 if there is no statement.
+	*/
+	vector<int> getAllStatements();
+	/*
+	Return a vector of all indices of all assignment statements in the program
+	Return a vector with 1 element -1 if there is no assignment statement.
+	*/
+	vector<int> getAllAssignStatements();
+	/*
+	Return a vector of all indices of all while statements in the program
+	Return a vector with 1 element -1 if there is no while statement.
+	*/
+	vector<int> getAllWhileStatements();
+	/*
+	Return a vector of all indices of all if statements in the program
+	Return a vector with 1 element -1 if there is no if statement.
+	*/
+	vector<int> getAllIfStatements();
+
+	//follows relation
 	bool follows(int stmt1, int stmt2);
 	int follows(int stmt1);
 	int followsBy(int stmt2);

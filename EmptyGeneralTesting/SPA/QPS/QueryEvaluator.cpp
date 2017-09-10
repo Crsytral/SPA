@@ -33,7 +33,7 @@ bool QueryEvaluator::processVariableClause() {
 			if (data->getResult() == 1){
 				cout << data->getVariableType() << endl;
 				if (data->getVariableType() == syntatic_type::assignment) {
-					rawResult.setAsgnData(PKB.getAllAssignStatement()); // to replace with relevant PKB API
+					rawResult.setAsgnData(PKB.getAllAssignStatements()); // to replace with relevant PKB API
 				}
 				else if (data->getVariableType() == syntatic_type::variable) {
 					rawResult.setAsgnData(PKB.getAllVariables()); // to replace with relevant PKB API
@@ -42,10 +42,10 @@ bool QueryEvaluator::processVariableClause() {
 					rawResult.setAsgnData(PKB.getAllStatements()); // to replace with relevant PKB API
 				}
 				else if (data->getVariableType() == syntatic_type::whileLoop) {
-					rawResult.setAsgnData(PKB.getAllWhileStatement()); // to replace with relevant PKB API
+					rawResult.setAsgnData(PKB.getAllWhileStatements()); // to replace with relevant PKB API
 				}
 				else if (data->getVariableType() == syntatic_type::ifelse) {
-					rawResult.setAsgnData(PKB.getAllIfStatement()); // to replace with relevant PKB API
+					rawResult.setAsgnData(PKB.getAllIfStatements()); // to replace with relevant PKB API
 				}
 				else if (data->getVariableType() == syntatic_type::procedure) {
 					rawResult.setAsgnData(PKB.getAllProcedures()); // to replace with relevant PKB API
