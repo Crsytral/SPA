@@ -4,19 +4,23 @@ To be implemented by Lu Yu
 */
 #include <string>
 #include <vector>
+#include <queue>
 using namespace std;
 
 #include "Variable.h"
+#include "../Parser/Token.h"
+#include "Node.h"
 class Variable;
 
 class Expression {
 private:
-	string syntaxTree;
-	vector<Variable*>* usedVariables;
+	Node* syntaxTree;
+	vector<Variable*> usedVariables;
+	Node* buildSyntaxTree(queue<Token> tokens);
 public:
-	Expression(string exp);
-	string getSyntaxTree();
-	vector<Variable*>* getUsedVariable();
-	bool operator==(Expression other);
-	bool contains(Expression other);
+	Expression(queue<Token> tokens);
+	Node* getSyntaxTree();
+	vector<Variable*> getUsedVariable();
+	bool equals(Expression* other);
+	bool contains(Expression* other);
 };
