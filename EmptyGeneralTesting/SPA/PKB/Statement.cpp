@@ -52,6 +52,7 @@ bool Statement::operator==(Statement others) {
 
 void Statement::addModVar(Variable var) {
 	modVar.push_back(var);
+	var.addModifyStmt(this);
 	if (parentContainer != nullptr) {
 		if (typeid(parentContainer) == typeid(Statement)) {
 			static_cast<WhileStatement*>(parentContainer) -> addModVar(var);
@@ -74,6 +75,7 @@ bool Statement::isMod(string varName) {
 
 void Statement::addUseVar(Variable var) {
 	useVar.push_back(var);
+	var.addUseStmt(this);
 	if (parentContainer != nullptr) {
 		if (typeid(parentContainer) == typeid(Statement)) {
 			static_cast<WhileStatement*>(parentContainer)->addUseVar(var);
