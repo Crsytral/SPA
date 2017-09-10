@@ -39,6 +39,7 @@ void Variable::addUseStmt(Statement* stmt) {
 	if (!alrAdded) {
 		useStmtLst.push_back(stmt);
 	}
+}
 bool Variable::operator==(Variable other) {
 	return varName.compare(other.varName) == 0;
 }

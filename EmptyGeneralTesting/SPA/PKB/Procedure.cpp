@@ -35,6 +35,7 @@ bool Procedure::isUse(string varName) {
 	Variable var(varName);
 	vector<Variable>::iterator it = find(useVar.begin(), useVar.end(), var);
 	return it != useVar.end();
+}
 
 string Procedure::getName() {
 	return procName;
