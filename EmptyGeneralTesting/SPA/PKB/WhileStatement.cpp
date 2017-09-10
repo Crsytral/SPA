@@ -1,7 +1,7 @@
 #include "WhileStatement.h"
 
-WhileStatement::WhileStatement(Variable* cVar) {
-	StatementList lst(this);
-	stmtLst = &lst;
-	varUsed.push_back(cVar);
+WhileStatement::WhileStatement(int index, StatementContainer parent, Statement following, Variable* cVar) {
+	Statement(index, &parent, &following);
+	addUseVar(*cVar);
+	stmtLst = new StatementList(this);
 }

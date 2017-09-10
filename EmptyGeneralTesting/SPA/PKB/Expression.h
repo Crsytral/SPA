@@ -17,4 +17,6 @@ public:
 	Expression(string exp);
 	string getSyntaxTree();
 	vector<Variable*>* getUsedVariable();
+	bool operator==(Expression other);
+	bool contains(Expression other);
 };

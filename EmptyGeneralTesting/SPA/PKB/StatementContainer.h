@@ -15,8 +15,6 @@ To be implemented by the following class: Procedure, IfStatement, WhileStatement
 */
 class StatementContainer {
 protected:
-	vector<Variable*> varUsed;
-	vector<Variable*> varModified;
 	StatementList * stmtLst;
 	StatementContainer * pContainer;
 public:
@@ -36,15 +34,6 @@ public:
 	/*
 	Update varUsed list of this object and its parentContainer (if exist) after a statement is added to the stmtLst.
 	To be implemented by Shermine
-	*/
-	void updateVarUsed(vector<Variable*>* vars);
-	/*
-	Update varModified list after a statement is added to the stmtLst. To be implemented by Shermine
-	*/
-	void updateVarModified(Variable* v);
-	/*
-	Set StatementContainer p as the parentContainer of this object to facilitate updateVarUsed and
-	updateVarModified operations.
 	*/
 	void setParentContainer(StatementContainer * p);
 	/*

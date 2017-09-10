@@ -1,8 +1,10 @@
 #pragma once
 #include <string>
+#include <vector>
 using namespace std;
 
 class StatementContainer;
+class Variable;
 
 /*
 Abstract representation of the commonalities of all types of statements
@@ -13,26 +15,27 @@ protected:
 	int stmtNo;
 	Statement* follow;
 	Statement* followBy;
-	Statement* parentStatement;
-	//I think this can be used to replace parentStatement
 	StatementContainer* parentContainer;
-	//Procedure parentProcedure;
+	vector<Variable> useVar;
+	vector<Variable> modVar;
 
 public:
 	Statement();
 	Statement(int stmtNo, StatementContainer* p, Statement *following);
-	//Statement(int stmtNo, Procedure parent, Statement *following);
 	void setFollowedBy(Statement* followBy);
-	void setParentStatement(Statement* parent);
 	Statement* getFollow();
 	bool isFollow(int stmtNo);
 	Statement* getFollowBy();
 	bool isFollowBy(int stmtNo);
-	Statement* getParentStatement();
-	//Procedure getParentProcedure();
 	StatementContainer* getParentContainer();
 	bool isParent(int stmtNo);
-	//bool isParent(string proName);
+	bool isParent(string proName);
 	int getStmtNo();
-	bool equals(Statement* others);
+	void addModVar(Variable var);
+	vector<Variable> getUseVar();
+	bool isUse(string varMod);
+	void addUseVar(Variable var);
+	vector<Variable> getModVar();
+	bool isMod(string varMod);
+	bool operator==(Statement others);
 };

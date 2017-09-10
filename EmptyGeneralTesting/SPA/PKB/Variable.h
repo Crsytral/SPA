@@ -35,4 +35,5 @@ public:
 	Statement needs to have a statement number already assigned.
 	*/
 	void addUseStmt(Statement* stmt);
+	bool operator==(Variable other);
 };
