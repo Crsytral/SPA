@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "../source/PKB/PKB.h"
+#include "../SPA/PKB/PKB.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -19,7 +19,7 @@ namespace UnitTesting
 				//Expected value:
 				expected[0],
 				//Actual value:
-				PKBTest.follow(1)[0],
+				PKBTest.followStar(1)[0],
 				//Message:
 				L"Basic test failed",
 				//Line number - used if there is no PDB file:

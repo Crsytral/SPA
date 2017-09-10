@@ -1,17 +1,5 @@
 ﻿  stdafx.cpp
   TestAST.cpp
-c:\users\le minh phuc\documents\spa\emptygeneraltesting\unittesting\testast.cpp(22): error C2039: 'follow': is not a member of 'PKB'
-  c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\pkb.h(18): note: see declaration of 'PKB'
-c:\users\le minh phuc\documents\spa\emptygeneraltesting\unittesting\testast.cpp(27): error C2665: 'Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual': none of the 8 overloads could convert all the argument types
-  c:\program files (x86)\microsoft visual studio 14.0\vc\unittest\include\cppunittestassert.h(178): note: could be 'void Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(const wchar_t *,const wchar_t *,bool,const wchar_t *,const Microsoft::VisualStudio::CppUnitTestFramework::__LineInfo *)'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\unittest\include\cppunittestassert.h(172): note: or       'void Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(const wchar_t *,const wchar_t *,const wchar_t *,const Microsoft::VisualStudio::CppUnitTestFramework::__LineInfo *)'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\unittest\include\cppunittestassert.h(166): note: or       'void Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(const wchar_t *,const wchar_t *,const char *,const Microsoft::VisualStudio::CppUnitTestFramework::__LineInfo *)'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\unittest\include\cppunittestassert.h(159): note: or       'void Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(const char *,const char *,bool,const wchar_t *,const Microsoft::VisualStudio::CppUnitTestFramework::__LineInfo *)'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\unittest\include\cppunittestassert.h(153): note: or       'void Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(const char *,const char *,const wchar_t *,const Microsoft::VisualStudio::CppUnitTestFramework::__LineInfo *)'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\unittest\include\cppunittestassert.h(147): note: or       'void Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(const char *,const char *,const char *,const Microsoft::VisualStudio::CppUnitTestFramework::__LineInfo *)'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\unittest\include\cppunittestassert.h(140): note: or       'void Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(float,float,float,const wchar_t *,const Microsoft::VisualStudio::CppUnitTestFramework::__LineInfo *)'
-  c:\program files (x86)\microsoft visual studio 14.0\vc\unittest\include\cppunittestassert.h(133): note: or       'void Microsoft::VisualStudio::CppUnitTestFramework::Assert::AreEqual(double,double,double,const wchar_t *,const Microsoft::VisualStudio::CppUnitTestFramework::__LineInfo *)'
-  c:\users\le minh phuc\documents\spa\emptygeneraltesting\unittesting\testast.cpp(27): note: while trying to match the argument list '(int, const wchar_t [18], Microsoft::VisualStudio::CppUnitTestFramework::__LineInfo *)'
   StatementTest.cpp
 c:\users\le minh phuc\documents\spa\emptygeneraltesting\unittesting\statementtest.cpp(35): error C2664: 'Statement::Statement(Statement &&)': cannot convert argument 2 from 'Statement *' to 'StatementContainer *'
   c:\users\le minh phuc\documents\spa\emptygeneraltesting\unittesting\statementtest.cpp(35): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
@@ -22,12 +10,4 @@ c:\users\le minh phuc\documents\spa\emptygeneraltesting\unittesting\statementtes
 c:\users\le minh phuc\documents\spa\emptygeneraltesting\unittesting\statementtest.cpp(127): error C2664: 'Statement::Statement(Statement &&)': cannot convert argument 2 from 'Statement *' to 'StatementContainer *'
   c:\users\le minh phuc\documents\spa\emptygeneraltesting\unittesting\statementtest.cpp(127): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
   StatementListTest.cpp
-c:\users\le minh phuc\documents\spa\emptygeneraltesting\unittesting\statementlisttest.cpp(17): error C2039: 'getParent': is not a member of 'StatementList'
-  c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\statementlist.h(11): note: see declaration of 'StatementList'
-c:\users\le minh phuc\documents\spa\emptygeneraltesting\unittesting\statementlisttest.cpp(25): error C2664: 'StatementList::StatementList(StatementList &&)': cannot convert argument 1 from 'Statement *' to 'StatementContainer *'
-  c:\users\le minh phuc\documents\spa\emptygeneraltesting\unittesting\statementlisttest.cpp(25): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
-c:\users\le minh phuc\documents\spa\emptygeneraltesting\unittesting\statementlisttest.cpp(27): error C2039: 'getParent': is not a member of 'StatementList'
-  c:\users\le minh phuc\documents\spa\emptygeneraltesting\source\pkb\statementlist.h(11): note: see declaration of 'StatementList'
-c:\users\le minh phuc\documents\spa\emptygeneraltesting\unittesting\statementlisttest.cpp(36): error C2664: 'StatementList::StatementList(StatementList &&)': cannot convert argument 1 from 'Statement *' to 'StatementContainer *'
-  c:\users\le minh phuc\documents\spa\emptygeneraltesting\unittesting\statementlisttest.cpp(36): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
   Generating Code...

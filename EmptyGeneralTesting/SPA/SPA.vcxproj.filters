@@ -51,37 +51,37 @@
     <ClCompile Include="PKB\WhileStatement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QPS\ParameterNode[2].cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QPS\PatternNode[1].cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="QPS\QueryEvaluator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QPS\QueryNode[1].cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QPS\QueryParser[1].cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="QPS\QueryResultProjector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QPS\QueryTree[1].cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="QPS\Result.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QPS\Synonyms[1].cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QPS\SyntaticData[1].cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DesignExtractor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QPS\ParameterNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QPS\PatternNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QPS\QueryNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QPS\QueryParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QPS\QueryTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QPS\Synonyms.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QPS\SyntaticData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -119,40 +119,40 @@
     <ClInclude Include="PKB\WhileStatement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="QPS\ParameterNode[1].h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QPS\PatternNode[1].h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="QPS\QueryEvaluator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QPS\QueryNode[1].h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QPS\QueryObject[1].h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QPS\QueryParser[1].h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QPS\QueryResultProjector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="QPS\QueryTree[1].h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="QPS\Result.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="QPS\Synonyms[1].h">
+    <ClInclude Include="QPS\ParameterNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="QPS\SyntaticData[1].h">
+    <ClInclude Include="QPS\PatternNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="QPS\SyntaticType[1].h">
+    <ClInclude Include="QPS\QueryNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QPS\QueryObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QPS\QueryParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QPS\QueryTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QPS\Synonyms.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QPS\SyntaticData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QPS\SyntaticType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
