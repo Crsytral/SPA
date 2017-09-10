@@ -15,6 +15,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DesignExtractor.cpp" />
+    <ClCompile Include="Parser\NumToken.cpp" />
+    <ClCompile Include="Parser\OperatorToken.cpp" />
     <ClCompile Include="Parser\Parser.cpp" />
     <ClCompile Include="Parser\Token.cpp" />
     <ClCompile Include="PKB\AssignStatement.cpp" />
@@ -39,8 +41,11 @@
     <ClCompile Include="QPS\Result.cpp" />
     <ClCompile Include="QPS\Synonyms.cpp" />
     <ClCompile Include="QPS\SyntaticData.cpp" />
+    <ClCompile Include="Parser\VarToken.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Parser\NumToken.h" />
+    <ClInclude Include="Parser\OperatorToken.h" />
     <ClInclude Include="Parser\Parser.h" />
     <ClInclude Include="Parser\Token.h" />
     <ClInclude Include="PKB\AssignStatement.h" />
@@ -67,6 +72,7 @@
     <ClInclude Include="QPS\Synonyms.h" />
     <ClInclude Include="QPS\SyntaticData.h" />
     <ClInclude Include="QPS\SyntaticType.h" />
+    <ClInclude Include="Parser\VarToken.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>
