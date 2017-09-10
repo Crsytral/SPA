@@ -49,8 +49,8 @@ void PKB::addAssignStatement(Variable* v, Expression* exp) {
 	AssignStatement* aStmt = static_cast<AssignStatement*> (stmt->addAssignStatement(++currIndex, v, exp));
 	allStatements.push_back(aStmt);
 	addVariable(v);
-	vector<Variable*>* expVars = exp->getUsedVariable();
-	for (Variable* vb : *expVars) {
+	vector<Variable*> expVars = exp->getUsedVariable();
+	for (Variable* vb : expVars) {
 		addVariable(vb);
 	}
 }

@@ -18,7 +18,10 @@
     <ClCompile Include="Parser\Parser.cpp" />
     <ClCompile Include="Parser\Token.cpp" />
     <ClCompile Include="PKB\AssignStatement.cpp" />
+    <ClCompile Include="PKB\BopNode.cpp" />
     <ClCompile Include="PKB\Expression.cpp" />
+    <ClCompile Include="PKB\LeafNode.cpp" />
+    <ClCompile Include="PKB\Node.cpp" />
     <ClCompile Include="PKB\PKB.cpp" />
     <ClCompile Include="PKB\Procedure.cpp" />
     <ClCompile Include="PKB\Statement.cpp" />
@@ -41,7 +44,10 @@
     <ClInclude Include="Parser\Parser.h" />
     <ClInclude Include="Parser\Token.h" />
     <ClInclude Include="PKB\AssignStatement.h" />
+    <ClInclude Include="PKB\BopNode.h" />
     <ClInclude Include="PKB\Expression.h" />
+    <ClInclude Include="PKB\LeafNode.h" />
+    <ClInclude Include="PKB\Node.h" />
     <ClInclude Include="PKB\PKB.h" />
     <ClInclude Include="PKB\Procedure.h" />
     <ClInclude Include="PKB\Statement.h" />
