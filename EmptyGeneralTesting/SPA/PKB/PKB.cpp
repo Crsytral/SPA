@@ -81,9 +81,96 @@ bool PKB::endOfList() {
 	}
 }
 
+//getAll APIS
 /*
-Dummy implementation
+Return a vector of names of all procedures in the program.
+Return an empty vector if the program has no procedure.
 */
+vector<string> PKB::getAllProcedures() {
+	vector<string> result;
+	for (Procedure* p : allProcedures) {
+		result.push_back(p->getName());
+	}
+	return result;
+}
+/*
+Return a vector of all indices of all statements in the program
+Return a vector with 1 element -1 if there is no statement.
+*/
+vector<int> PKB::getAllStatements() {
+	vector<int> result;
+	for (Statement* s : allStatements) {
+		result.push_back(s->getStmtNo());
+	}
+	if (!result.empty()) {
+		return result;
+	}
+	else {
+		result.push_back(-1);
+		return result;
+	}
+}
+/*
+Return a vector of all indices of all assignment statements in the program
+Return a vector with 1 element -1 if there is no assignment statement.
+*/
+vector<int> PKB::getAllAssignStatements() {
+	vector<int> result;
+	for (Statement* s : allStatements) {
+		if (typeid(*s) == typeid(AssignStatement)) {
+			result.push_back(s->getStmtNo());
+		}
+	}
+	if (result.empty()) {
+		result.push_back(-1);
+		return result;
+	}
+	else {
+		return result;
+	}
+}
+/*
+Return a vector of all indices of all while statements in the program
+Return a vector with 1 element -1 if there is no while statement.
+*/
+vector<int> PKB::getAllWhileStatements() {
+	vector<int> result;
+	for (Statement* s : allStatements) {
+		if (typeid(*s) == typeid(WhileStatement)) {
+			result.push_back(s->getStmtNo());
+		}
+	}
+	if (result.empty()) {
+		result.push_back(-1);
+		return result;
+	}
+	else {
+		return result;
+	}
+}
+/*
+Return a vector of all indices of all if statements in the program
+Return a vector with 1 element -1 if there is no if statement.
+*/
+vector<int> PKB::getAllIfStatements() {
+	vector<int> result(1, -1);
+	return result;
+}
+
+vector<string> PKB::getAllVariables() {
+	vector<string> result;
+	for (Variable* v : allVariables) {
+		result.push_back(v->getName());
+	}
+	if (result.empty()) {
+		result.push_back("");
+		return result;
+	}
+	else {
+		return result;
+	}
+}
+
 bool PKB::isValidStmtNo(int s) {
 	return (0 < s && s < currIndex + 1 ? true : false);
 }

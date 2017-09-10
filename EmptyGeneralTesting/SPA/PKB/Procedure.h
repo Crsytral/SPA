@@ -15,7 +15,6 @@ private:
 	vector<Variable> modVar;
 public:
 	Procedure(string name);
-	string getProcName();
 	void addModVar(Variable var);
 	vector<Variable> getUseVar();
 	bool isUse(string varMod);
@@ -23,4 +22,5 @@ public:
 	vector<Variable> getModVar();
 	bool isMod(string varMod);
 	bool operator==(Statement others);
+	string getName();
 };
