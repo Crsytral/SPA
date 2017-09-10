@@ -3,8 +3,8 @@
 #define QUERYEVALUATOR_H	
 
 #include <string>
-#include "Result.h"
 #include "QueryObject.h"
+#include "Result.h"
 #include "../PKB/PKB.h"
 
 using namespace std;
@@ -16,8 +16,11 @@ private:
 	Result rawResult;
 
 	bool processVariableClause();
-	bool processSelect();
+	bool processRawResult();
 	bool processSuchThat();
+	bool processPattern();
+	string convertIntVectorToString(vector<int> intVector);
+	string convertStringVectorToString(vector<string> stringVector);
 	//bool processSecondClause(Result result);
 	//Result combineResults(Result r1, Result r2, Result r3);
 
