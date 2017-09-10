@@ -40,7 +40,7 @@ bool Statement::isParent(int stmtNo) {
 }
 
 bool Statement::isParent(string procName) {
-	return typeid(parentContainer) == typeid(Procedure) && static_cast<Procedure*>(parentContainer)->getProcName() == procName;
+	return typeid(parentContainer) == typeid(Procedure) && static_cast<Procedure*>(parentContainer)->getProcName().compare(procName) == 0;
 }
 
 int Statement::getStmtNo() {
