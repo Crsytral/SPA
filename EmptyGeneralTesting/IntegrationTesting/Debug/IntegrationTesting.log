@@ -1,3 +1,0 @@
-﻿  stdafx.cpp
-  TestFrontEnd.cpp
-LINK : fatal error LNK1104: cannot open file 'C:\Users\Le Minh Phuc\Documents\SPA\EmptyGeneralTesting\Debug\SPA.lib'
