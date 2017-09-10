@@ -8,3 +8,7 @@ Procedure::Procedure(string name) {
 	stmtLst = &lst;
 	procName = name;
 }
+
+string Procedure::getName() {
+	return procName;
+}
