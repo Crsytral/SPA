@@ -49,3 +49,31 @@ int Statement::getStmtNo() {
 bool Statement::operator==(Statement others) {
 	return stmtNo == others.stmtNo;
 }
+
+void Statement::addModVar(Variable var) {
+	modVar.push_back(var);
+}
+
+vector<Variable> Statement::getModVar() {
+	return modVar;
+}
+
+bool Statement::isMod(string varName) {
+	Variable var(varName);
+	vector<Variable>::iterator it = find(modVar.begin(), modVar.end(), var);
+	return it != modVar.end();
+}
+
+void Statement::addUseVar(Variable var) {
+	useVar.push_back(var);
+}
+
+vector<Variable> Statement::getUseVar() {
+	return useVar;
+}
+
+bool Statement::isUse(string varName) {
+	Variable var(varName);
+	vector<Variable>::iterator it = find(useVar.begin(), useVar.end(), var);
+	return it != useVar.end();
+}

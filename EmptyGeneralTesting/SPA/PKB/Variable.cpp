@@ -22,3 +22,7 @@ void Variable::addModifyStmt(Statement* stmt) {
 void Variable::addUseStmt(Statement* stmt) {
 	useStmtLst->push_back(stmt);
 }
+
+bool Variable::operator==(Variable other) {
+	return varName.compare(other.varName) == 0;
+}

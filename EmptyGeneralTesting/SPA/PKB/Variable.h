@@ -21,4 +21,5 @@ public:
 	bool equals(Variable& v);
 	void addModifyStmt(Statement* stmt);
 	void addUseStmt(Statement* stmt);
+	bool operator==(Variable other);
 };
