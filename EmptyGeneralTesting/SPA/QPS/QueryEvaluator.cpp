@@ -1,10 +1,12 @@
 #include "QueryEvaluator.h"
-#include <vector>
-#include <iterator>
-#include <sstream>
-#include <iostream>
-#include <algorithm>
 #include "SyntaticType.h"
+#include <algorithm>
+#include <iostream>
+#include <iterator>
+#include <numeric>
+#include <sstream>
+#include <string>
+#include <vector>
 
 QueryEvaluator::QueryEvaluator(QueryObject q) { //string q to be replaced with QueryObj
 	queryObj = q;
@@ -35,22 +37,22 @@ bool QueryEvaluator::processVariableClause() {
 				cout << data->getVariableType() << endl;
 				// to check for empty or filter out -1 during projector stage
 				if (data->getVariableType() == syntatic_type::assignment) {
-					rawResult.setAsgnData(convertIntVectorToString(PKB.getAllAssignStatement()));
+					rawResult.setAsgnData(convertIntVectorToString(PKB.getAllAssignStatements()));
 				}
 				else if (data->getVariableType() == syntatic_type::variable) {
-					rawResult.setAsgnData(convertIntVectorToString(PKB.getAllVariables()));
+					rawResult.setAsgnData(convertStringVectorToString(PKB.getAllVariables()));
 				}
 				else if (data->getVariableType() == syntatic_type::statement) {
 					rawResult.setAsgnData(convertIntVectorToString(PKB.getAllStatements()));
 				}
 				else if (data->getVariableType() == syntatic_type::whileLoop) {
-					rawResult.setAsgnData(convertIntVectorToString(PKB.getAllWhileStatement()));
+					rawResult.setAsgnData(convertIntVectorToString(PKB.getAllWhileStatements()));
 				}
 				else if (data->getVariableType() == syntatic_type::ifelse) {
-					rawResult.setAsgnData(convertIntVectorToString(PKB.getAllIfStatement()));
+					rawResult.setAsgnData(convertIntVectorToString(PKB.getAllIfStatements()));
 				}
 				else if (data->getVariableType() == syntatic_type::procedure) {
-					rawResult.setAsgnData(PKB.getAllProcedures());
+					rawResult.setAsgnData(convertStringVectorToString(PKB.getAllProcedures()));
 				}
 				else {
 					//will this case ever be reached?
@@ -67,22 +69,22 @@ bool QueryEvaluator::processSuchThat() {
 	//checks if both inputs(L param and R param) are int
 	if ((queryObj.tree->getQuery()->getLeftParam()->getType() == syntatic_type::integer) && (queryObj.tree->getQuery()->getRightParam()->getType() == syntatic_type::integer)){
 		if (queryObj.tree->getQuery()->getType() == relation::follows) {
-			success = PKB.follows((int)queryObj.tree->getQuery()->getLeftParam(), (int)queryObj.tree->getQuery()->getRightParam());
+			success = PKB.follows(atoi(queryObj.tree->getQuery()->getLeftParam()->getParameter().c_str()), atoi(queryObj.tree->getQuery()->getRightParam()->getParameter().c_str()));
 		}
 		else if (queryObj.tree->getQuery()->getType() == relation::followsStar) {
-			success = PKB.followStar((int)queryObj.tree->getQuery()->getLeftParam(), (int)queryObj.tree->getQuery()->getRightParam());
+			success = PKB.followStar(atoi(queryObj.tree->getQuery()->getLeftParam()->getParameter().c_str()), atoi(queryObj.tree->getQuery()->getRightParam()->getParameter().c_str()));
 		}
 		else if (queryObj.tree->getQuery()->getType() == relation::parent) {
-			success = PKB.parents((int)queryObj.tree->getQuery()->getLeftParam(), (int)queryObj.tree->getQuery()->getRightParam());
+			success = PKB.parents(atoi(queryObj.tree->getQuery()->getLeftParam()->getParameter().c_str()), atoi(queryObj.tree->getQuery()->getRightParam()->getParameter().c_str()));
 		}
 		else if (queryObj.tree->getQuery()->getType() == relation::parentStar) {
-			success = PKB.parentStar((int)queryObj.tree->getQuery()->getLeftParam(), (int)queryObj.tree->getQuery()->getRightParam());
+			success = PKB.parentStar(atoi(queryObj.tree->getQuery()->getLeftParam()->getParameter().c_str()), atoi(queryObj.tree->getQuery()->getRightParam()->getParameter().c_str()));
 		}
 		else if (queryObj.tree->getQuery()->getType() == relation::modifies) {
-			success = PKB.modifies((int)queryObj.tree->getQuery()->getLeftParam(), queryObj.tree->getQuery()->getRightParam());
+			success = PKB.modifies(atoi(queryObj.tree->getQuery()->getLeftParam()->getParameter().c_str()), queryObj.tree->getQuery()->getRightParam()->getParameter());
 		}
 		else if (queryObj.tree->getQuery()->getType() == relation::uses) {
-			success = PKB.uses((int)queryObj.tree->getQuery()->getLeftParam(), queryObj.tree->getQuery()->getRightParam());
+			success = PKB.uses(atoi(queryObj.tree->getQuery()->getLeftParam()->getParameter().c_str()), queryObj.tree->getQuery()->getRightParam()->getParameter());
 		}
 		//else if (queryObj.tree->getQuery()->getType() == relation::pattern) {
 		//	cout << "pattern processing yet to finish" << endl;
@@ -128,11 +130,11 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryObj.tree->getQuery()->getType() == relation::modifies) {
-			rawResult.setQueryResult(PKB.modifiedBy((int)queryObj.tree->getQuery()->getLeftParam()));
+			rawResult.setQueryResult(convertStringVectorToString(PKB.modifiedBy((int)queryObj.tree->getQuery()->getLeftParam())));
 			success = true;
 		}
 		else if (queryObj.tree->getQuery()->getType() == relation::uses) {
-			rawResult.setQueryResult(PKB.usedBy((int)queryObj.tree->getQuery()->getLeftParam()));
+			rawResult.setQueryResult(convertStringVectorToString(PKB.usedBy((int)queryObj.tree->getQuery()->getLeftParam())));
 			success = true;
 		}
 	}
@@ -156,16 +158,16 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryObj.tree->getQuery()->getType() == relation::parent) {
-			vector<int> stmts = PKB.parentedBy((int)queryObj.tree->getQuery()->getRightParam());
-			if (stmts.front() != -1) {
+			int stmts = PKB.parentedBy(atoi(queryObj.tree->getQuery()->getRightParam()->getParameter().c_str()));
+			if (stmts != -1) {
 				success = true;
-				rawResult.setQueryResult(convertIntVectorToString(stmts));
+				rawResult.setQueryResult(stmts+"");
 			}
 			else
 				success = false;
 		}
 		else if (queryObj.tree->getQuery()->getType() == relation::parentStar) {
-			vector<int> stmts = PKB.parentStarBy((int)queryObj.tree->getQuery()->getRightParam());
+			vector<int> stmts = PKB.parentStarBy(atoi(queryObj.tree->getQuery()->getRightParam()->getParameter().c_str()));
 			if (stmts.front() != -1) {
 				success = true;
 				rawResult.setQueryResult(convertIntVectorToString(stmts));
@@ -174,7 +176,7 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryObj.tree->getQuery()->getType() == relation::modifies) {
-			vector<int> stmts = PKB.modifies(queryObj.tree->getQuery()->getRightParam());
+			vector<int> stmts = PKB.modifies(queryObj.tree->getQuery()->getRightParam()->getParameter());
 			if (stmts.front() != -1) {
 				success = true;
 				rawResult.setQueryResult(convertIntVectorToString(stmts));
@@ -183,7 +185,7 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryObj.tree->getQuery()->getType() == relation::uses) {
-			vector<int> stmts = PKB.uses(queryObj.tree->getQuery()->getRightParam());
+			vector<int> stmts = PKB.uses(queryObj.tree->getQuery()->getRightParam()->getParameter());
 			if (stmts.front() != -1) {
 				success = true;
 				rawResult.setQueryResult(convertIntVectorToString(stmts));
@@ -277,5 +279,11 @@ string QueryEvaluator::convertIntVectorToString(vector<int> intVector) {
 	copy(intVector.begin(), intVector.end(), ostream_iterator<int>(ss, " "));
 	string s = ss.str();
 	s = s.substr(0, s.length() - 1);  // get rid of the trailing space
+	return s;
+}
+
+string QueryEvaluator::convertStringVectorToString(vector<string> stringVector) {
+	string s;
+	s = accumulate(begin(stringVector), end(stringVector), s);
 	return s;
 }
