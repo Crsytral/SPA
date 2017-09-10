@@ -325,7 +325,7 @@ vector<pair<int, int>> PKB::parents() {
 		allWhileStatements.begin(),
 		[](Statement* s) { return (typeid(*s) == typeid(WhileStatement)); });
 	allWhileStatements.resize(distance(allWhileStatements.begin(), it));
-	if (allWhileStatements.empty) {
+	if (allWhileStatements.empty()) {
 		pair<int, int> p(-1, -1);
 		result.push_back(p);
 		return result;
@@ -357,7 +357,7 @@ vector<pair<int, int>> PKB::parentStar() {
 		allWhileStatements.begin(),
 		[](Statement* s) { return (typeid(*s) == typeid(WhileStatement)); });
 	allWhileStatements.resize(distance(allWhileStatements.begin(), it));
-	if (allWhileStatements.empty) {
+	if (allWhileStatements.empty()) {
 		pair<int, int> p(-1, -1);
 		result.push_back(p);
 		return result;
