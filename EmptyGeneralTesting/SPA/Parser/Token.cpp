@@ -4,18 +4,14 @@
 #include <iostream>
 using namespace std;
 
-Token::Token(string type, string value) : type(type), value(value)
+Token::Token(string value) :value(value)
 {
-	/*if (raw == "while")
-	{
-	type = "keyword";
-	value = raw;
-	}*/
-	/*type = type;
-	value = value;*/
 
 }
+Token::Token()
+{
 
+}
 string Token::getType()
 {
 	return type;
@@ -29,4 +25,21 @@ string Token::getValue()
 void Token::print()
 {
 	cout << "The Token is of type " << type << ", of value " << value << endl;
+}
+
+bool Token::isNum()
+{
+	return (getType() == "N");
+}
+bool Token::isVar()
+{
+	return (getType() == "V");
+}
+bool Token::isOperand()
+{
+	return (getType() != "O");
+}
+bool Token::isOperator()
+{
+	return (getType() == "O");
 }
