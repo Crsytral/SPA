@@ -1,4 +1,6 @@
 #include "StatementList.h"
+#include "AssignStatement.h"
+#include "WhileStatement.h"
 
 StatementList::StatementList(StatementContainer* p) {
 	parentContainer = p;
@@ -19,12 +21,22 @@ StatementContainer* StatementList::getParentContainer() {
 
 Statement* StatementList::addAssignStatement(int index, Variable* v, vector<Variable*>* usedVars, Expression* exp) {
 	
-	return nullptr;
+	Statement* stmt = new AssignStatement(index, *parentContainer, *curr, v, usedVars, exp);
+	statementList.push_back(*stmt);
+	if (curr != nullptr)
+		curr->setFollowedBy(stmt);
+	curr = stmt;
+	return stmt;
 }
 
 StatementContainer* StatementList::addWhileStatement(int index, Variable* controlVar) {
 	
-	return nullptr;
+	WhileStatement* stmt = new WhileStatement(index, *parentContainer, *curr, controlVar);
+	statementList.push_back(*stmt);
+	if (curr != nullptr)
+		curr->setFollowedBy(stmt);
+	curr = stmt;
+	return stmt;
 }
 
 vector<Statement> StatementList::getAllStatement() {

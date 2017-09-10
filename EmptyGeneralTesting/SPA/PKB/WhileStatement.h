@@ -6,5 +6,5 @@
 
 class WhileStatement : public StatementContainer, public Statement {
 public:
-	WhileStatement(Variable* cVar);
+	WhileStatement(int index, StatementContainer parent, Statement following, Variable* cVar);
 };

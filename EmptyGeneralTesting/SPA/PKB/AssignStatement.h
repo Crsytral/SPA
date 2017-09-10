@@ -15,7 +15,7 @@ class AssignStatement : public Statement {
 private:
 	Expression* exp;
 public:
-	AssignStatement(int index, StatementContainer parent, Statement follows,Variable* v, vector<Variable>* usedVars, Expression* exp);
+	AssignStatement(int index, StatementContainer parent, Statement follows,Variable* v, vector<Variable*>* usedVars, Expression* exp);
 	bool isExpEqual(Expression exp);
 	bool isContainExp(Expression exp);
 };
