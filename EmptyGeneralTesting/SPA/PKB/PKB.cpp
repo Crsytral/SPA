@@ -157,6 +157,20 @@ vector<int> PKB::getAllIfStatements() {
 	return result;
 }
 
+vector<string> PKB::getAllVariables() {
+	vector<string> result;
+	for (Variable* v : allVariables) {
+		result.push_back(v->getName());
+	}
+	if (result.empty()) {
+		result.push_back("");
+		return result;
+	}
+	else {
+		return result;
+	}
+}
+
 bool PKB::isValidStmtNo(int s) {
 	return (0 < s && s < currIndex + 1 ? true : false);
 }

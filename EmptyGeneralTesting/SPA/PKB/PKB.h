@@ -70,7 +70,11 @@ public:
 	Return a vector with 1 element -1 if there is no if statement.
 	*/
 	vector<int> getAllIfStatements();
-
+	/*
+	Return a vector of names of all variables in the program.
+	Return a vector with 1 element "" if there is no variable.
+	*/
+	vector<string> getAllVariables();
 	//follows relation
 	bool follows(int stmt1, int stmt2);
 	int follows(int stmt1);
