@@ -18,7 +18,6 @@
 
 using namespace std;
 
-bool checkEntityType= false;
 
 
 QueryTree* newTree;
@@ -602,65 +601,62 @@ void checkPatternOrQuery(char* inputTok) {
 			buildPatternNode(inputTok, concatPattern);
 		}
 	}
-
-
 	
 }
 
 syntatic_type getEntityType(char* input) {
-
 
 	syntatic_type result;
 
 	if (strcmp(input, "while") == 0)
 	{
 		result = syntatic_type::whileLoop;
-		checkEntityType = true;
+		//checkEntityType = true;
 	}
 	else if (strcmp(input, "assign") == 0)
 	{
 		result = syntatic_type::assignment;
-		checkEntityType = true;
+		//checkEntityType = true;
 	}
 	else if (strcmp(input, "procedure") == 0)
 	{
 		result = syntatic_type::procedure;
-		checkEntityType = true;
+		//checkEntityType = true;
 	}
 	else if (strcmp(input, "stmtLst") == 0)
 	{
 		result = syntatic_type::statementList;
-		checkEntityType = true;
+		//checkEntityType = true;
 	}
-	else if (strcmp(input, "stmt") == 0)
+	else if (strcmp(input, "statement") == 0)
 	{
 		result = syntatic_type::statement;
-		checkEntityType = true;
+		//checkEntityType = true;
 	}
 	else if (strcmp(input, "call") == 0)
 	{
 		result = syntatic_type::call;
-		checkEntityType = true;
+		//checkEntityType = true;
 	}
 	else if (strcmp(input, "if") == 0)
 	{
 		result = syntatic_type::ifelse;
-		checkEntityType = true;
+		//checkEntityType = true;
 	}
 	else if (strcmp(input, "variable") == 0)
 	{
 		result = syntatic_type::variable;
-		checkEntityType = true;
+		//checkEntityType = true;
 	}
 	else if (strcmp(input, "constant") == 0)
 	{
 		result = syntatic_type::constant;
-		checkEntityType = true;
+		//checkEntityType = true;
 	}
 	else if (strcmp(input, "prog_line") == 0)
 	{
 		result = syntatic_type::progline;
-		checkEntityType = true;
+		//checkEntityType = true;
 	}
 	
 
@@ -670,14 +666,17 @@ syntatic_type getEntityType(char* input) {
 
 void tokenCheck(char *tok) {
 
-	regex entity(" *(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line) +([a-zA-Z])+(\\d|#)*( *, *[a-zA-Z]+(\\d|#)*)*");
+	regex entity(" *(procedure|stmtLst|statement|assign|call|while|if|variable|constant|prog_line) +([a-zA-Z])+(\\d|#)*( *, *[a-zA-Z]+(\\d|#)*)*");
 	regex select(" *Select *.*");
+
+	//std::cout << tok << '\n';
 
 	if (regex_match(tok, entity))
 	{
 		char *pch;
 		char *end_tok;
 		pch = strtok_s(tok, " ,", &end_tok);
+		bool checkEntityType = false;
 		syntatic_type newSyntaticType = syntatic_type::synError;
 
 		while (pch != NULL) {
@@ -686,11 +685,15 @@ void tokenCheck(char *tok) {
 			{
 
 				newSyntaticType = getEntityType(pch);
+				checkEntityType = true;
+				//printf("1");
+				//std::cout << tok << '\n';
 
 			}
 
 			else {
 				newSynonyms->createVar(pch, newSyntaticType);
+				//std::cout << pch << '\n';
 			}
 
 			pch = strtok_s(NULL, " ,", &end_tok);
@@ -701,6 +704,7 @@ void tokenCheck(char *tok) {
 
 	else if(regex_match(tok, select)){
 
+		char a = getchar();
 		char *pch;
 		char *end_tok;
 		pch = strtok_s(tok, " ", &end_tok);
@@ -720,6 +724,7 @@ void tokenCheck(char *tok) {
 //This function will take in a user input and turn it into a query object
 QueryObject QueryParser::getQueryObj(std::string i) {
 
+	//printf("%s", i);
 	QueryObject query;
 
 	const char* semiColon = ";";
@@ -731,15 +736,18 @@ QueryObject QueryParser::getQueryObj(std::string i) {
 	newTree = new QueryTree();
     newSynonyms = new Synonyms();
 
+	//printf("%d", str_size);
+
 	//points the temp pointer to the input string elements
 	memcpy(temp, i.c_str(), str_size);
+	//std::cout << temp << '\n';
 
-	token = strtok_s(temp, semiColon, &end);
-
+	token = strtok_s(temp,semiColon, &end);
+	
 	while (token != NULL) {
 
 		tokenCheck(token);
-		token = strtok_s(NULL, semiColon, &end);
+		token = strtok_s(NULL,semiColon, &end);
 
 	}
 
@@ -766,8 +774,34 @@ QueryObject QueryParser::getQueryObj(std::string i) {
 }
 
 int main(void){
+	
+	//QueryParser* qp;
+	//qp = new QueryParser();
+
+	//string input = "assign a; statement s; variable v; Select s such that Parent (2, s)";
+
+	//printf("%s, input");
+
+	//QueryObject test = qp -> getQueryObj("assign a; statement s; variable v; Select s such that Parent (2, s)");
+
+	/*
+	int size = test.synonym->getSize();
+
+	if (size == 3)
+	{
+		printf("true");
+	}
+
+	else
+
+		printf("fail");
+
+	*/
+
+	char a = getchar();
 
 	return 0;
 }
+
 
 
