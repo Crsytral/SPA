@@ -27,6 +27,10 @@ Node* BopNode::getRight() {
 	return right;
 }
 
+bool BopNode::isFilled() {
+	return (left != NULL && right != NULL);
+}
+
 bool BopNode::equals(BopNode* other) {
 	if (content.compare(other->getContent()) != 0) return false;
 	bool flagLeft, flagRight;
