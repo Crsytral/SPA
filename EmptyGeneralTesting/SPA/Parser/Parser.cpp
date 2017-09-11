@@ -1,16 +1,16 @@
 #include "Parser.h"
 #include "Token.h"
-
+#include "VarToken.h"
+#include "OperatorToken.h"
+#include "NumToken.h"
 #include <string>
 #include <vector>
 #include <iostream>
 #include <fstream>
-
+#include <stack>
+#include <queue> 
 using namespace std;
 // token types:
-const string LETTER = "LETTER";
-const string DIGIT = "DIGIT";
-const string PLUS = "PLUS";
 
 
 const string EOL = "EOL";
@@ -42,10 +42,25 @@ const char TAB = '\t';
 const char SPACE = ' ';
 const char SEMI_COLON = ';';
 const char EQUAL = '=';
+const char PLUS = '+';
 
 const string BLOCK_START = "{";
 const string BLOCK_END = "}";
 //const string PLUS, MINUS, MULTIPLY, DIVIDE, EQUAL = "PLUS", "MINUS", "MULTIPLY", "DIVIDE", "EQUAL";
+
+bool isLegalSymbol(char symbol)
+{
+	return (symbol == '{' || symbol == '}' || symbol == ';' || symbol == '+' || symbol == '=');
+}
+bool isIllegalSymbol(char symbol)
+{
+	return false;
+}
+void clearQueue(queue<Token> &q)
+{
+	queue<Token> empty;
+	swap(q, empty);
+}
 
 
 Parser::Parser(string filename) : filename(filename), currentToken(EMPTY_TOKEN)
@@ -53,7 +68,7 @@ Parser::Parser(string filename) : filename(filename), currentToken(EMPTY_TOKEN)
 	ifstream ifs(filename);
 	string content((istreambuf_iterator<char>(ifs)),
 		(istreambuf_iterator<char>()));
-	
+
 	text = content;
 	cout << text << endl;
 	line = 1;
@@ -83,6 +98,10 @@ Token Parser::lex()
 	string op = "";
 	int factorCount = 0;
 
+	stack<Token> operatorStack;
+	queue<Token> output;
+	queue<Token> tokens;
+
 	// 3 bool: {proc keyword found, proc name defined, starting brace found, ending brace found}
 	bool procVerify[4] = { false, false, false, false };
 	string currentProcName = "";
@@ -101,7 +120,7 @@ Token Parser::lex()
 		}
 		if (bufferPosition != 0 && (buffer == SPACE_STRING || buffer == EMPTY_STRING || buffer == TAB_STRING)) {
 
-			cout << "space/newline/tab encountered and ignored" << endl;
+			//cout << "space/newline/tab encountered and ignored" << endl;
 			memset(buffer, 0, sizeof(buffer));
 			bufferPosition = 0;
 			continue;
@@ -113,7 +132,7 @@ Token Parser::lex()
 
 		if (buffer[bufferPosition - 1] == NONE) // if the current buffer array is a string
 		{
-			//cout << "start of buffer: //" << buffer << "// end of buffer" << endl;
+			cout << "start of buffer: //" << buffer << "// end of buffer" << endl;
 
 			// ignore space/tab
 			if (buffer == EMPTY_TOKEN)
@@ -163,7 +182,7 @@ Token Parser::lex()
 				continue;
 			}
 
-			// if not inside an assignment, expect assignment variable
+			// if not inside an assignment, expect assignment variable, start parsing assignment
 			if (!assignVerify[0])
 			{
 				/*cout << buffer << ", pointer: " << bufferPosition << endl;*/
@@ -202,8 +221,40 @@ Token Parser::lex()
 						if (buffer == SEMI_COLON_STRING)
 						{
 							assignVerify[2] = true;
+							while (!operatorStack.empty())
+							{
+								output.push(operatorStack.top());
+								operatorStack.pop();
+							}
+
+
 							cout << "assignment of var " << currentAssignVar << " finished!" << endl;
-							cout << "final assignment is: " << leftFactor << " " << op << " " << rightFactor << endl;
+							cout << "---------- start of output queue" << endl;
+							while (!output.empty())
+							{
+
+								cout << output.front().getValue() << ", ";
+								output.pop();
+							}
+							cout << '\n';
+							clearQueue(output);
+							cout << "-------------" << endl;
+
+							cout << "---------- start of op stack" << endl;
+							while (!operatorStack.empty())
+							{
+
+								cout << operatorStack.top().getValue() << ", ";
+								operatorStack.pop();
+							}
+							cout << "-------------" << endl;
+
+							// reset all variables used here
+							currentAssignVar = "";
+							assignVerify[0] = false;
+							assignVerify[1] = false;
+							assignVerify[2] = false;
+							assignExpectOp = false;
 							memset(buffer, 0, sizeof(buffer));
 							bufferPosition = 0;
 							continue;
@@ -214,6 +265,7 @@ Token Parser::lex()
 						{
 							cout << "operator is: " << PLUS_STRING << ". " << endl;
 							op = "PLUS";
+							operatorStack.push(OperatorToken(buffer));
 							assignExpectOp = false;
 						}
 
@@ -225,16 +277,18 @@ Token Parser::lex()
 							cout << "assignment cannot end with operator!" << endl;
 							return null;
 						}
-						cout << "exp factor is: " << buffer << ". " << endl;
-						if (factorCount == 0)
+						if (isdigit(buffer[0]))
 						{
-							leftFactor = buffer;
-							factorCount++;
+							cout << "exp factor is a number: " << buffer << ". " << endl;
+							output.push(NumToken(buffer));
 						}
-						else
+						if (isalpha(buffer[0]))
 						{
-							rightFactor = buffer;
+							cout << "exp factor is a variable: " << buffer << ". " << endl;
+							output.push(VarToken(buffer));
 						}
+
+
 						assignExpectOp = true;
 					}
 					memset(buffer, 0, sizeof(buffer));
@@ -250,42 +304,71 @@ Token Parser::lex()
 
 		}
 
-		if (currentChar == SPACE || currentChar == LINE_FEED || currentChar == TAB) // TODO: if semi colon is seen, do not advance!!
+		if (isIllegalSymbol(currentChar))
 		{
-			//cout << "buffer is: " << buffer << " |||| " << endl;
-			//cout << "space! tab!!!!" << endl;
-			buffer[bufferPosition] = '\0';
+			cout << "illegal symbol" << endl;
+			break;
+		}
 
+		if (currentChar == SPACE)
+		{
+			//cout << "space! buffer is: " << buffer << " |||| position is " << position << "char is: " << currentChar << endl;
+			advance();
+			continue;
+		}
+		if (currentChar == LINE_FEED)
+		{
+			//cout << "linefeed! buffer is: " << buffer << " |||| position is " << position << "char is: " << currentChar << endl;
+			advance();
+			continue;
+		}
+
+		if (isLegalSymbol(currentChar))
+		{
+			if (isIllegalSymbol(text[position + 1]))
+			{
+				cout << "illegal symbol" << endl;
+				break;
+			}
+			//cout << "symbol! buffer is: " << buffer << " |||| position is " << position << "char is: " << currentChar << endl;
+			buffer[bufferPosition] = currentChar;
+			bufferPosition++;
+
+			buffer[bufferPosition] = '\0';
 			bufferPosition++;
 			advance();
 			continue;
-
 		}
-		else if (currentChar == SEMI_COLON)
+
+
+		if (text[position + 1] == SPACE)
 		{
-			cout << "curr is:" << currentChar << "|||| position is:" << position << endl;
-			if (strlen(buffer) == 0)
-			{
-				cout << "buffer empty" << endl;
-				buffer[bufferPosition] = currentChar;
-				bufferPosition++;
-				advance();
-				continue;
-			}
+			//cout << "next char is space! buffer is: " << buffer << " |||| position is " << position << "char is: " << currentChar << endl;
+
+			buffer[bufferPosition] = currentChar;
+			bufferPosition++;
 
 			buffer[bufferPosition] = '\0';
-
 			bufferPosition++;
-			//advance();
 
-			continue;
-
-
-
+			advance();
 			continue;
 		}
-		else
+		if (isLegalSymbol(text[position + 1]))
 		{
+			buffer[bufferPosition] = currentChar;
+			bufferPosition++;
+
+			buffer[bufferPosition] = '\0';
+			bufferPosition++;
+
+			advance();
+			continue;
+		}
+
+		if (isalnum(currentChar))
+		{
+			//cout << "buffer is: " << buffer << " |||| position is " << position << endl;
 			buffer[bufferPosition] = currentChar;
 			bufferPosition++;
 			advance();
@@ -293,7 +376,6 @@ Token Parser::lex()
 		}
 
 
-		//cout << "buffer is: "<< buffer << " |||| " <<endl;
 		//advance();
 	} // end while loop
 
@@ -317,3 +399,4 @@ void Parser::advance()
 		currentChar = text[position];
 	}
 }
+
