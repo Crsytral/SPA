@@ -4,6 +4,10 @@ StatementContainer::StatementContainer() {
 
 }
 
+vector<Statement*> StatementContainer::getAllStatements() {
+	return stmtLst->getAllStatement();
+}
+
 void StatementContainer::setParentContainer(StatementContainer* p) {
 	pContainer = p;
 }
