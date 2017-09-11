@@ -165,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PKBStub.cpp" />
+    <ClCompile Include="QueryEvaluatorTest.cpp" />
     <ClCompile Include="StatementListTest.cpp" />
     <ClCompile Include="StatementTest.cpp" />
     <ClCompile Include="stdafx.cpp">

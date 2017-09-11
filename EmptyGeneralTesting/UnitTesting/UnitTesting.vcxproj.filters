@@ -39,6 +39,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PKBStub.cpp">
+    <ClCompile Include="QueryEvaluatorTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
