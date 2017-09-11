@@ -10,9 +10,9 @@ AssignStatement::AssignStatement(int index, StatementContainer parent, Statement
 }
 
 bool AssignStatement::isExpEqual(Expression exp) {
-	return *(this->exp) == exp;
+	return this->exp->contains(&exp);
 }
 
 bool AssignStatement::isContainExp(Expression exp) {
-	return (this->exp)->contains(exp);
+	return (this->exp)->contains(&exp);
 }
