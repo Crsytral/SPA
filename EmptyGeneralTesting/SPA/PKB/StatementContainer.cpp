@@ -10,7 +10,7 @@ StatementContainer* StatementContainer::getParentContainer() {
 
 
 Statement* StatementContainer::addAssignStatement(int index, Variable* v, Expression* exp) {
-	return stmtLst->addAssignStatement(index, v, exp->getUsedVariable(), exp);
+	return stmtLst->addAssignStatement(index, v, &(exp->getUsedVariable()), exp);
 }
 
 StatementContainer* StatementContainer::addWhileStatement(int index, Variable* controlVar) {
