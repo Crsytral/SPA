@@ -12,4 +12,5 @@ public:
 	Node* getRight();
 	bool equals(BopNode* other);
 	bool contains(Node* other);
+	bool isFilled();
 };

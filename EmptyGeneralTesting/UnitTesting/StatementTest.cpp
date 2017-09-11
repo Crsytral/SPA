@@ -9,7 +9,7 @@ namespace UnitTesting
 	TEST_CLASS(StatementTest)
 	{
 	public:
-
+		/*
 		TEST_METHOD(testConstructorWithBothNullptr)
 		{
 			Statement stmt(1, nullptr, nullptr);
@@ -150,5 +150,6 @@ namespace UnitTesting
 			Assert::IsFalse(stmt2.isFollowBy(2));
 			Assert::IsFalse(stmt1.isFollowBy(1));
 		}
+		*/
 	};
 }

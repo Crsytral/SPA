@@ -16,7 +16,7 @@ class Expression {
 private:
 	Node* syntaxTree;
 	vector<Variable*> usedVariables;
-	Node* buildSyntaxTree(queue<Token> tokens);
+	void buildSyntaxTree(queue<Token> tokens);
 public:
 	Expression(queue<Token> tokens);
 	Node* getSyntaxTree();
