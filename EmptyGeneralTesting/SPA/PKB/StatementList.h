@@ -12,7 +12,7 @@ class StatementList {
 private:
 	StatementContainer* parentContainer;
 	Statement* curr; //Represent the last element of this StatementList
-	vector<Statement> statementList;
+	vector<Statement*> statementList;
 
 public:
 	StatementList(StatementContainer* p);
@@ -20,6 +20,6 @@ public:
 	Statement* addAssignStatement(int index, Variable* modVar, vector<Variable*>* usedVars, Expression* exp);
 	StatementContainer* addWhileStatement(int index, Variable* controlVar);
 	StatementContainer* getParentContainer();
-	vector<Statement> getAllStatement();
+	vector<Statement*> getAllStatement();
 	bool isChild(int stmtNo);
 };

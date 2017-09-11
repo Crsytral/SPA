@@ -18,6 +18,7 @@ protected:
 	StatementList * stmtLst;
 	StatementContainer * pContainer;
 public:
+	StatementContainer();
 	/*
 	Return a vector of all statements that are nested under this statement container.
 	Return an empty vector if there is no statement nested under this statement container.

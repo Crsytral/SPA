@@ -1,5 +1,9 @@
 #include "StatementContainer.h"
 
+StatementContainer::StatementContainer() {
+
+}
+
 void StatementContainer::setParentContainer(StatementContainer* p) {
 	pContainer = p;
 }
