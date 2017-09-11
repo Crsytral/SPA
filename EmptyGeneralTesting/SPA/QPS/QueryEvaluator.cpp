@@ -1,5 +1,6 @@
-#include "QueryEvaluator.h"
-#include "SyntaticType.h"
+#include "../QPS/QueryEvaluator.h"
+#include "../QPS/SyntaticType.h"
+#include "../PKB/Expression.h"
 #include <algorithm>
 #include <iostream>
 #include <iterator>
@@ -251,15 +252,41 @@ bool QueryEvaluator::processSuchThat() {
 		}
 	}
 
-	if (success == true)
+	if (success == true){
 		rawResult.setValid(true);
 		processRawResult();
+	}
 	return true;
 }
 
+//Process the Pattern query of the PQL
 bool QueryEvaluator::processPattern() {
 	bool success = false;
 
+	if (queryObj.tree->getPattern()->getLeftParam()->getType() == syntatic_type::assignment) {
+		string rightParam = queryObj.tree->getPattern()->getRightParam()->getParameter();
+		//check and remove "_" from first index and last index of rightParam
+		if (rightParam.at(0) == '_' && rightParam.size()>=2) {
+			rightParam = rightParam.substr(1, rightParam.size()-1);
+		}
+		if (rightParam.back() == '_' && rightParam.size()>=2) {
+			rightParam = rightParam.substr(0, rightParam.size() - 2);
+		}
+		//Turn them into an Expression Var
+
+		//Feed to PKB API
+		//vector<int> stmts = PKB.getPattern(Expression leftPattern, Expression rightPattern);
+		//if (stmts.front() != -1) {
+		//	success = true;
+		//	rawResult.setQueryResult(convertIntVectorToString(stmts));
+		//}
+		//else
+			success = false;
+	}
+
+	if (success == true){
+		rawResult.setValid(true);
+	}
 	return true;
 }
 
@@ -274,6 +301,9 @@ bool QueryEvaluator::processRawResult() {
 	return true;
 }
 
+//Helper methods
+
+//Converts a vector of interger into a string value
 string QueryEvaluator::convertIntVectorToString(vector<int> intVector) {
 	stringstream ss;
 	copy(intVector.begin(), intVector.end(), ostream_iterator<int>(ss, " "));
@@ -282,6 +312,7 @@ string QueryEvaluator::convertIntVectorToString(vector<int> intVector) {
 	return s;
 }
 
+//converts a vector of string into a string value
 string QueryEvaluator::convertStringVectorToString(vector<string> stringVector) {
 	string s;
 	s = accumulate(begin(stringVector), end(stringVector), s);
