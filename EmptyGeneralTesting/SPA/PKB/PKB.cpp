@@ -463,3 +463,44 @@ vector<pair<int, int>> PKB::parentStar() {
 		return result;
 	}
 }
+
+bool uses(int stmtIndex, string varName) {
+	return false;
+}
+
+vector<int> uses(string varName) {
+	vector<int> result;
+	result.push_back(-1);
+	return result;
+}
+vector<string> usedBy(int stmtIndex) {
+	vector<string> result;
+	result.push_back("");
+	return result;
+}
+vector<pair<int, string>> uses() {
+	vector<pair<int, string>> result;
+	pair<int, string> p(-1, "");
+	result.push_back(p);
+	return result;
+}
+//modifies relation
+bool modifies(int stmtIndex, string varName) {
+	return false;
+}
+vector<int> modifies(string varName) {
+	vector<int> result;
+	result.push_back(-1);
+	return result;
+}
+vector<string> modifiedBy(int stmtIndex) {
+	vector<string> result;
+	result.push_back("");
+	return result;
+}
+vector<pair<int, string>> modifies() {
+	vector<pair<int, string>> result;
+	pair<int, string> p(-1, "");
+	result.push_back(p);
+	return result;
+}
