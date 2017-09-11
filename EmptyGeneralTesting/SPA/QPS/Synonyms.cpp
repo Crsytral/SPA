@@ -43,7 +43,7 @@ int Synonyms::getIndex(string var)
 {   
 	//initialize iterator
     vector<SyntaticData*>::iterator i;
-	int index;
+	int index = -999;
 
 	for (i = symbolTable.begin(); i != symbolTable.end(); i++)
 	{
@@ -51,7 +51,7 @@ int Synonyms::getIndex(string var)
 	    index = distance(symbolTable.begin(), i);
 		return index;
 	}
-	return -999;
+	return index;
 }
 
 //Check whether a certain synonym exist in the symbolTable
