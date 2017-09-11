@@ -48,7 +48,7 @@ const string BLOCK_END = "}";
 //const string PLUS, MINUS, MULTIPLY, DIVIDE, EQUAL = "PLUS", "MINUS", "MULTIPLY", "DIVIDE", "EQUAL";
 
 
-Parser::Parser(string filename) : filename(filename), currentToken(EMPTY_TOKEN, EMPTY_TOKEN)
+Parser::Parser(string filename) : filename(filename), currentToken(EMPTY_TOKEN)
 {
 	ifstream ifs(filename);
 	string content((istreambuf_iterator<char>(ifs)),
@@ -60,7 +60,7 @@ Parser::Parser(string filename) : filename(filename), currentToken(EMPTY_TOKEN, 
 	//text = text;
 	position = 0;
 	currentChar = text[position];
-	currentToken = Token(EMPTY_TOKEN, EMPTY_TOKEN);
+	currentToken = Token(EMPTY_TOKEN);
 
 	bufferPosition = 0;
 }
@@ -68,7 +68,7 @@ Parser::Parser(string filename) : filename(filename), currentToken(EMPTY_TOKEN, 
 
 Token Parser::lex()
 {
-	Token null = Token("null", "null");
+	Token null = Token("null");
 	int parenNum = 0; // ( )
 	int braceNum = 0; // { }
 
