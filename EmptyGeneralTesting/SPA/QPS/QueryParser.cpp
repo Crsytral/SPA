@@ -18,6 +18,9 @@
 
 using namespace std;
 
+bool checkEntityType= false;
+
+
 QueryTree* newTree;
 Synonyms* newSynonyms;
 
@@ -604,7 +607,7 @@ void checkPatternOrQuery(char* inputTok) {
 	
 }
 
-syntatic_type getEntityType(char* input, bool checkEntityType) {
+syntatic_type getEntityType(char* input) {
 
 
 	syntatic_type result;
@@ -612,45 +615,54 @@ syntatic_type getEntityType(char* input, bool checkEntityType) {
 	if (strcmp(input, "while") == 0)
 	{
 		result = syntatic_type::whileLoop;
+		checkEntityType = true;
 	}
 	else if (strcmp(input, "assign") == 0)
 	{
 		result = syntatic_type::assignment;
+		checkEntityType = true;
 	}
 	else if (strcmp(input, "procedure") == 0)
 	{
 		result = syntatic_type::procedure;
+		checkEntityType = true;
 	}
 	else if (strcmp(input, "stmtLst") == 0)
 	{
 		result = syntatic_type::statementList;
+		checkEntityType = true;
 	}
 	else if (strcmp(input, "stmt") == 0)
 	{
 		result = syntatic_type::statement;
+		checkEntityType = true;
 	}
 	else if (strcmp(input, "call") == 0)
 	{
 		result = syntatic_type::call;
+		checkEntityType = true;
 	}
 	else if (strcmp(input, "if") == 0)
 	{
 		result = syntatic_type::ifelse;
+		checkEntityType = true;
 	}
 	else if (strcmp(input, "variable") == 0)
 	{
 		result = syntatic_type::variable;
+		checkEntityType = true;
 	}
 	else if (strcmp(input, "constant") == 0)
 	{
 		result = syntatic_type::constant;
+		checkEntityType = true;
 	}
 	else if (strcmp(input, "prog_line") == 0)
 	{
 		result = syntatic_type::progline;
+		checkEntityType = true;
 	}
-
-	checkEntityType = true;
+	
 
 	return result;
 
@@ -666,7 +678,6 @@ void tokenCheck(char *tok) {
 		char *pch;
 		char *end_tok;
 		pch = strtok_s(tok, " ,", &end_tok);
-		bool checkEntityType = false;
 		syntatic_type newSyntaticType = syntatic_type::synError;
 
 		while (pch != NULL) {
@@ -674,7 +685,7 @@ void tokenCheck(char *tok) {
 			if (!checkEntityType)
 			{
 
-				newSyntaticType = getEntityType(pch, checkEntityType);
+				newSyntaticType = getEntityType(pch);
 
 			}
 
@@ -758,4 +769,5 @@ int main(void){
 
 	return 0;
 }
+
 
