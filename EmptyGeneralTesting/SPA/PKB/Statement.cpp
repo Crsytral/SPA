@@ -46,6 +46,7 @@ bool Statement::isParent(string procName) {
 int Statement::getStmtNo() {
 	return stmtNo;
 }
+
 bool Statement::operator==(Statement others) {
 	return stmtNo == others.stmtNo;
 }
