@@ -11,15 +11,15 @@ using namespace std;
 class Procedure: public StatementContainer {
 private:
 	string procName;
-	vector<Variable> useVar;
-	vector<Variable> modVar;
+	vector<Variable*> useVar;
+	vector<Variable*> modVar;
 public:
 	Procedure(string name);
-	void addModVar(Variable var);
-	vector<Variable> getUseVar();
+	void addModVar(Variable* var);
+	vector<Variable*> getUseVar();
 	bool isUse(string varMod);
-	void addUseVar(Variable var);
-	vector<Variable> getModVar();
+	void addUseVar(Variable* var);
+	vector<Variable*> getModVar();
 	bool isMod(string varMod);
 	bool operator==(Statement others);
 	string getName();
