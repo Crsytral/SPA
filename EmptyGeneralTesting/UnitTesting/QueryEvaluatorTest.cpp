@@ -12,14 +12,14 @@ namespace UnitTesting
 	{
 	public:
 
-		TEST_METHOD(testConstructor)
+		TEST_METHOD(testQueryEvaluatorWithoutPKB)
 		{
 			QueryParser* qp;
 			qp = new QueryParser();
-			QueryObject queryObj = qp->getQueryObj("assign a, statement s, variable v; Select s such that follows(1,2)");
+			QueryObject queryObj = qp->getQueryObj("assign a; statement s; variable v; Select s such that Parent (2, s)");
 
 			//Need a demo PKB 
-
+			Logger::WriteMessage("Call PKB Stub");
 
 			QueryEvaluator qe(queryObj);
 			Result result = qe.getRawResult();

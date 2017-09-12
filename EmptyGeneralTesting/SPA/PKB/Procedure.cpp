@@ -3,7 +3,7 @@ using namespace std;
 
 #include "Procedure.h"
 
-Procedure::Procedure(const string &name) {
+Procedure::Procedure(string name) {
 	procName = name;
 	StatementList lst;
 	stmtLst = &lst;

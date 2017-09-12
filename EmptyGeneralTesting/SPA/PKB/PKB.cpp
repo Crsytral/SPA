@@ -3,8 +3,8 @@
 #include <typeinfo>
 using namespace std;
 
-#include "PKB.h"
-#include "Procedure.h"
+#include "../PKB/PKB.h"
+#include "../PKB/Procedure.h"
 /*
 Represents a parsed SIMPLE program
 */
@@ -465,41 +465,41 @@ vector<pair<int, int>> PKB::parentStar() {
 	}
 }
 
-bool uses(int stmtIndex, string varName) {
+bool PKB::uses(int stmtIndex, string varName) {
 	return false;
 }
 
-vector<int> uses(string varName) {
+vector<int> PKB::uses(string varName) {
 	vector<int> result;
 	result.push_back(-1);
 	return result;
 }
-vector<string> usedBy(int stmtIndex) {
+vector<string> PKB::usedBy(int stmtIndex) {
 	vector<string> result;
 	result.push_back("");
 	return result;
 }
-vector<pair<int, string>> uses() {
+vector<pair<int, string>> PKB::uses() {
 	vector<pair<int, string>> result;
 	pair<int, string> p(-1, "");
 	result.push_back(p);
 	return result;
 }
 //modifies relation
-bool modifies(int stmtIndex, string varName) {
+bool PKB::modifies(int stmtIndex, string varName) {
 	return false;
 }
-vector<int> modifies(string varName) {
+vector<int> PKB::modifies(string varName) {
 	vector<int> result;
 	result.push_back(-1);
 	return result;
 }
-vector<string> modifiedBy(int stmtIndex) {
+vector<string> PKB::modifiedBy(int stmtIndex) {
 	vector<string> result;
 	result.push_back("");
 	return result;
 }
-vector<pair<int, string>> modifies() {
+vector<pair<int, string>> PKB::modifies() {
 	vector<pair<int, string>> result;
 	pair<int, string> p(-1, "");
 	result.push_back(p);
