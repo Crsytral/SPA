@@ -36,7 +36,7 @@ StatementContainer* Statement::getParentContainer() {
 }
 //Procedure getParentProcedure();
 bool Statement::isParent(int stmtNo) {
-	return typeid(parentContainer) == typeid(Statement) && static_cast<WhileStatement*>(parentContainer)->stmtNo == stmtNo;
+	return typeid(parentContainer) == typeid(Statement);// && (static_cast<WhileStatement*>(parentContainer)->stmtNo) == stmtNo;
 }
 
 bool Statement::isParent(string procName) {
@@ -52,7 +52,7 @@ bool Statement::operator==(Statement others) {
 }
 
 void Statement::addModVar(Variable* var) {
-	if (isMod(var->getName())) {
+	if (!isMod(var->getName())) {
 		modVar.push_back(var);
 		var->addModifyStmt(this);
 		if (parentContainer != nullptr) {
@@ -81,7 +81,7 @@ bool Statement::isMod(string varName) {
 }
 
 void Statement::addUseVar(Variable* var) {
-	if (isUse(var->getName())) {
+	if (!isUse(var->getName())) {
 		useVar.push_back(var);
 		var->addUseStmt(this);
 		if (parentContainer != nullptr) {

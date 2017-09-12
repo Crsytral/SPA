@@ -30,8 +30,8 @@ public:
 	StatementList of this object should also be added to the StatementList of stmt.
 	Set parent of stmt to this Statement Container for if & while statements.
 	*/
-	Statement* addAssignStatement(int index, Variable* v, Expression* exp);
-	StatementContainer* addWhileStatement(int index, Variable* controlVar);
+	Statement* addAssignStatement(int index, StatementContainer* parent,Variable* v, Expression* exp);
+	StatementContainer* addWhileStatement(int index, StatementContainer* parent,Variable* controlVar);
 	/*
 	Update varUsed list of this object and its parentContainer (if exist) after a statement is added to the stmtLst.
 	To be implemented by Shermine

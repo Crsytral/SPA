@@ -14,66 +14,48 @@ namespace UnitTesting
 	{
 	public:
 
-		TEST_METHOD(testConstructorWithNullParents)
-		{
-			StatementList stmtList(nullptr);
-			StatementContainer* parent = stmtList.getParentContainer();
-
-			Assert::IsNull(parent);
-		}
-
-
-		TEST_METHOD(testConstructor)
-		{
-			Procedure proc("Proc");
-			StatementList stmtList(&proc);
-
-			StatementContainer* parent = stmtList.getParentContainer();
-
-			Assert::IsTrue(parent == &proc);
-		}
 		
 
 		TEST_METHOD(TestAdd)
 		{
 			
 			Procedure proc("Proc"); 
-			StatementList stmtList(&proc);
+			StatementList stmtList;
 
-			stmtList.addStatement(1);
-			stmtList.addStatement(2);
-			stmtList.addStatement(3);
+			stmtList.addStatement(1, &proc);
+			stmtList.addStatement(2, &proc);
+			stmtList.addStatement(3, &proc);
 
 			vector<Statement> stmtList1;
 			
+			Statement stmt1, stmt2;
 			for each (Statement* stmt in stmtList.getAllStatement())
 			{
-				stmtList1.push_back(*stmt);
+				if (stmt->getStmtNo() == 1) {
+					stmt1 = *stmt;
+				}
+				if (stmt->getStmtNo() == 2) {
+					stmt2 = *stmt;
+				}
 			}
 			
-			Statement find1(1,nullptr,nullptr);
-			vector<Statement>::iterator stmt1 = find(stmtList1.begin(), stmtList1.end(), find1);
 
-			StatementContainer* stmtC = stmt1->getParentContainer();
+			StatementContainer* stmtC = stmt1.getParentContainer();
 			Assert::IsTrue(&proc == stmtC);
 
-			Statement* stmt = stmt1->getFollow();
+			Statement* stmt = stmt1.getFollow();
 			Assert::IsNull(stmt);
 
-
-			Statement find2(2, nullptr, nullptr);
-			vector<Statement>::iterator stmt2 = find(stmtList1.begin(), stmtList1.end(), find2);
-
-			stmtC = stmt2->getParentContainer();
+			stmtC = stmt2.getParentContainer();
 			Assert::IsTrue(&proc == stmtC);
 
-			stmt = stmt2->getFollow();
-			Assert::IsTrue(stmt1->operator==(*stmt));
+			stmt = stmt2.getFollow();
+			Assert::IsTrue(stmt1 == *stmt);
 
-			stmt = stmt1->getFollowBy();
-			Assert::IsTrue(stmt2->operator==(*stmt));
+			stmt = stmt1.getFollowBy();
+			Assert::IsTrue(stmt2 == *stmt);
 			
-			stmt = stmt2->getFollowBy();
+			stmt = stmt2.getFollowBy();
 			Assert::IsNull(stmt);
 
 		}
@@ -81,48 +63,46 @@ namespace UnitTesting
 		TEST_METHOD(TestAddWhileStatement)
 		{
 			Procedure proc("Proc");
-			StatementList stmtList(&proc);
+			StatementList stmtList;
 
-			stmtList.addWhileStatement(1,nullptr);
+			Variable var("three");
+			stmtList.addWhileStatement(1, &proc, &var);
 
-			vector<Statement> stmtList1;
-
+			Statement stmt1;
 			for each (Statement* stmt in stmtList.getAllStatement())
 			{
-				stmtList1.push_back(*stmt);
+				if (stmt->getStmtNo() == 1) {
+					stmt1 = *stmt;
+				}
 			}
 
-			Statement find1(1, nullptr, nullptr);
-			vector<Statement>::iterator it = find(stmtList1.begin(), stmtList1.end(), find1);
-
-			Assert::IsTrue(typeid(it) == typeid(WhileStatement));
+			Assert::IsTrue(typeid(stmt1) == typeid(WhileStatement));
 		}
 
 		TEST_METHOD(TestAddAssignStatement)
 		{
 			Procedure proc("Proc");
-			StatementList stmtList(&proc);
+			StatementList stmtList;
 
-			stmtList.addAssignStatement(1, nullptr,nullptr,nullptr);
+			stmtList.addAssignStatement(1, &proc,nullptr,nullptr,nullptr);
 
-			vector<Statement> stmtList1;
-
+			Statement stmt1;
 			for each (Statement* stmt in stmtList.getAllStatement())
 			{
-				stmtList1.push_back(*stmt);
+				if (stmt->getStmtNo() == 1) {
+					stmt1 = *stmt;
+				}
 			}
 
-			Statement find1(1, nullptr, nullptr);
-			vector<Statement>::iterator it = find(stmtList1.begin(), stmtList1.end(), find1);
-
-			Assert::IsTrue(typeid(it) == typeid(AssignStatement));
+			Assert::IsTrue(typeid(stmt1) == typeid(AssignStatement));
 		}
 
 		TEST_METHOD(TestIsChild)
 		{
 			Procedure proc("Proc");
-			StatementList stmtList(&proc);
-			stmtList.addAssignStatement(1, nullptr, nullptr, nullptr);
+			StatementList stmtList;
+			Variable var("var");
+			stmtList.addWhileStatement(1, &proc,&var);
 
 			Assert::IsTrue(stmtList.isChild(1));
 		}
