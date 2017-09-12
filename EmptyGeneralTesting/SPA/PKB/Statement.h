@@ -16,8 +16,8 @@ protected:
 	Statement* follow;
 	Statement* followBy;
 	StatementContainer* parentContainer;
-	vector<Variable> useVar;
-	vector<Variable> modVar;
+	vector<Variable*> useVar;
+	vector<Variable*> modVar;
 
 public:
 	Statement();
@@ -31,11 +31,11 @@ public:
 	bool isParent(int stmtNo);
 	bool isParent(string proName);
 	int getStmtNo();
-	void addModVar(Variable var);
-	vector<Variable> getUseVar();
+	void addModVar(Variable *var);
+	vector<Variable*> getUseVar();
 	bool isUse(string varMod);
-	void addUseVar(Variable var);
-	vector<Variable> getModVar();
+	void addUseVar(Variable *var);
+	vector<Variable*> getModVar();
 	bool isMod(string varMod);
 	bool operator==(Statement others);
 };

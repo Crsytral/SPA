@@ -9,32 +9,44 @@ Procedure::Procedure(string name) {
 	procName = name;
 }
 
-void Procedure::addModVar(Variable var) {
-	modVar.push_back(var);
+void Procedure::addModVar(Variable* var) {
+	if (isMod(var->getName())) {
+		modVar.push_back(var);
+	}
 }
 
-vector<Variable> Procedure::getModVar() {
+vector<Variable*> Procedure::getModVar() {
 	return modVar;
 }
 
 bool Procedure::isMod(string varName) {
-	Variable var(varName);
-	vector<Variable>::iterator it = find(modVar.begin(), modVar.end(), var);
-	return it != modVar.end();
+	for each (Variable* var in modVar)
+	{
+		if (var->getName().compare(varName) == 0) {
+			return true;
+		}
+	}
+	return false;
 }
 
-void Procedure::addUseVar(Variable var) {
-	useVar.push_back(var);
+void Procedure::addUseVar(Variable* var) {
+	if (isUse(var->getName())) {
+		useVar.push_back(var);
+	}
 }
 
-vector<Variable> Procedure::getUseVar() {
+vector<Variable*> Procedure::getUseVar() {
 	return useVar;
 }
 
 bool Procedure::isUse(string varName) {
-	Variable var(varName);
-	vector<Variable>::iterator it = find(useVar.begin(), useVar.end(), var);
-	return it != useVar.end();
+	for each (Variable* var in useVar)
+	{
+		if (var->getName().compare(varName) == 0) {
+			return true;
+		}
+	}
+	return false;
 }
 
 string Procedure::getName() {
