@@ -1,7 +1,6 @@
 #include "AssignStatement.h"
 
-AssignStatement::AssignStatement(int index, StatementContainer* parent, Statement* follows, Variable* v, vector<Variable*>* usedVars, Expression* exp) {
-	Statement(index, parent, follows);
+AssignStatement::AssignStatement(int index, StatementContainer* parent, Statement* follows, Variable* v, vector<Variable*>* usedVars, Expression* exp) : Statement(index, parent, follows) {
 	addModVar(v);
 	for each (Variable* var in *usedVars){
 		addUseVar(var);

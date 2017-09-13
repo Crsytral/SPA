@@ -20,42 +20,42 @@ namespace UnitTesting
 		{
 			
 			Procedure proc("Proc"); 
-			StatementList stmtList;
+			StatementList* stmtList =  new StatementList();
 
-			stmtList.addStatement(1, &proc);
-			stmtList.addStatement(2, &proc);
-			stmtList.addStatement(3, &proc);
+			stmtList->addStatement(1, &proc);
+			stmtList->addStatement(2, &proc);
 
 			vector<Statement> stmtList1;
 			
-			Statement stmt1, stmt2;
-			for each (Statement* stmt in stmtList.getAllStatement())
+			Statement* stmt1;
+			Statement* stmt2;
+			for each (Statement* stmt in stmtList->getAllStatement())
 			{
 				if (stmt->getStmtNo() == 1) {
-					stmt1 = *stmt;
+					stmt1 = stmt;
 				}
 				if (stmt->getStmtNo() == 2) {
-					stmt2 = *stmt;
+					stmt2 = stmt;
 				}
 			}
 			
 
-			StatementContainer* stmtC = stmt1.getParentContainer();
+			StatementContainer* stmtC = stmt1->getParentContainer();
 			Assert::IsTrue(&proc == stmtC);
 
-			Statement* stmt = stmt1.getFollow();
+			Statement* stmt = stmt1->getFollow();
 			Assert::IsNull(stmt);
 
-			stmtC = stmt2.getParentContainer();
+			stmtC = stmt2->getParentContainer();
 			Assert::IsTrue(&proc == stmtC);
 
-			stmt = stmt2.getFollow();
-			Assert::IsTrue(stmt1 == *stmt);
+			stmt = stmt2->getFollow();
+			Assert::IsTrue(stmt1 == stmt);
 
-			stmt = stmt1.getFollowBy();
-			Assert::IsTrue(stmt2 == *stmt);
+			stmt = stmt1->getFollowBy();
+			Assert::IsTrue(stmt2 == stmt);
 			
-			stmt = stmt2.getFollowBy();
+			stmt = stmt2->getFollowBy();
 			Assert::IsNull(stmt);
 
 		}
@@ -68,43 +68,26 @@ namespace UnitTesting
 			Variable var("three");
 			stmtList.addWhileStatement(1, &proc, &var);
 
-			Statement stmt1;
+			Statement* stmt1;
 			for each (Statement* stmt in stmtList.getAllStatement())
 			{
 				if (stmt->getStmtNo() == 1) {
-					stmt1 = *stmt;
+					stmt1 = stmt;
 				}
 			}
 
-			Assert::IsTrue(typeid(stmt1) == typeid(WhileStatement));
-		}
-
-		TEST_METHOD(TestAddAssignStatement)
-		{
-			Procedure proc("Proc");
-			StatementList stmtList;
-
-			stmtList.addAssignStatement(1, &proc,nullptr,nullptr,nullptr);
-
-			Statement stmt1;
-			for each (Statement* stmt in stmtList.getAllStatement())
-			{
-				if (stmt->getStmtNo() == 1) {
-					stmt1 = *stmt;
-				}
-			}
-
-			Assert::IsTrue(typeid(stmt1) == typeid(AssignStatement));
+			Assert::IsNotNull(stmt1);
 		}
 
 		TEST_METHOD(TestIsChild)
 		{
 			Procedure proc("Proc");
-			StatementList stmtList;
+			StatementList* stmtList = new StatementList();
 			Variable var("var");
-			stmtList.addWhileStatement(1, &proc,&var);
+			stmtList->addStatement(1, &proc);
+			stmtList->addStatement(2, &proc);
 
-			Assert::IsTrue(stmtList.isChild(1));
+			Assert::IsTrue(stmtList->isChild(1));
 		}
 		
 	};
