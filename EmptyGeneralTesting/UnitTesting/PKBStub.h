@@ -2,12 +2,12 @@
 #include <vector>
 using namespace std;
 
-#include "../PKB/Procedure.h"
-#include "../PKB/Variable.h"
-#include "../PKB/Statement.h"
-#include "../PKB/AssignStatement.h"
-#include "../PKB/WhileStatement.h"
-#include "../PKB/StatementContainer.h"
+#include "Procedure.h"
+#include "Variable.h"
+#include "Statement.h"
+#include "AssignStatement.h"
+#include "WhileStatement.h"
+#include "StatementContainer.h"
 
 class PKBStub {
 private:

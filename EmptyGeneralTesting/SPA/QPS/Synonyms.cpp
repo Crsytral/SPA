@@ -1,5 +1,5 @@
 #include "Synonyms.h"
-#include<string>
+#include <string>
 #include <vector>
 #include "SyntaticData.h"
 #include "SyntaticType.h"

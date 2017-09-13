@@ -8,7 +8,7 @@ To be implemented by Lu Yu
 using namespace std;
 
 #include "Variable.h"
-#include "../Parser/Token.h"
+#include "Token.h"
 #include "Node.h"
 class Variable;
 

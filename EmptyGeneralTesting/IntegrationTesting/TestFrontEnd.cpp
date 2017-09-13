@@ -1,13 +1,13 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "../SPA/Parser/Parser.h"
-#include "../SPA/PKB/PKB.h"
-#include "../SPA/QPS/QueryParser.h"
-#include "../SPA/QPS/QueryEvaluator.h"
-#include "../SPA/PKB/Expression.h"
-#include "../SPA/Parser/VarToken.h"
-#include "../SPA/Parser/NumToken.h"
-#include "../SPA/Parser/OperatorToken.h"
+#include "Parser.h"
+#include "PKB.h"
+#include "QueryParser.h"
+#include "QueryEvaluator.h"
+#include "Expression.h"
+#include "VarToken.h"
+#include "NumToken.h"
+#include "OperatorToken.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

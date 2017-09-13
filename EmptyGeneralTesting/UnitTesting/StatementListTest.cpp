@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "../SPA/PKB/Statement.h"
-#include "../SPA/PKB/WhileStatement.h"
-#include "../SPA/PKB/AssignStatement.h"
-#include "../SPA/PKB/StatementList.h"
-#include "../SPA/PKB/Procedure.h"
+#include "Statement.h"
+#include "WhileStatement.h"
+#include "AssignStatement.h"
+#include "StatementList.h"
+#include "Procedure.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

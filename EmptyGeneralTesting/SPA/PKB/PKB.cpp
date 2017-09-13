@@ -3,8 +3,8 @@
 #include <typeinfo>
 using namespace std;
 
-#include "../PKB/PKB.h"
-#include "../PKB/Procedure.h"
+#include "PKB.h"
+#include "Procedure.h"
 /*
 Represents a parsed SIMPLE program
 */

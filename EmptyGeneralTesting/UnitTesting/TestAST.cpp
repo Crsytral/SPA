@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "../SPA/PKB/PKB.h"
+#include "PKB.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

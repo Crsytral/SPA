@@ -1,6 +1,6 @@
-#include "../QPS/QueryEvaluator.h"
-#include "../QPS/SyntaticType.h"
-#include "../PKB/Expression.h"
+#include "QueryEvaluator.h"
+#include "SyntaticType.h"
+#include "Expression.h"
 #include <algorithm>
 #include <iostream>
 #include <iterator>
