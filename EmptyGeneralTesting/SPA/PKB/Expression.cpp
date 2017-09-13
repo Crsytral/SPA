@@ -10,28 +10,28 @@ using namespace std;
 #include "BopNode.h"
 
 void Expression::buildSyntaxTree(queue<Token> tokens) {
-	vector<Token> v;
+	vector<Token> v = *(new vector<Token>());
 	while (!tokens.empty()) {
 		v.push_back(tokens.front());
 		tokens.pop();
 	}
-	Node* curr;
+	Node* curr = new Node();
 	int s = v.size();
 	stack<BopNode*> st;
 	//set last token as root node
 	Token last = v[s - 1];
 	if (last.isNum() || last.isVar()) {
-		LeafNode l(last.getValue());
-		syntaxTree = static_cast<Node*>(&l);
+		LeafNode* l = new LeafNode(last.getValue());
+		syntaxTree = static_cast<Node*>(l);
 		if (last.isVar()) {
-			Variable v(last.getValue());
-			usedVariables.push_back(&v);
+			Variable * v = new Variable(last.getValue());
+			usedVariables.push_back(v);
 		}
 	}
 	else {
-		BopNode l(last.getValue(), NULL, NULL);
-		syntaxTree = static_cast<Node*>(&l);
-		st.push(&l);
+		BopNode* l = new BopNode(last.getValue(), NULL, NULL);
+		syntaxTree = static_cast<Node*>(l);
+		st.push(l);
 	}
 	//set root node as current node
 	curr = syntaxTree;
@@ -42,17 +42,17 @@ void Expression::buildSyntaxTree(queue<Token> tokens) {
 		Node* nodeProcessing;
 		bool canHaveMoreChildren = false;
 		if (tk.isNum() || tk.isVar()) {
-			LeafNode l(tk.getValue());
-			nodeProcessing = static_cast<Node*>(&l);
+			LeafNode* l = new LeafNode(tk.getValue());
+			nodeProcessing = static_cast<Node*>(l);
 			if (tk.isVar()) {
-				Variable v(tk.getValue());
-				usedVariables.push_back(&v);
+				Variable* v = new Variable(tk.getValue());
+				usedVariables.push_back(v);
 			}
 		}
 		else {
-			BopNode l(tk.getValue(), NULL, NULL);
-			nodeProcessing = static_cast<Node*>(&l);
-			st.push(&l);
+			BopNode* l = new BopNode(tk.getValue(), NULL, NULL);
+			nodeProcessing = static_cast<Node*>(l);
+			st.push(l);
 		}
 		//if current node cannot have more children, search for first parent/grandparent
 		//that can have more children and set it as current node
