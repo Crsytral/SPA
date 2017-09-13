@@ -76,5 +76,9 @@ namespace UnitTesting
 			//add an Assignment statement into the existing procedure
 			return; 
 		}
+
+		TEST_METHOD(GetAllAssign) {
+
+		}
 	};
 }

@@ -40,22 +40,22 @@ bool QueryEvaluator::processVariableClause() {
 				//cout << (**i).getVariableType() << endl;
 				// to check for empty or filter out -1 during projector stage
 				if ((**i).getVariableType() == syntatic_type::assignment) {
-					rawResult.setAsgnData(convertIntVectorToString(PKB.getAllAssignStatements()));
+					rawResult.setAsgnData(convertIntVectorToString(pkb->getAllAssignStatements()));
 				}
 				else if ((**i).getVariableType() == syntatic_type::variable) {
-					rawResult.setAsgnData(convertStringVectorToString(PKB.getAllVariables()));
+					rawResult.setAsgnData(convertStringVectorToString(pkb->getAllVariables()));
 				}
 				else if ((**i).getVariableType() == syntatic_type::statement) {
-					rawResult.setAsgnData(convertIntVectorToString(PKB.getAllStatements()));
+					rawResult.setAsgnData(convertIntVectorToString(pkb->getAllStatements()));
 				}
 				else if ((**i).getVariableType() == syntatic_type::whileLoop) {
-					rawResult.setAsgnData(convertIntVectorToString(PKB.getAllWhileStatements()));
+					rawResult.setAsgnData(convertIntVectorToString(pkb->getAllWhileStatements()));
 				}
 				else if ((**i).getVariableType() == syntatic_type::ifelse) {
-					rawResult.setAsgnData(convertIntVectorToString(PKB.getAllIfStatements()));
+					rawResult.setAsgnData(convertIntVectorToString(pkb->getAllIfStatements()));
 				}
 				else if ((**i).getVariableType() == syntatic_type::procedure) {
-					rawResult.setAsgnData(convertStringVectorToString(PKB.getAllProcedures()));
+					rawResult.setAsgnData(convertStringVectorToString(pkb->getAllProcedures()));
 				}
 				else {
 					//will this case ever be reached?
@@ -73,22 +73,22 @@ bool QueryEvaluator::processSuchThat() {
 	//checks if both inputs(L param and R param) are int
 	if ((queryNode->getLeftParam()->getType() == syntatic_type::integer) && (queryNode->getRightParam()->getType() == syntatic_type::integer)){
 		if (queryNode->getType() == relation::follows) {
-			success = PKB.follows(atoi(queryNode->getLeftParam()->getParameter().c_str()), atoi(queryNode->getRightParam()->getParameter().c_str()));
+			success = pkb->follows(atoi(queryNode->getLeftParam()->getParameter().c_str()), atoi(queryNode->getRightParam()->getParameter().c_str()));
 		}
 		else if (queryNode->getType() == relation::followsStar) {
-			success = PKB.followStar(atoi(queryNode->getLeftParam()->getParameter().c_str()), atoi(queryNode->getRightParam()->getParameter().c_str()));
+			success = pkb->followStar(atoi(queryNode->getLeftParam()->getParameter().c_str()), atoi(queryNode->getRightParam()->getParameter().c_str()));
 		}
 		else if (queryNode->getType() == relation::parent) {
-			success = PKB.parents(atoi(queryNode->getLeftParam()->getParameter().c_str()), atoi(queryNode->getRightParam()->getParameter().c_str()));
+			success = pkb->parents(atoi(queryNode->getLeftParam()->getParameter().c_str()), atoi(queryNode->getRightParam()->getParameter().c_str()));
 		}
 		else if (queryNode->getType() == relation::parentStar) {
-			success = PKB.parentStar(atoi(queryNode->getLeftParam()->getParameter().c_str()), atoi(queryNode->getRightParam()->getParameter().c_str()));
+			success = pkb->parentStar(atoi(queryNode->getLeftParam()->getParameter().c_str()), atoi(queryNode->getRightParam()->getParameter().c_str()));
 		}
 		else if (queryNode->getType() == relation::modifies) {
-			success = PKB.modifies(atoi(queryNode->getLeftParam()->getParameter().c_str()), queryNode->getRightParam()->getParameter());
+			success = pkb->modifies(atoi(queryNode->getLeftParam()->getParameter().c_str()), queryNode->getRightParam()->getParameter());
 		}
 		else if (queryNode->getType() == relation::uses) {
-			success = PKB.uses(atoi(queryNode->getLeftParam()->getParameter().c_str()), queryNode->getRightParam()->getParameter());
+			success = pkb->uses(atoi(queryNode->getLeftParam()->getParameter().c_str()), queryNode->getRightParam()->getParameter());
 		}
 		//else if (queryObj.tree->getQuery()->getType() == relation::pattern) {
 		//	cout << "pattern processing yet to finish" << endl;
@@ -99,7 +99,7 @@ bool QueryEvaluator::processSuchThat() {
 	}
 	else if ((queryNode->getLeftParam()->getType() == syntatic_type::integer) && (queryNode->getRightParam()->getType() != syntatic_type::integer)) { //Left Param is Int
 		if (queryNode->getType() == relation::follows) {
-			int stmtIndex = PKB.follows((int)queryNode->getLeftParam());
+			int stmtIndex = pkb->follows((int)queryNode->getLeftParam());
 			if (stmtIndex != -1){
 				success = true;
 				rawResult.setQueryResult(stmtIndex + "");
@@ -107,7 +107,7 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryNode->getType() == relation::followsStar) {
-			vector<int> stmts = PKB.followStar((int)queryNode->getLeftParam());
+			vector<int> stmts = pkb->followStar((int)queryNode->getLeftParam());
 			if (stmts.front() != -1) {
 				success = true;
 				rawResult.setQueryResult(convertIntVectorToString(stmts));
@@ -116,7 +116,7 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryNode->getType() == relation::parent) {
-			vector<int> stmts = PKB.parents((int)queryNode->getLeftParam());
+			vector<int> stmts = pkb->parents((int)queryNode->getLeftParam());
 			if (stmts.front() != -1){
 				success = true;
 				rawResult.setQueryResult(convertIntVectorToString(stmts));
@@ -125,7 +125,7 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryNode->getType() == relation::parentStar) {
-			vector<int> stmts = PKB.parentStar((int)queryNode->getLeftParam());
+			vector<int> stmts = pkb->parentStar((int)queryNode->getLeftParam());
 			if (stmts.front() != -1) {
 				success = true;
 				rawResult.setQueryResult(convertIntVectorToString(stmts));
@@ -134,17 +134,17 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryNode->getType() == relation::modifies) {
-			rawResult.setQueryResult(convertStringVectorToString(PKB.modifiedBy((int)queryNode->getLeftParam())));
+			rawResult.setQueryResult(convertStringVectorToString(pkb->modifiedBy((int)queryNode->getLeftParam())));
 			success = true;
 		}
 		else if (queryNode->getType() == relation::uses) {
-			rawResult.setQueryResult(convertStringVectorToString(PKB.usedBy((int)queryNode->getLeftParam())));
+			rawResult.setQueryResult(convertStringVectorToString(pkb->usedBy((int)queryNode->getLeftParam())));
 			success = true;
 		}
 	}
 	else if ((queryNode->getLeftParam()->getType() != syntatic_type::integer) && (queryNode->getRightParam()->getType() == syntatic_type::integer)) { //Right Param is Int
 		if (queryNode->getType() == relation::follows) {
-			int stmtIndex = PKB.followsBy((int)queryNode->getRightParam());
+			int stmtIndex = pkb->followsBy((int)queryNode->getRightParam());
 			if (stmtIndex != -1) {
 				success = true;
 				rawResult.setQueryResult(stmtIndex + "");
@@ -153,7 +153,7 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryNode->getType() == relation::followsStar) {
-			vector<int> stmts = PKB.followStarBy((int)queryNode->getRightParam());
+			vector<int> stmts = pkb->followStarBy((int)queryNode->getRightParam());
 			if (stmts.front() != -1) {
 				success = true;
 				rawResult.setQueryResult(convertIntVectorToString(stmts));
@@ -162,7 +162,7 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryNode->getType() == relation::parent) {
-			int stmts = PKB.parentedBy(atoi(queryNode->getRightParam()->getParameter().c_str()));
+			int stmts = pkb->parentedBy(atoi(queryNode->getRightParam()->getParameter().c_str()));
 			if (stmts != -1) {
 				success = true;
 				rawResult.setQueryResult(stmts+"");
@@ -171,7 +171,7 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryNode->getType() == relation::parentStar) {
-			vector<int> stmts = PKB.parentStarBy(atoi(queryNode->getRightParam()->getParameter().c_str()));
+			vector<int> stmts = pkb->parentStarBy(atoi(queryNode->getRightParam()->getParameter().c_str()));
 			if (stmts.front() != -1) {
 				success = true;
 				rawResult.setQueryResult(convertIntVectorToString(stmts));
@@ -180,7 +180,7 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryNode->getType() == relation::modifies) {
-			vector<int> stmts = PKB.modifies(queryNode->getRightParam()->getParameter());
+			vector<int> stmts = pkb->modifies(queryNode->getRightParam()->getParameter());
 			if (stmts.front() != -1) {
 				success = true;
 				rawResult.setQueryResult(convertIntVectorToString(stmts));
@@ -189,7 +189,7 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryNode->getType() == relation::uses) {
-			vector<int> stmts = PKB.uses(queryNode->getRightParam()->getParameter());
+			vector<int> stmts = pkb->uses(queryNode->getRightParam()->getParameter());
 			if (stmts.front() != -1) {
 				success = true;
 				rawResult.setQueryResult(convertIntVectorToString(stmts));
@@ -200,7 +200,7 @@ bool QueryEvaluator::processSuchThat() {
 
 	}else{ //both not int
 		if (queryNode->getType() == relation::follows) {
-			vector<pair<int, int>> possibleCombinations = PKB.follows();
+			vector<pair<int, int>> possibleCombinations = pkb->follows();
 			if (possibleCombinations.front().first != -1 && possibleCombinations.front().second != -1) {
 				success = true;
 
@@ -209,7 +209,7 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryNode->getType() == relation::followsStar) {
-			vector<pair<int, int>> possibleCombinations = PKB.followStar();
+			vector<pair<int, int>> possibleCombinations = pkb->followStar();
 			if (possibleCombinations.front().first != -1 && possibleCombinations.front().second != -1) {
 				success = true;
 				
@@ -218,7 +218,7 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryNode->getType() == relation::parent) {
-			vector<pair<int, int>> possibleCombinations = PKB.parents();
+			vector<pair<int, int>> possibleCombinations = pkb->parents();
 			if (possibleCombinations.front().first != -1 && possibleCombinations.front().second != -1) {
 				success = true;
 				
@@ -227,7 +227,7 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryNode->getType() == relation::parentStar) {
-			vector<pair<int, int>> possibleCombinations = PKB.parentStar();
+			vector<pair<int, int>> possibleCombinations = pkb->parentStar();
 			if (possibleCombinations.front().first != -1 && possibleCombinations.front().second != -1) {
 				success = true;
 				
@@ -236,7 +236,7 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryNode->getType() == relation::modifies) {
-			vector<pair<int, string>> possibleCombinations = PKB.modifies();
+			vector<pair<int, string>> possibleCombinations = pkb->modifies();
 			if (possibleCombinations.front().first != -1 && possibleCombinations.front().second != "") {
 				success = true;
 
@@ -245,7 +245,7 @@ bool QueryEvaluator::processSuchThat() {
 				success = false;
 		}
 		else if (queryNode->getType() == relation::uses) {
-			vector<pair<int, string>> possibleCombinations = PKB.uses();
+			vector<pair<int, string>> possibleCombinations = pkb->uses();
 			if (possibleCombinations.front().first != -1 && possibleCombinations.front().second != "") {
 				success = true;
 
