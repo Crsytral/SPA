@@ -15,7 +15,7 @@ namespace UnitTesting
 			PKB PKBTest;
 			vector<int> expected(2, 2);
 			Assert::AreEqual(1, 1);
-			Assert::AreEqual(
+			Assert::AreNotEqual(
 				//Expected value:
 				expected[0],
 				//Actual value:

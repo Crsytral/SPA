@@ -125,19 +125,31 @@ namespace UnitTesting
 
 			Assert::IsTrue(stmt1==stmt2);
 		}
+		TEST_METHOD(TestgetStatementNo)
+		{
+			Statement stmt1(1, nullptr, nullptr);
+
+			Assert::IsTrue(stmt1.getStmtNo() == 1);
+		}
 
 		TEST_METHOD(TestIsParentForStatement)
 		{
 			Procedure proc("PrcName");
+			Variable var("var1");
+			WhileStatement stmt1(1,nullptr,nullptr,&var);
 			Statement stmt2(2, &proc, nullptr);
+			Statement stmt3(3, &stmt1,nullptr);
 
+			Assert::IsTrue(stmt3.isParent(1));
+			Assert::IsFalse(stmt3.isParent("PrcName"));
 			Assert::IsTrue(stmt2.isParent("PrcName"));
 			Assert::IsFalse(stmt2.isParent(2));
 		}
 		TEST_METHOD(TestIsFollow)
 		{
-			Statement stmt1(1, nullptr, nullptr);
-			Statement stmt2(2, nullptr, &stmt1);
+			int const1 = 1, const2 = 2;
+			Statement stmt1(const1, nullptr, nullptr);
+			Statement stmt2(const2, nullptr, &stmt1);
 
 			Assert::IsTrue(stmt2.isFollow(1));
 			Assert::IsFalse(stmt2.isFollow(2));
@@ -158,33 +170,46 @@ namespace UnitTesting
 		TEST_METHOD(TestAddModVar)
 		{
 			Statement stmt1(1, nullptr, nullptr);
-			Variable var("three");
+			Variable var1("three");
 
-			stmt1.addModVar(var);
-			vector<Variable> varList = stmt1.getModVar();
+			stmt1.addModVar(&var1);
+			vector<Variable*> varList = stmt1.getModVar();
 
-			vector<Variable>::iterator it = find(varList.begin(), varList.end(), var);
-
-			Assert::IsTrue(it != varList.end());
+			bool isFound = false;
+			for each (Variable* var in varList)
+			{
+				string str1 = var->getName();
+				if (var->getName().compare("three") == 0) {
+					isFound = true;
+					break;
+				}
+			}
+			Assert::IsTrue(isFound);
 		}
 		TEST_METHOD(TestAddUseVar)
 		{
 			Statement stmt1(1, nullptr, nullptr);
 			Variable var("three");
 
-			stmt1.addUseVar(var);
-			vector<Variable> varList = stmt1.getUseVar();
+			stmt1.addUseVar(&var);
+			vector<Variable*> varList = stmt1.getUseVar();
 
-			vector<Variable>::iterator it = find(varList.begin(), varList.end(), var);
-
-			Assert::IsTrue(it != varList.end());
+			bool isFound = false;
+			for each (Variable* var in varList)
+			{
+				if (var->getName().compare("three") == 0) {
+					isFound = true;
+					break;
+				}
+			}
+			Assert::IsTrue(isFound);
 		}
 		TEST_METHOD(TestIsModVar)
 		{
 			Statement stmt1(1, nullptr, nullptr);
 			Variable var("three");
 
-			stmt1.addModVar(var);
+			stmt1.addModVar(&var);
 
 			Assert::IsTrue(stmt1.isMod("three"));
 		}
@@ -193,7 +218,7 @@ namespace UnitTesting
 			Statement stmt1(1, nullptr, nullptr);
 			Variable var("three");
 
-			stmt1.addUseVar(var);
+			stmt1.addUseVar(&var);
 
 			Assert::IsTrue(stmt1.isUse("three"));
 		}

@@ -3,48 +3,35 @@
 #include "WhileStatement.h"
 
 StatementList::StatementList() {
-
-}
-
-StatementList::StatementList(StatementContainer* p) {
-	parentContainer = p;
 	curr = nullptr;
 }
 
-void StatementList::addStatement(int stmtNo) {
-	Statement stmt(stmtNo, parentContainer, curr);
-	statementList.push_back(&stmt);
+void StatementList::addStatement(int stmtNo, StatementContainer* parent) {
+	Statement* stmt =  new Statement(stmtNo, parent, curr);
+	statementList.push_back(stmt);
 	if(curr != nullptr)
-		curr->setFollowedBy(&stmt);
-	curr = &stmt;
+		curr->setFollowedBy(stmt);
+	curr = stmt;
 }
 
-StatementContainer* StatementList::getParentContainer() {
-	return parentContainer;
-}
-
-void StatementList::setParentContainer(StatementContainer* container) {
-	parentContainer = container;
-}
-
-Statement* StatementList::addAssignStatement(int index, Variable* v, vector<Variable*>* usedVars, Expression* exp) {
+Statement* StatementList::addAssignStatement(int index, StatementContainer* parent, Variable* v, vector<Variable*>* usedVars, Expression* exp) {
 	
-	AssignStatement stmt(index, parentContainer, curr, v, usedVars, exp);
-	statementList.push_back(&stmt);
+	AssignStatement* stmt = new AssignStatement(index, parent, curr, v, usedVars, exp);
+	statementList.push_back(stmt);
 	if (curr != nullptr)
-		curr->setFollowedBy(&stmt);
-	curr = &stmt;
-	return &stmt;
+		curr->setFollowedBy(stmt);
+	curr = stmt;
+	return stmt;
 }
 
-StatementContainer* StatementList::addWhileStatement(int index, Variable* controlVar) {
+StatementContainer* StatementList::addWhileStatement(int index, StatementContainer* parent,Variable* controlVar) {
 	
-	WhileStatement stmt(index, parentContainer, curr, controlVar);
-	statementList.push_back(&stmt);
+	WhileStatement* stmt =  new WhileStatement(index, parent, curr, controlVar);
+	statementList.push_back(stmt);
 	if (curr != nullptr)
-		curr->setFollowedBy(&stmt);
-	curr = &stmt;
-	return &stmt;
+		curr->setFollowedBy(stmt);
+	curr = stmt;
+	return stmt;
 }
 
 vector<Statement*> StatementList::getAllStatement() {
