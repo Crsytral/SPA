@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
+#include "../SPA/Parser/Parser.h"
+#include "../SPA/PKB/PKB.h"
+#include "../SPA/QPS/QueryParser.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -9,9 +12,10 @@ namespace IntegrationTesting
 	{
 	public:
 		
-		TEST_METHOD(TestMethod1)
+		TEST_METHOD(PkbAndQueryParser)
 		{
 			// TODO: Your test code here
+
 		}
 
 	};
