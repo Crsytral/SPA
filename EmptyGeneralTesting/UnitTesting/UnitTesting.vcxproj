@@ -165,7 +165,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PKBStub.cpp" />
-    <ClCompile Include="QueryEvaluatorTest.cpp" />
     <ClCompile Include="StatementListTest.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
