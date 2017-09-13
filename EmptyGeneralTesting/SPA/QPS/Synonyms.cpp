@@ -41,9 +41,10 @@ int Synonyms::getSize()
 
 int Synonyms::getIndex(string var)
 {   
+	/*
 	//initialize iterator
     vector<SyntaticData*>::iterator i;
-	int index = -999;
+	int index;
 
 	for (i = symbolTable.begin(); i != symbolTable.end(); i++)
 	{
@@ -52,6 +53,15 @@ int Synonyms::getIndex(string var)
 		return index;
 	}
 	return index;
+
+	*/
+
+	for (std::vector<SyntaticData*>::iterator i = symbolTable.begin(); i != symbolTable.end(); i++)
+	{
+		if ((**i).getVariable() == var)
+			return std::distance(symbolTable.begin(), i);
+	}
+	return -1;
 }
 
 //Check whether a certain synonym exist in the symbolTable

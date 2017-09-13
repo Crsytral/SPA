@@ -12,7 +12,7 @@ class StatementList {
 private:
 	StatementContainer* parentContainer;
 	Statement* curr; //Represent the last element of this StatementList
-	vector<Statement> statementList;
+	vector<Statement*> statementList;
 
 public:
 	StatementList();

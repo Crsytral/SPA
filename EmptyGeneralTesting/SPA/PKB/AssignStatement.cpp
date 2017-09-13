@@ -2,9 +2,9 @@
 
 AssignStatement::AssignStatement(int index, StatementContainer* parent, Statement* follows, Variable* v, vector<Variable*>* usedVars, Expression* exp) {
 	Statement(index, parent, follows);
-	addModVar(*v);
+	addModVar(v);
 	for each (Variable* var in *usedVars){
-		addUseVar(*var);
+		addUseVar(var);
 	}
 	this->exp = exp;
 }

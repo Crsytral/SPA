@@ -51,48 +51,60 @@ bool Statement::operator==(Statement others) {
 	return stmtNo == others.stmtNo;
 }
 
-void Statement::addModVar(Variable var) {
-	modVar.push_back(var);
-	var.addModifyStmt(this);
-	if (parentContainer != nullptr) {
-		if (typeid(parentContainer) == typeid(Statement)) {
-			static_cast<WhileStatement*>(parentContainer) -> addModVar(var);
-		}
-		else {
-			static_cast<Procedure*>(parentContainer)->addModVar(var);
+void Statement::addModVar(Variable* var) {
+	if (isMod(var->getName())) {
+		modVar.push_back(var);
+		var->addModifyStmt(this);
+		if (parentContainer != nullptr) {
+			if (typeid(parentContainer) == typeid(Statement)) {
+				static_cast<WhileStatement*>(parentContainer)->addModVar(var);
+			}
+			else {
+				static_cast<Procedure*>(parentContainer)->addModVar(var);
+			}
 		}
 	}
 }
 
-vector<Variable> Statement::getModVar() {
+vector<Variable*> Statement::getModVar() {
 	return modVar;
 }
 
 bool Statement::isMod(string varName) {
-	Variable var(varName);
-	vector<Variable>::iterator it = find(modVar.begin(), modVar.end(), var);
-	return it != modVar.end();
+	for each (Variable* var in modVar)
+	{
+		if (var->getName().compare(varName) == 0) {
+			return true;
+		}
+	}
+	return false;
 }
 
-void Statement::addUseVar(Variable var) {
-	useVar.push_back(var);
-	var.addUseStmt(this);
-	if (parentContainer != nullptr) {
-		if (typeid(parentContainer) == typeid(Statement)) {
-			static_cast<WhileStatement*>(parentContainer)->addUseVar(var);
-		}
-		else {
-			static_cast<Procedure*>(parentContainer)->addUseVar(var);
+void Statement::addUseVar(Variable* var) {
+	if (isUse(var->getName())) {
+		useVar.push_back(var);
+		var->addUseStmt(this);
+		if (parentContainer != nullptr) {
+			if (typeid(parentContainer) == typeid(Statement)) {
+				static_cast<WhileStatement*>(parentContainer)->addUseVar(var);
+			}
+			else {
+				static_cast<Procedure*>(parentContainer)->addUseVar(var);
+			}
 		}
 	}
 }
 
-vector<Variable> Statement::getUseVar() {
+vector<Variable*> Statement::getUseVar() {
 	return useVar;
 }
 
 bool Statement::isUse(string varName) {
-	Variable var(varName);
-	vector<Variable>::iterator it = find(useVar.begin(), useVar.end(), var);
-	return it != useVar.end();
+	for each (Variable* var in useVar)
+	{
+		if (var->getName().compare(varName) == 0) {
+			return true;
+		}
+	}
+	return false;
 }

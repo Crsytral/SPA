@@ -13,7 +13,7 @@ StatementList::StatementList(StatementContainer* p) {
 
 void StatementList::addStatement(int stmtNo) {
 	Statement stmt(stmtNo, parentContainer, curr);
-	statementList.push_back(stmt);
+	statementList.push_back(&stmt);
 	if(curr != nullptr)
 		curr->setFollowedBy(&stmt);
 	curr = &stmt;
@@ -30,7 +30,7 @@ void StatementList::setParentContainer(StatementContainer* container) {
 Statement* StatementList::addAssignStatement(int index, Variable* v, vector<Variable*>* usedVars, Expression* exp) {
 	
 	AssignStatement stmt(index, parentContainer, curr, v, usedVars, exp);
-	statementList.push_back(stmt);
+	statementList.push_back(&stmt);
 	if (curr != nullptr)
 		curr->setFollowedBy(&stmt);
 	curr = &stmt;
@@ -40,7 +40,7 @@ Statement* StatementList::addAssignStatement(int index, Variable* v, vector<Vari
 StatementContainer* StatementList::addWhileStatement(int index, Variable* controlVar) {
 	
 	WhileStatement stmt(index, parentContainer, curr, controlVar);
-	statementList.push_back(stmt);
+	statementList.push_back(&stmt);
 	if (curr != nullptr)
 		curr->setFollowedBy(&stmt);
 	curr = &stmt;
@@ -48,17 +48,16 @@ StatementContainer* StatementList::addWhileStatement(int index, Variable* contro
 }
 
 vector<Statement*> StatementList::getAllStatement() {
-	vector<Statement*> stmtList;
-	for each (Statement stmt in statementList)
-	{
-		stmtList.push_back(&stmt);
-	}
-	return stmtList;
+	return statementList;
 }
 
 bool StatementList::isChild(int stmtNo) {
-	Statement stmt(stmtNo, nullptr, nullptr);
-	vector<Statement>::iterator it = find(statementList.begin(),statementList.end(),stmt);
 
-	return it != statementList.end();
+	for each (Statement* stmt in statementList)
+	{
+		if (stmt->getStmtNo() == stmtNo) {
+			return true;
+		}
+	}
+	return false;
 }
