@@ -1,0 +1,75 @@
+1 - modifiesS synonym and synonym, while stmt, false (9 from 1)
+while w; variable v;
+Select v such that Modifies(w, v)
+none
+5000
+2 - modifiesS synonym and IDENT, while stmt, false (13 from 1)
+while w;
+Select w such that Modifies(w, "yes")
+none
+5000
+3 - usesS synonym and synonym, assign stmt, some unused declarations, select a, false (22 from 1)
+assign a; variable x, v;
+Select a such that Uses(a, v)
+none
+5000
+4 - parent synonym and synonym, stmt, select s1, false (42 from 1)
+stmt s1, s2;
+Select s1 such that Parent(s1, s2)
+none
+5000
+5 - parent synonym and _, while stmt, false (49 from 1)
+while w;
+Select w such that Parent(w, _)
+none
+5000
+6 - parent _ and synonym, stmt, false (55 from 1)
+stmt s;
+Select s such that Parent(_, s)
+none
+5000
+7 - parent _ and synonym, assign stmt, false (57 from 1)
+assign a;
+Select a such that Parent(_, a)
+none
+5000
+8 - parent _ and _, some unused declarations, diff select synonym, false (58 from 1)
+prog_line n, n1; constant c, cc, c1, c2;
+Select c1 such that Parent(_, _)
+1, 6
+5000
+9 - parent _ and _, all unused declarations, boolean, false (59 from 1)
+stmt s, v; while w3;
+Select BOOLEAN such that Parent(_, _)
+False
+5000
+10 - parentT synonym and synonym, stmt, select s1, false (74 from 1)
+stmt s1, s2;
+Select s1 such that Parent*(s1, s2)
+none
+5000
+11 - parentT synonym and _, while stmt, false (80 from 1)
+while w;
+Select w such that Parent*(w, _)
+none
+5000
+12 - parentT _ and synonym, stmt, false (86 from 1)
+stmt s;
+Select s such that Parent*(_, s)
+none
+5000
+13 - parentT _ and synonym, assign stmt, false (88 from 1)
+assign a;
+Select a such that Parent*(_, a)
+none
+5000
+14 - parentT _ and _, some unused declarations, diff select synonym, false (89 from 1)
+prog_line n, n1; constant c, cc, c1, c2;
+Select c1 such that Parent*(_, _)
+none
+5000
+15 - parentT _ and _, all unused declarations, boolean, false (90 from 1)
+stmt s, v; while w3;
+Select BOOLEAN such that Parent*(_, _)
+False
+5000
