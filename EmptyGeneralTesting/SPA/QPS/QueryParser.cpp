@@ -32,8 +32,8 @@ bool isSuch = false;
 bool buildSuchThat = false;
 bool buildPattern = false;
 
-string concatQuery;
-string concatPattern;
+string concatQuery = "";
+string concatPattern = "";
 
 regex varRegex("(([a-zA-Z])+(([a-zA-Z])|#|(\\d)+)*|_|\"([a-zA-Z])+(([a-zA-Z])|#|(\\d)+)*\")");
 
@@ -280,7 +280,8 @@ relation getType(char* rsType){
 		return relation::callsStar;
 	}
 	else if (strcmp(rsType, "Parent") == 0)
-	{
+	{   
+		//printf("checkParent");
 		return relation::parent;
 	}
 	else if (strcmp(rsType, "Parent*") == 0)
@@ -318,25 +319,31 @@ relation getType(char* rsType){
 
 void identifyResult(char* curTok){
 
+	
+
 	if (!newSynonyms->checkExists(curTok))
 	{
 		noSynFound = true;		
 	} 
 	else
-	{
+	{   
+		int index = newSynonyms->getIndex(curTok);
+		//printf("%d", index);
+		//char a = getchar();
 		newSynonyms->setResult(newSynonyms->getIndex(curTok));
 	}
 
 }
 
-void buildQueryNode(char* curTok, string concatQuery) {
+void buildQueryNode(char* curTok) {
 
-	//regex qurPattern("([^\\(]+\\(([^\\)]+|[^\,]+)\,([^\\)]+|[^\,]+)\\))");
+	//printf("getQuery");
+	//std::cout << curTok << '\n';
 	regex qurPattern("([^\\(]+\\(([^\\)]+|[^\,]+)\,([^\\)]+|[^\,]+)\\))");
 	concatQuery.append(curTok);
-
+	//std::cout << concatQuery;
 	if (regex_match(concatQuery, qurPattern))
-	{
+	{   
 		string relationEntity = "";
 		relation relationClause;
 		string firstParameter = "";
@@ -347,9 +354,10 @@ void buildQueryNode(char* curTok, string concatQuery) {
 		//int size = concatQuery.size();
 
 		for (std::string::size_type i = 0; i < concatQuery.size(); ++i) {
-
+			
 			if (concatQuery[i] == '(')
-			{
+			{   
+				//printf("getQuery");
 				vector<char> writable(relationEntity.begin(), relationEntity.end());
 				writable.push_back('\0');
 				relationClause = getType(&writable[0]);
@@ -358,8 +366,8 @@ void buildQueryNode(char* curTok, string concatQuery) {
 			}
 
 			else if (concatQuery[i] == ')')
-			{
-				concatQuery = "";
+			{   
+				//concatQuery = "";
 			}
 
 			else if (gottenRelation && concatQuery[i] != ',')
@@ -382,7 +390,6 @@ void buildQueryNode(char* curTok, string concatQuery) {
 				firstParameterDone = true;
 			}
 
-			else if (!gottenRelation)
 			{
 				relationEntity += concatQuery[i];
 			}
@@ -395,13 +402,27 @@ void buildQueryNode(char* curTok, string concatQuery) {
 			syntatic_type secondSynType = checkSyntaticType(secondParameter);
 
 			if (firstSynType != syntatic_type::synTypeError && secondSynType != syntatic_type::synTypeError)
-			{
+			{   
+				
 				removeCharsFromString(secondParameter, "\"");
 				removeCharsFromString(firstParameter, "\"");
 				ParameterNode* firstParamNode = new ParameterNode(firstSynType, firstParameter);
 				ParameterNode* secondParamNode = new ParameterNode(secondSynType, secondParameter);
 				QueryNode* newQuery = new QueryNode(relationClause, firstParamNode, secondParamNode);
+				//string test = firstParamNode->getParameter();
+				//string test1 = secondParamNode->getParameter();
+				//cout << test1;
 				newTree->addQuery(newQuery);
+				//string test2 = newTree->getQuery()->getLeftParam()->getParameter();
+				//cout << test2;
+				
+				/*
+				if (newTree->getQuery()->getType() == relation::parent)
+				{
+					printf("yay");
+				}
+				*/
+				
 			}
 		}
 	}
@@ -409,9 +430,14 @@ void buildQueryNode(char* curTok, string concatQuery) {
 
 }
 
-void buildPatternNode(char* curTok, string concatPattern) {
+void buildPatternNode(char* curTok) {
+	
+	//printf("pattern");
+	//char a = getchar();
 
 	concatPattern.append(curTok);
+
+	//printf("test");
 
 	regex expectedPattern("([^\\(]+\\(([^\\)]+|[^\,]+)(\,([^\\)]+|[^\,]+)\\))+)");
 
@@ -552,7 +578,8 @@ void checkPatternOrQuery(char* inputTok) {
 
 
 	if (strcmp(inputTok, "Select") == 0)
-	{
+	{   
+		//printf("test select");
 		buildResult = true;
 		isSuch = false;
 		buildSuchThat = false;
@@ -561,7 +588,8 @@ void checkPatternOrQuery(char* inputTok) {
 	}
 
 	else if (strcmp(inputTok, "such") == 0)
-	{
+	{   
+		//printf("test such");
 		isSuch = true;
 		buildSuchThat = false;
 		buildPattern = false;
@@ -569,37 +597,52 @@ void checkPatternOrQuery(char* inputTok) {
 	}
 
 	else if (isSuch == true && strcmp(inputTok, "that") == 0)
-	{
+	{   
+		//printf("test that\n");
 		buildSuchThat = true;
 		buildPattern = false;
 		buildResult = false;
 		isSuch = false;
 
-		concatQuery = "";
+		//concatQuery = "";
+
+		
 	}
 
 	else if (strcmp(inputTok, "pattern") == 0)
 	{
 		buildPattern = true;
-		concatPattern = "";
 	}
 
 	else
-	{
-		if (buildResult = true)
-		{
+	{   
+		//std::cout << inputTok << '\n';
+	
+		if (buildResult)
+		{   
+			//printf("hello");
 			identifyResult(inputTok);
 		}
 
-		else if (buildSuchThat = true)
-		{
-			buildQueryNode(inputTok, concatQuery);
+		else;
+		
+	    if (buildSuchThat)
+		{   
+			//printf("check");
+			buildQueryNode(inputTok);
 		}
 
-		else if (buildPattern = true)
-		{
-			buildPatternNode(inputTok, concatPattern);
+		else;
+
+		if (buildPattern)
+		{   
+			//printf("buildPattern");
+			//std::cout << inputTok << '\n';
+			//char a = getchar();
+			buildPatternNode(inputTok);
 		}
+
+		else;
 	}
 	
 }
@@ -704,13 +747,14 @@ void tokenCheck(char *tok) {
 
 	else if(regex_match(tok, select)){
 
-		char a = getchar();
+		//std::cout << tok << '\n';
+		//char a = getchar();
 		char *pch;
 		char *end_tok;
 		pch = strtok_s(tok, " ", &end_tok);
-
 		while (pch != NULL) {
-
+			//std::cout << pch << '\n';
+			//char a = getchar();
 			checkPatternOrQuery(pch);
 			pch = strtok_s(NULL, " ", &end_tok);
 		}
@@ -724,7 +768,7 @@ void tokenCheck(char *tok) {
 //This function will take in a user input and turn it into a query object
 QueryObject QueryParser::getQueryObj(std::string i) {
 
-	//printf("%s", i);
+
 	QueryObject query;
 
 	const char* semiColon = ";";
@@ -733,6 +777,7 @@ QueryObject QueryParser::getQueryObj(std::string i) {
 	char *token;
 	char *end;
 	char *temp = new char[str_size + 1];
+	temp[str_size] = 0;
 	newTree = new QueryTree();
     newSynonyms = new Synonyms();
 
@@ -773,17 +818,19 @@ QueryObject QueryParser::getQueryObj(std::string i) {
 
 }
 
+/*
+
 int main(void){
 	
-	//QueryParser* qp;
-	//qp = new QueryParser();
+	QueryParser* qp;
+	qp = new QueryParser();
 
 	//string input = "assign a; statement s; variable v; Select s such that Parent (2, s)";
 
 	//printf("%s, input");
 
-	//QueryObject test = qp -> getQueryObj("assign a; statement s; variable v; Select s such that Parent (2, s)");
-
+	QueryObject test = qp -> getQueryObj("assign a; statement s; variable v; Select s such that Parent (2, s)");
+	//QueryObject test = qp->getQueryObj("assign a; variable v; Select a pattern a (v,__)");
 	/*
 	int size = test.synonym->getSize();
 
@@ -796,12 +843,15 @@ int main(void){
 
 		printf("fail");
 
-	*/
+	
 
 	char a = getchar();
 
 	return 0;
 }
+
+*/
+
 
 
 
