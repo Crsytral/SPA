@@ -5,12 +5,12 @@
 #include <utility>
 using namespace std;
 
-#include "AssignStatement.h"
-#include "Procedure.h"
-#include "Statement.h"
-#include "Variable.h"
-#include "WhileStatement.h"
-#include "StatementContainer.h"
+#include "../PKB/AssignStatement.h"
+#include "../PKB/Procedure.h"
+#include "../PKB/Statement.h"
+#include "../PKB/Variable.h"
+#include "../PKB/WhileStatement.h"
+#include "../PKB/StatementContainer.h"
 
 /*
 Represents a parsed SIMPLE program
