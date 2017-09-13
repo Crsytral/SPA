@@ -3,10 +3,10 @@ using namespace std;
 
 #include "Procedure.h"
 
-Procedure::Procedure(string name) {
-	StatementList lst(this);
-	stmtLst = &lst;
+Procedure::Procedure(const string &name) {
 	procName = name;
+	StatementList lst;
+	stmtLst = &lst;
 }
 
 void Procedure::addModVar(Variable var) {
@@ -39,5 +39,4 @@ bool Procedure::isUse(string varName) {
 
 string Procedure::getName() {
 	return procName;
-
 }

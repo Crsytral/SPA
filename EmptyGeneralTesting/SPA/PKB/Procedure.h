@@ -10,11 +10,11 @@ using namespace std;
 
 class Procedure: public StatementContainer {
 private:
-	string procName;
-	vector<Variable> useVar;
-	vector<Variable> modVar;
+	std::string procName;
+	std::vector<Variable> useVar;
+	std::vector<Variable> modVar;
 public:
-	Procedure(string name);
+	Procedure(const string &name);
 	void addModVar(Variable var);
 	vector<Variable> getUseVar();
 	bool isUse(string varMod);

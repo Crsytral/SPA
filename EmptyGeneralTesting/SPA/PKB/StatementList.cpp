@@ -2,6 +2,10 @@
 #include "AssignStatement.h"
 #include "WhileStatement.h"
 
+StatementList::StatementList() {
+
+}
+
 StatementList::StatementList(StatementContainer* p) {
 	parentContainer = p;
 	curr = nullptr;
@@ -17,6 +21,10 @@ void StatementList::addStatement(int stmtNo) {
 
 StatementContainer* StatementList::getParentContainer() {
 	return parentContainer;
+}
+
+void StatementList::setParentContainer(StatementContainer* container) {
+	parentContainer = container;
 }
 
 Statement* StatementList::addAssignStatement(int index, Variable* v, vector<Variable*>* usedVars, Expression* exp) {
