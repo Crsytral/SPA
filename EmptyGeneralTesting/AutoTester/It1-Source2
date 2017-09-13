@@ -1,0 +1,8 @@
+procedure SIMPLE2 {
+	while real {
+		female = 10; 
+	}
+	while please {
+		no = female;
+	}
+}

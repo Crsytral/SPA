@@ -1,6 +1,8 @@
 #include "Result.h"
 
-Result::Result() {}
+Result::Result() {
+	Result::isValid = false;
+}
 
 Result::Result(string data) { // to remove
 	Result::isValid = false;
@@ -48,7 +50,7 @@ string Result::toString() {
 		}
 	}
 	else {
-		output = "No Result";
+		output = "";
 	}
 	
 	return	output;

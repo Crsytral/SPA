@@ -1,59 +1,25 @@
 #pragma once
-
 #include <vector>
-#include <stack>
-#include <utility>
 using namespace std;
 
-#include "../PKB/AssignStatement.h"
 #include "../PKB/Procedure.h"
-#include "../PKB/Statement.h"
 #include "../PKB/Variable.h"
+#include "../PKB/Statement.h"
+#include "../PKB/AssignStatement.h"
 #include "../PKB/WhileStatement.h"
 #include "../PKB/StatementContainer.h"
 
-/*
-Represents a parsed SIMPLE program
-*/
-class PKB {
+class PKBStub {
 private:
-	int currIndex = 0;
+	int currIndex = 4;
 	vector<Procedure*> allProcedures;
 	vector<Variable*> allVariables;
 	vector<Statement*> allStatements;
-	stack<StatementContainer*> currentStmtContainer;
 	bool isValidStmtNo(int s);
 	bool followStar(Statement* s1, Statement* s2);
 	bool parentStar(WhileStatement* s1, StatementContainer* s2);
 public:
-	PKB();
-	/*
-	Create an emtpy Procedure object with the specified procName,
-	add it to allProcedures list and push it on top of the currentStmtContainer stack.
-	procName has to be guaranteed to be valid by Parser.
-	*/
-	void addProcedure(const string& procName);
-	void addVariable(Variable* var);
-	/*
-	Add an assign statement to the PKB.
-	It should be guaranteed by the parser that the statement belong to some valid statement list.
-	*/
-	void addAssignStatement(Variable* v, Expression* exp);
-	/*
-	Add WhileStatement stmt to the PKB.
-	Parser should guarantee stmt to be not null and have controlVar attribute filled up
-	*/
-	void addWhileStatement(Variable* controlVar);
-	/*
-	Signal to PKB a closing bracket i.e. remove top of currentStmtContainer
-	Return: true if possible, false if stack is empty i.e. extra closing bracket.
-	*/
-	bool endOfList();
-	//the ones below are for query selector
-	//getAll APIs
-	/*
-	Return a vector of names of all procedures in the program
-	*/
+	PKBStub();
 	vector<string> getAllProcedures();
 	/*
 	Return a vector of all indices of all statements in the program
@@ -98,14 +64,4 @@ public:
 	vector<int> parentStarBy(int stmt2);
 	vector<pair<int, int>> parents();
 	vector<pair<int, int>> parentStar();
-	//uses relation
-	bool uses(int stmtIndex, string varName);
-	vector<int> uses(string varName);
-	vector<string> usedBy(int stmtIndex);
-	vector<pair<int, string>> uses();
-	//modifies relation
-	bool modifies(int stmtIndex, string varName);
-	vector<int> modifies(string varName);
-	vector<string> modifiedBy(int stmtIndex);
-	vector<pair<int, string>> modifies();
 };

@@ -3,8 +3,8 @@
 #define QUERYEVALUATOR_H	
 
 #include <string>
-#include "QueryObject.h"
-#include "Result.h"
+#include "../QPS/QueryObject.h"
+#include "../QPS/Result.h"
 #include "../PKB/PKB.h"
 
 using namespace std;
@@ -12,9 +12,10 @@ using namespace std;
 class QueryEvaluator {
 private:
 	QueryObject queryObj;
-	PKB PKB;
+	PKB* pkb;
 	Result rawResult;
 
+	Result processQuery();
 	bool processVariableClause();
 	bool processRawResult();
 	bool processSuchThat();
@@ -25,9 +26,8 @@ private:
 	//Result combineResults(Result r1, Result r2, Result r3);
 
 public:
-	QueryEvaluator(QueryObject query);
+	QueryEvaluator(PKB* pkb, QueryObject query);
 
-	Result processQuery();
 	Result getRawResult();
 };
 

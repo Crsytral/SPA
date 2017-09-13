@@ -1,0 +1,40 @@
+1 - usesS synonym and synonym, assign stmt, true (25 from 1)
+assign a; variable v;
+Select v such that Uses(a, v)
+female
+5000
+2 - usesS synonym and synonym, while stmt, true (25 from 1)
+while w; variable v;
+Select v such that Uses(w, v)
+please, real
+5000
+3 - parent synonym and synonym, while stmt, select w1, false (47 from 1)
+while w1, w2;
+Select w1 such that Parent(w1, w2)
+none
+5000
+4 - parent synonym and synonym, while stmt, select w2, false (48 from 1)
+while w1, w2;
+Select w2 such that Parent(w1, w2)
+none
+5000
+5 - parent _ and synonym, while stmt, false (56 from 1)
+while w;
+Select w such that Parent(_, w)
+none
+5000
+6 - parentT synonym and synonym, while stmt, select w1, false (78 from 1)
+while w1, w2;
+Select w1 such that Parent*(w1, w2)
+none
+5000
+7 - parentT synonym and synonym, while stmt, select w2, false (79 from 1)
+while w1, w2;
+Select w2 such that Parent*(w1, w2)
+none
+5000
+8 - parentT _ and synonym, while stmt, false (87 from 1)
+while w;
+Select w such that Parent*(_, w)
+none
+5000

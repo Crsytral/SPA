@@ -5,6 +5,8 @@ using namespace std;
 
 Procedure::Procedure(string name) {
 	procName = name;
+	StatementList lst;
+	stmtLst = &lst;
 }
 
 void Procedure::addModVar(Variable* var) {
@@ -49,5 +51,4 @@ bool Procedure::isUse(string varName) {
 
 string Procedure::getName() {
 	return procName;
-
 }
