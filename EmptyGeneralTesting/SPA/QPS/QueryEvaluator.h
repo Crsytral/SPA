@@ -3,9 +3,9 @@
 #define QUERYEVALUATOR_H	
 
 #include <string>
-#include "../QPS/QueryObject.h"
-#include "../QPS/Result.h"
-#include "../PKB/PKB.h"
+#include "QueryObject.h"
+#include "Result.h"
+#include "PKB.h"
 
 using namespace std;
 

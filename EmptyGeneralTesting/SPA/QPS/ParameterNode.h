@@ -12,7 +12,7 @@
 #include <set>
 #include <list>
 #include <string.h>
-#include "../QPS/SyntaticType.h"
+#include "SyntaticType.h"
 
 using namespace std;
 
