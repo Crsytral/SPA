@@ -76,13 +76,15 @@ bool parametersCheck(syntatic_type inputSyn, string firstPara, string secondPara
 	{
 		if (regex_match(firstPara, varRegex)) {
 
-			if (regex_match(secondPara, expressionRegex) || regex_match(secondPara, doubleUnderscore))
+			//cout << firstPara;
+			if (regex_match(secondPara, singleUnderscore) || regex_match(secondPara, expressionRegex) || regex_match(secondPara, doubleUnderscore) )
 			{
 				validity = true;
 			}
 
 			else
 			{
+				cout << secondPara;
 				printf("Invalid regex detected");
 			}
 
@@ -90,6 +92,7 @@ bool parametersCheck(syntatic_type inputSyn, string firstPara, string secondPara
 
 		else
 		{
+			cout << firstPara;
 			printf("invalid parameter detected");
 		}
 	}
@@ -144,20 +147,7 @@ bool parametersCheck(relation relationClause, string firstParam, string secondPa
 			validity = true;
 		}
 	}
-	else if (relationClause == relation::calls)
-	{
-		if (regex_match(firstParam, entRef) && regex_match(secondParam, entRef))
-		{
-			validity = true;
-		}
-	}
-	else if (relationClause == relation::callsStar)
-	{
-		if (regex_match(firstParam, entRef) && regex_match(secondParam, entRef))
-		{
-			validity = true;
-		}
-	}
+
 	else if (relationClause == relation::parent)
 	{
 		if (regex_match(firstParam, stmtRef) && regex_match(secondParam, stmtRef))
@@ -186,34 +176,8 @@ bool parametersCheck(relation relationClause, string firstParam, string secondPa
 			validity = true;
 		}
 	}
-	else if (relationClause == relation::next)
-	{
-		if (regex_match(firstParam, lineRef) && regex_match(secondParam, lineRef))
-		{
-			validity = true;
-		}
-	}
-	else if (relationClause == relation::nextStar)
-	{
-		if (regex_match(firstParam, lineRef) && regex_match(secondParam, lineRef))
-		{
-			validity = true;
-		}
-	}
-	else if (relationClause == relation::affects)
-	{
-		if (regex_match(firstParam, stmtRef) && regex_match(secondParam, stmtRef))
-		{
-			validity = true;
-		}
-	}
-	else if (relationClause == relation::affectsStar)
-	{
-		if (regex_match(firstParam, stmtRef) && regex_match(secondParam, stmtRef))
-		{
-			validity = true;
-		}
-	}
+
+	
 	return validity;
 
 }
@@ -234,6 +198,8 @@ syntatic_type checkSyntaticType(string input) {
 	regex doubleQuotes("\"[^\"]+\"");
 	regex underScoreBothSides("_\"[^\"]+\"_");
 	regex integer("\\d+");
+	regex alphabets("/^[a-z]+$/i");
+
 
 	syntatic_type resultingSyn = syntatic_type::synTypeError;
 
@@ -242,6 +208,10 @@ syntatic_type checkSyntaticType(string input) {
 		resultingSyn = syntatic_type::expression;
 	}
 	else if (regex_match(input, underScoreOnly))
+	{
+		resultingSyn = syntatic_type::expression;
+	}
+	else if (regex_match(input, alphabets))
 	{
 		resultingSyn = syntatic_type::expression;
 	}
@@ -271,14 +241,6 @@ relation getType(char* rsType){
 	{
 		return relation::modifies;
 	}
-	else if (strcmp(rsType, "Calls") == 0)
-	{
-		return relation::calls;
-	}
-	else if (strcmp(rsType, "Calls*") == 0)
-	{
-		return relation::callsStar;
-	}
 	else if (strcmp(rsType, "Parent") == 0)
 	{   
 		//printf("checkParent");
@@ -296,22 +258,7 @@ relation getType(char* rsType){
 	{
 		return relation::followsStar;
 	}
-	else if (strcmp(rsType, "Next") == 0)
-	{
-		return relation::next;
-	}
-	else if (strcmp(rsType, "Next*") == 0)
-	{
-		return relation::nextStar;
-	}
-	else if (strcmp(rsType, "Affects") == 0)
-	{
-		return relation::affects;
-	}
-	else if (strcmp(rsType, "Affects*") == 0)
-	{
-		return relation::affectsStar;
-	}
+	
 
 	else errorFound = true;
 	return isError;
@@ -423,6 +370,7 @@ void buildQueryNode(char* curTok) {
 				}
 				*/
 				
+				
 			}
 		}
 	}
@@ -440,7 +388,7 @@ void buildPatternNode(char* curTok) {
 	//printf("test");
 
 	regex expectedPattern("([^\\(]+\\(([^\\)]+|[^\,]+)(\,([^\\)]+|[^\,]+)\\))+)");
-
+	/*
 	bool firstParameterDone = false;
 	bool secondParameterDone = false;
 	bool foundPatternSyn = false;
@@ -452,11 +400,24 @@ void buildPatternNode(char* curTok) {
 	string thirdParameter = "";
 	syntatic_type  patternSynType;
 
-	//patternSyn reders to the synonyms 'a' in < pattern a ("x", _)
 	string patternSyn = "";
+	*/
 
 	if (regex_match(concatPattern, expectedPattern))
 	{
+		bool firstParameterDone = false;
+		bool secondParameterDone = false;
+		bool foundPatternSyn = false;
+		bool synonymExist;
+		bool isIfElse = false;
+
+		string firstParameter = "";
+		string secondParameter = "";
+		string thirdParameter = "";
+		string patternSyn = "";
+
+		syntatic_type  patternSynType;
+
 
 		for (std::string::size_type i = 0; i < concatPattern.size(); ++i) {
 
@@ -480,7 +441,7 @@ void buildPatternNode(char* curTok) {
 					patternSynType = newSynonyms->getSyntType(patternSyn);
 
 					//check if its syntactic type is valid
-					if (patternSynType != syntatic_type::assignment || patternSynType != syntatic_type::whileLoop || patternSynType != syntatic_type::ifelse)
+					if (patternSynType != syntatic_type::assignment && patternSynType != syntatic_type::whileLoop && patternSynType != syntatic_type::ifelse)
 					{
 						errorFound = true;
 						printf("Error with pattern syntactic type");
@@ -493,7 +454,7 @@ void buildPatternNode(char* curTok) {
 					{
 						isIfElse = true;
 					}
-				
+
 				}
 				foundPatternSyn = true;
 			}
@@ -557,19 +518,49 @@ void buildPatternNode(char* curTok) {
 				patternSyn += concatPattern[i];
 			}
 		}
-	}
 
-	if (parametersCheck(patternSynType, firstParameter, secondParameter, thirdParameter))
-	{
-		ParameterNode* leftParameterNode = new ParameterNode(patternSynType, patternSyn);
-		syntatic_type middleParameterSynType = checkSyntaticType(firstParameter);
-		syntatic_type rightParameterSynType = checkSyntaticType(secondParameter);
-		removeCharsFromString(secondParameter, "\"");
-		removeCharsFromString(firstParameter, "\"");
-		ParameterNode* middleParameterNode = new ParameterNode(middleParameterSynType, firstParameter);
-		ParameterNode* rightParameterNode = new ParameterNode(rightParameterSynType, secondParameter);
-		PatternNode* newPattern = new PatternNode(leftParameterNode, middleParameterNode, rightParameterNode);
-		newTree -> addPattern(newPattern);
+
+		if (parametersCheck(patternSynType, firstParameter, secondParameter, thirdParameter))
+		{
+			printf("entered parameterCheck\n");
+			ParameterNode* leftParameterNode = new ParameterNode(patternSynType, patternSyn);
+			syntatic_type middleParameterSynType = checkSyntaticType(firstParameter);
+			syntatic_type rightParameterSynType = checkSyntaticType(secondParameter);
+			removeCharsFromString(secondParameter, "\"");
+			removeCharsFromString(firstParameter, "\"");
+			ParameterNode* middleParameterNode = new ParameterNode(middleParameterSynType, firstParameter);
+			printf("second parameterCheck");
+			char a = getchar();
+			ParameterNode* rightParameterNode = new ParameterNode(rightParameterSynType, secondParameter);
+			PatternNode* newPattern = new PatternNode(leftParameterNode, middleParameterNode, rightParameterNode);
+			newTree->addPattern(newPattern);
+			//string test2 = newTree->getPattern()->getMiddleParam()->getParameter();
+			//cout << test2;
+			/*
+			if (newTree->getPattern()->getRightParam()->getType() == syntatic_type::expression)
+			{
+				printf("correct syn");
+			}
+
+			else
+			{
+				printf("wrong syn");
+			}
+
+			
+			if (newTree->getPattern()->getMiddleParam()->getType() == syntatic_type::integer)
+			{
+				printf("correct syn");
+			}
+
+			else
+			{
+				printf("wrong syn");
+			}
+			*/
+
+
+		}
 	}
 
 }
@@ -666,11 +657,7 @@ syntatic_type getEntityType(char* input) {
 		result = syntatic_type::procedure;
 		//checkEntityType = true;
 	}
-	else if (strcmp(input, "stmtLst") == 0)
-	{
-		result = syntatic_type::statementList;
-		//checkEntityType = true;
-	}
+
 	else if (strcmp(input, "statement") == 0)
 	{
 		result = syntatic_type::statement;
@@ -825,12 +812,12 @@ int main(void){
 	QueryParser* qp;
 	qp = new QueryParser();
 
-	//string input = "assign a; statement s; variable v; Select s such that Parent (2, s)";
+	//string input = "assign a; variable v; Select a pattern a ("3",_)";
 
 	//printf("%s, input");
 
 	QueryObject test = qp -> getQueryObj("assign a; statement s; variable v; Select s such that Parent (2, s)");
-	//QueryObject test = qp->getQueryObj("assign a; variable v; Select a pattern a (v,__)");
+	//QueryObject test = qp->getQueryObj("assign a; variable v; Select a pattern a (\"v\", _)");
 	/*
 	int size = test.synonym->getSize();
 
@@ -843,13 +830,12 @@ int main(void){
 
 		printf("fail");
 
-	
+	*/
 
-	char a = getchar();
+	//char a = getchar();
 
-	return 0;
+	//return 0;
 }
-
 */
 
 
