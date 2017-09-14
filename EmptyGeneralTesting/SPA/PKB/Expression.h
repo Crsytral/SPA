@@ -7,9 +7,9 @@ To be implemented by Lu Yu
 #include <queue>
 using namespace std;
 
-#include "Variable.h"
-#include "Token.h"
-#include "Node.h"
+#include "../PKB/Variable.h"
+#include "../Parser/Token.h"
+#include "../PKB/Node.h"
 class Variable;
 
 class Expression {

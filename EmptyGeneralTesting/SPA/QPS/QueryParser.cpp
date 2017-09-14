@@ -830,7 +830,7 @@ int main(void){
 
 		printf("fail");
 
-	*/
+	
 
 	//char a = getchar();
 
