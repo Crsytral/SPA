@@ -4,6 +4,8 @@
     <ClCompile Include="StatementListTest.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="TestAST.cpp" />
+    <ClCompile Include="PKBStub.cpp" />
+    <ClCompile Include="QueryEvaluatorTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PKBStub.h" />

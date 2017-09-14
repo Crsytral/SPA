@@ -45,6 +45,9 @@ bool QueryEvaluator::processVariableClause() {
 				else if ((**i).getVariableType() == syntatic_type::variable) {
 					rawResult.setAsgnData(convertStringVectorToString(pkb->getAllVariables()));
 				}
+				//else if ((**i).getVariableType() == syntatic_type::constant) {
+				//	rawResult.setAsgnData(convertStringVectorToString(pkb->getAllConstants()));
+				//}
 				else if ((**i).getVariableType() == syntatic_type::statement) {
 					rawResult.setAsgnData(convertIntVectorToString(pkb->getAllStatements()));
 				}

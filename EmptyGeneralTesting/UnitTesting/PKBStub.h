@@ -2,12 +2,13 @@
 #include <vector>
 using namespace std;
 
-#include "Procedure.h"
-#include "Variable.h"
-#include "Statement.h"
-#include "AssignStatement.h"
-#include "WhileStatement.h"
-#include "StatementContainer.h"
+#include "../SPA/PKB/Procedure.h"
+#include "../SPA/PKB/Variable.h"
+#include "../SPA/PKB/Statement.h"
+#include "../SPA/PKB/AssignStatement.h"
+#include "../SPA/PKB/WhileStatement.h"
+#include "../SPA/PKB/StatementContainer.h"
+#include "../SPA/PKB/PKB.h"
 
 class PKBStub {
 private:
@@ -19,6 +20,7 @@ private:
 	bool followStar(Statement* s1, Statement* s2);
 	bool parentStar(WhileStatement* s1, StatementContainer* s2);
 public:
+	PKB pkb;
 	PKBStub();
 	vector<string> getAllProcedures();
 	/*

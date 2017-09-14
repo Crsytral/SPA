@@ -2,11 +2,12 @@
 #include <queue>;
 using namespace std;
 
-#include "PKBStub.h"
+#include "../UnitTesting/PKBStub.h"
 #include "../PKB/Expression.h"
-#include "../Parser/VarToken.h"
 #include "../Parser/NumToken.h"
 #include "../Parser/OperatorToken.h"
+#include "../PKB/PKB.h"
+#include "../Parser/VarToken.h"
 
 PKBStub::PKBStub() {
 	//adding in var list
@@ -16,16 +17,26 @@ PKBStub::PKBStub() {
 		new Variable(varNames[2]),
 		new Variable(varNames[3])
 	};
+
+
+	pkb.addVariable(new Variable(varNames[0]));
+	pkb.addVariable(new Variable(varNames[1]));
+	pkb.addVariable(new Variable(varNames[2]));
+	pkb.addVariable(new Variable(varNames[3]));
+
+
 	string proc = "Sun";
 	//adding in procedure list
 	allProcedures = { new Procedure(proc) };
+
+	pkb.addProcedure(proc);
 	//adding in the statements
 	//first construct the expressions for 3 assignment statements
 	queue<Token> q1, q2, q3;
 	//add to q1 & build expression 1
 	q1.push(*(new NumToken("1")));
 	Expression * ex1 = new Expression(q1);
-	allProcedures[0]->addAssignStatement(1, allVariables[1], ex1);
+	pkb.addAssignStatement(allVariables[1], ex1);
 	//add to q2
 	q2.push(*(new VarToken("x")));
 	q2.push(*(new NumToken("2")));
@@ -33,13 +44,14 @@ PKBStub::PKBStub() {
 	q2.push(*(new VarToken("z")));
 	q2.push(*(new OperatorToken("+")));
 	Expression * ex2 = new Expression(q2);
-	allProcedures[0]->addAssignStatement(2, allVariables[2], ex2);
+	pkb.addAssignStatement(allVariables[2], ex2);
 	//add to q3 and build expression 3
 	q3.push(*(new NumToken("3")));
 	Expression * ex3 = new Expression(q3);
     //add a while statement
-	WhileStatement * w1 = static_cast<WhileStatement *>(allProcedures[0]->addWhileStatement(3, allVariables[0]));
-	w1->addAssignStatement(4, allVariables[3], ex3);
+	pkb.addWhileStatement(allVariables[0]);
+	pkb.addAssignStatement(allVariables[3], ex3);
+	
 }
 
 vector<string> PKBStub::getAllProcedures() {
