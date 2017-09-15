@@ -37,6 +37,12 @@ vector <string> Result::getQueryResult() const {
 	return queryResult;
 }
 
+list<string> Result::getQueryResultAsList() const{
+	vector<string> result = getQueryResult();
+	std::list<string> myList(result.begin(), result.end());
+	return myList;
+}
+
 string Result::toString() {
 	string output = "";
 	if (isValid == true) {

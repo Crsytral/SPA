@@ -3,8 +3,9 @@
 #define RESULT_H	
 
 #include <stdio.h>
-#include <vector>
+#include <list>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -24,6 +25,7 @@ public:
 	vector <string> getAsgnData() const;
 	void setQueryResult(string data);
 	vector <string> getQueryResult() const;
+	list<string> getQueryResultAsList() const;
 	string toString();
 };
 
